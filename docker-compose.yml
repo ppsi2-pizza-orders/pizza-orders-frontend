@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+
+  angular:
+    container_name: pizza-orders-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - '4200:4200'
