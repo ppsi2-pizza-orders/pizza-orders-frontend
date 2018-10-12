@@ -1,0 +1,49 @@
+@import 'styles.scss';
+.main-nav{
+    background: rgba($primary-color, .8);
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    color: $nav-text-color;
+    text-align: center;
+    .logo{
+        img{
+            width: 30%;
+            margin-top: 2em;
+        }
+        h5{
+            font-weight: 800;
+        }
+    }
+    .nav-buttons{
+        margin-top: 4em;
+        button{
+            width: 100%;
+            text-transform: uppercase;
+            mat-icon{
+                font-size: 1.4em;
+                padding: 2px;
+                margin-right: 10px;
+                margin-left: -10px;
+            }
+        }
+    }
+    .nav-footer{
+        position: absolute;
+        width: 100%;
+        bottom: 10px;
+        hr{
+            background-color: rgba($nav-text-color, 0.349);
+            width: 70%;
+        }
+        .social-icons{
+            margin: 1em 0;
+            i{
+                margin-right: 8px;
+            }
+            p{
+                font-size: .8em;
+            }
+        }
+    }
+}

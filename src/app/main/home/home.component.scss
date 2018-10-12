@@ -1,0 +1,13 @@
+@import 'styles.scss';
+.home{
+    text-align: center;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button{
+        background-color: $primary-color;
+        text-transform: uppercase;
+    }
+}

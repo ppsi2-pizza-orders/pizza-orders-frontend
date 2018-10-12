@@ -1,1 +1,21 @@
-<p>main navigation works</p>
+<div class="main-nav">
+    <div class="logo">
+        <img src="assets/logo.png" alt="">
+        <h5>pizza-orders</h5>
+    </div>
+    <div class="nav-buttons">
+        <button [routerLink]="['/']" mat-button><mat-icon>home</mat-icon>home</button>
+        <button [routerLink]="['/menu']" mat-button><mat-icon>local_dining</mat-icon>menu</button>
+        <button [routerLink]="['/creator']" mat-button><mat-icon>local_pizza</mat-icon>kreator</button>
+        <button [routerLink]="['/offers']" mat-button><mat-icon>local_offer</mat-icon>oferty</button>
+        <button [routerLink]="['/account']" mat-button><mat-icon>person</mat-icon>zamówienia</button>
+    </div>
+    <div class="nav-footer">
+        <hr>
+        <div class="social-icons">
+            <i class="fab fa-facebook-square"></i>
+            <i class="fab fa-instagram"></i>
+            <p>© 2018 PizzaOrders</p>
+        </div>
+    </div>
+</div>

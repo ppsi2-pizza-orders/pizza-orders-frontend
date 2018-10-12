@@ -1,0 +1,14 @@
+.main{
+    height: 100vh;
+    &.bg-home{
+        background: url("src/assets/background.jpg") no-repeat 0px 0px;;
+        background-size: cover;
+    }
+    &.bg-default{
+        background: url("src/assets/background2.jpg") no-repeat 0px 0px;;
+        background-size: cover;
+    }
+    .row{
+        margin-right: 0;
+    }
+}
