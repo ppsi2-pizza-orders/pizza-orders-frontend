@@ -1,5 +1,9 @@
-$primary-color: #d00808;
-$nav-text-color: #fff;
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'variables';
 
 button:focus {outline:0;}
-div {transition: background-image 0.4s ease-in-out;}
+.mat-raised-button{
+    background-color: $primary-color;
+    color: #fff;
+    text-transform: uppercase;
+}
