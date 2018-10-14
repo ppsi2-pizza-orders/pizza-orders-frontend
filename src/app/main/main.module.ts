@@ -10,15 +10,35 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { PizzaCreatorComponent } from './pizza-creator/pizza-creator.component';
 import { OfferComponent } from './offer/offer.component';
-import { AccountComponent } from './account/account.component';
+import { DropzoneDirective } from '../shared/directives/dropzone.directive';
+import { DroppableDirective } from '../shared/directives/droppable.directive';
+import { DraggableDirective } from '../shared/directives/draggable.directive';
+import { OrdersComponent } from './orders/orders.component';
+import { DroppableService } from '../shared/services/droppable.service';
+import { MovableDirective } from '../shared/directives/movable.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
-  declarations: [NavigationComponent, MainComponent, HomeComponent, MenuComponent, PizzaCreatorComponent, OfferComponent, AccountComponent]
+  declarations: [
+    NavigationComponent,
+    MainComponent,
+    HomeComponent,
+    MenuComponent,
+    PizzaCreatorComponent,
+    OfferComponent,
+    OrdersComponent,
+    DropzoneDirective,
+    DroppableDirective,
+    DraggableDirective,
+    MovableDirective
+  ],
+  providers: [
+    DroppableService
+  ]
 })
 export class MainModule { }
