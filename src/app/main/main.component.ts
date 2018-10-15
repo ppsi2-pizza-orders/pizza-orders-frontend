@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit, DoCheck {
-  private url: String;
+  url: String;
 
   constructor(private router: Router) {
   }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationComponent } from './navigation/navigation.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { MainComponent } from './main.component';
 import { MaterialModule } from '../material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +16,8 @@ import { DraggableDirective } from '../shared/directives/draggable.directive';
 import { OrdersComponent } from './orders/orders.component';
 import { DroppableService } from '../shared/services/droppable.service';
 import { MovableDirective } from '../shared/directives/movable.directive';
+import { PizzaService } from '../shared/services/pizza.service';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   imports: [
@@ -25,7 +27,7 @@ import { MovableDirective } from '../shared/directives/movable.directive';
     BrowserAnimationsModule
   ],
   declarations: [
-    NavigationComponent,
+    NavbarComponent,
     MainComponent,
     HomeComponent,
     MenuComponent,
@@ -35,10 +37,12 @@ import { MovableDirective } from '../shared/directives/movable.directive';
     DropzoneDirective,
     DroppableDirective,
     DraggableDirective,
-    MovableDirective
+    MovableDirective,
+    SidebarComponent
   ],
   providers: [
-    DroppableService
+    DroppableService,
+    PizzaService
   ]
 })
 export class MainModule { }

@@ -1,19 +1,37 @@
 @import 'styles.scss';
-.main-nav{
-    background: rgba($primary-color, .8);
-    height: 100vh;
+.app-navbar{
+    background: $primary-color;
+    height: 80px;
     width: 100%;
-    position: absolute;
     color: $nav-text-color;
     text-align: center;
     .logo{
+        width: 100%;
+        height: 100%;
+        a{
+            display: flex;
+            width: fit-content;
+            height: 100%;
+            margin: auto;
+            align-items: center;
+            justify-content: center;
+        }
         img{
-            width: 30%;
-            margin-top: 2em;
+            width: 40px;
+            float: left;
         }
         h5{
             font-weight: 800;
+            float: left;
+            margin: 0;
+            margin-left: .5em;
         }
+    }
+    .btn{
+        position: absolute;
+        display: inline;
+        right: 20px;
+        top: 10px;
     }
     .nav-buttons{
         margin-top: 4em;
