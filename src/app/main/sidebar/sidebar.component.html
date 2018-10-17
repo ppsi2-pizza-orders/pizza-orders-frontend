@@ -1,0 +1,26 @@
+<div class="app-sidebar">
+  <div class="restaurant-info">
+    <div class="row">
+      <div class="col-4">
+        <img src="assets/restaurant.jpg" alt="">
+      </div>
+      <div class="col-8 nopadding">
+        <div class="restaurant-name">
+          <h3>Nocne Gastro</h3>
+        </div>
+        <div class="rating">
+            <app-rating [rating]='3' [itemId]='0' (ratingClick)='ratingComponentClick($event)'></app-rating>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box">
+      <mat-nav-list>
+          <a [routerLink]="['/menu']" [routerLinkActive]="['active']" mat-list-item><mat-icon>local_dining</mat-icon>Menu</a>
+          <a [routerLink]="['/creator']" [routerLinkActive]="['active']" mat-list-item><mat-icon>local_pizza</mat-icon>Kreator</a>
+          <a [routerLink]="['/offers']" [routerLinkActive]="['active']" mat-list-item><mat-icon>local_offer</mat-icon>Oferty</a>
+          <a [routerLink]="['/info']" [routerLinkActive]="['active']" mat-list-item><mat-icon>info</mat-icon>Informacje</a>
+          <a [routerLink]="['/opinions']" [routerLinkActive]="['active']" mat-list-item><mat-icon>comment</mat-icon>Opinie</a>
+        </mat-nav-list>
+  </div>
+</div>

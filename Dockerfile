@@ -1,4 +1,4 @@
-FROM tiangolo/node-frontend:10
+FROM colthreepv/node-chrome:latest
 
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app

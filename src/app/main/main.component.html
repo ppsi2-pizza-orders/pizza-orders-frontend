@@ -1,1 +1,13 @@
-<router-outlet></router-outlet>
+<div class="main" [ngClass]="getBackground()">
+    <app-navbar></app-navbar>
+    <div class="container">
+        <div class="row">
+            <div *ngIf="url !== '/'" class="col-md-3">
+                <app-sidebar></app-sidebar>
+            </div>
+            <div [ngClass]="{'col-md-9' : url !== '/', 'col-md-12' : url === '/'}">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

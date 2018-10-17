@@ -1,0 +1,67 @@
+@import 'styles.scss';
+.app-navbar{
+    background: $primary-color;
+    height: 80px;
+    width: 100%;
+    color: $nav-text-color;
+    text-align: center;
+    .logo{
+        width: 100%;
+        height: 100%;
+        a{
+            display: flex;
+            width: fit-content;
+            height: 100%;
+            margin: auto;
+            align-items: center;
+            justify-content: center;
+        }
+        img{
+            width: 40px;
+            float: left;
+        }
+        h5{
+            font-weight: 800;
+            float: left;
+            margin: 0;
+            margin-left: .5em;
+        }
+    }
+    .btn{
+        position: absolute;
+        display: inline;
+        right: 20px;
+        top: 10px;
+    }
+    .nav-buttons{
+        margin-top: 4em;
+        button{
+            width: 100%;
+            text-transform: uppercase;
+            mat-icon{
+                font-size: 1.4em;
+                padding: 2px;
+                margin-right: 10px;
+                margin-left: -10px;
+            }
+        }
+    }
+    .nav-footer{
+        position: absolute;
+        width: 100%;
+        bottom: 10px;
+        hr{
+            background-color: rgba($nav-text-color, 0.349);
+            width: 70%;
+        }
+        .social-icons{
+            margin: 1em 0;
+            i{
+                margin-right: 8px;
+            }
+            p{
+                font-size: .8em;
+            }
+        }
+    }
+}

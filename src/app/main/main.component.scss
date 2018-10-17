@@ -1,0 +1,19 @@
+@import 'styles.scss';
+.main{
+    min-height: 100vh;
+    &.bg-home{
+        background: url("src/assets/background.jpg") no-repeat 0px 0px;
+        background-size: cover;
+    }
+    &.bg-default{
+        background-color: $bg-color;
+        background-size: cover;
+    }
+    .row{
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .col{
+        padding: 0;
+    }
+}
