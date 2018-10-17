@@ -1,0 +1,21 @@
+<div class="app-navbar">
+    <div class="logo">
+        <a [routerLink]="['/']">
+            <img src="assets/logo.png" alt="">
+            <h5>PizzaOrders</h5>
+        </a>
+    </div>
+
+    <div class="btn">
+        <button mat-icon-button>
+            <mat-icon>shopping_basket</mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Logowanie</button>
+            <button mat-menu-item>Rejestracja</button>
+        </mat-menu>
+    </div>
+</div>
