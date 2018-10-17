@@ -18,6 +18,7 @@ import { DroppableService } from '../shared/services/droppable.service';
 import { MovableDirective } from '../shared/directives/movable.directive';
 import { PizzaService } from '../shared/services/pizza.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { RatingComponent } from '../shared/components/rating/rating.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     DroppableDirective,
     DraggableDirective,
     MovableDirective,
-    SidebarComponent
+    SidebarComponent,
+    RatingComponent
   ],
   providers: [
     DroppableService,

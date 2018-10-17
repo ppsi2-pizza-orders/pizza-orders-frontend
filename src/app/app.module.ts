@@ -6,16 +6,15 @@ import { RouterModule } from '@angular/router';
 import { MainModule } from './main/main.module';
 import { AdminModule } from './admin/admin.module';
 
-
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     MainModule,
     AdminModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]

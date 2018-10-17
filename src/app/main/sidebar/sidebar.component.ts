@@ -12,4 +12,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
   }
 
+  ratingComponentClick(rate): void {
+    console.log(rate);
+  }
+
 }

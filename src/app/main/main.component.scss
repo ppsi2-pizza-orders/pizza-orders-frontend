@@ -1,6 +1,6 @@
 @import 'styles.scss';
 .main{
-    height: 100vh;
+    min-height: 100vh;
     &.bg-home{
         background: url("src/assets/background.jpg") no-repeat 0px 0px;
         background-size: cover;

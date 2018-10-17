@@ -336,30 +336,31 @@
 
 /// Media
 
-$phone-width: 600px;
-$tablet-width: 992px;
-$desktop-width: 1200px;
+$sm-width: 576px;
+$md-width: 768px;;
+$lg-width: 992px;;
+$xl-width: 1200px;
 
-@mixin phone {
-    @media (max-width: #{$phone-width}) {
+@mixin sm {
+    @media (max-width: #{$sm-width}) {
         @content;
     }
 }
 
-@mixin tablet {
-    @media (max-width: #{$tablet-width}) {
+@mixin md {
+    @media (max-width: #{$md-width}) {
         @content;
     }
 }
 
-@mixin desktop {
-    @media (min-width: #{$tablet-width}) {
+@mixin lg {
+    @media (max-width: #{$lg-width}) {
         @content;
     }
 }
 
-@mixin desktop-xl {
-    @media (min-width: #{$desktop-width}) {
+@mixin xl {
+    @media (max-width: #{$xl-width}) {
         @content;
     }
 }

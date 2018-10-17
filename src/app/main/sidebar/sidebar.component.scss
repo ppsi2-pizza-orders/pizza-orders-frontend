@@ -1,7 +1,13 @@
 @import 'styles.scss';
 .app-sidebar{
     padding-top: $sidebar-margin;
+    .restaurant-info{
+        img{
+            width: 100%;
+        }
+    }
     .box{
+        margin-top: 1em;
         background-color: #fff;
         .mat-nav-list{
             padding-top: 0;
