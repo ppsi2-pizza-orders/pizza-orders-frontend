@@ -14,8 +14,8 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>Logowanie</button>
-            <button mat-menu-item>Rejestracja</button>
+            <button (click)="openLoginDialog()" mat-menu-item>Logowanie</button>
+            <button (click)="openRegisterDialog()" mat-menu-item>Rejestracja</button>
         </mat-menu>
     </div>
 </div>

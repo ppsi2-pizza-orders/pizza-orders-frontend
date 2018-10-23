@@ -1,7 +1,7 @@
 @import 'styles.scss';
 .app-navbar{
     background: $primary-color;
-    height: 80px;
+    height: $navbar-height;
     width: 100%;
     color: $nav-text-color;
     text-align: center;

@@ -8,12 +8,15 @@ import { MovableDirective } from './directives/movable.directive';
 import { DroppableService } from './services/droppable.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     MaterialModule,
@@ -22,6 +25,8 @@ import { RouterModule } from '@angular/router';
     DroppableDirective,
     DraggableDirective,
     MovableDirective,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
     DropzoneDirective,
