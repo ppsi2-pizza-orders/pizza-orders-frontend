@@ -12,6 +12,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
+import { RestaurantComponent } from './components/restaurant/restaurant.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { HomeComponent } from './components/home/home.component';
     OfferComponent,
     OrdersComponent,
     SidebarComponent,
-    RatingComponent
+    RatingComponent,
+    RestaurantComponent
   ],
   providers: [
   ]
