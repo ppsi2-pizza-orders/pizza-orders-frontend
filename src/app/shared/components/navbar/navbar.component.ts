@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from 'src/app/authorization/login/login.component';
 import { RegisterComponent } from 'src/app/authorization/register/register.component';
+import { RegisterRestaurantComponent } from 'src/app/authorization/register-restaurant/register-restaurant.component';
 
 @Component({
   selector: 'app-navbar',
@@ -25,6 +26,14 @@ export class NavbarComponent implements OnInit {
 
   openRegisterDialog(): void {
     const dialogRef = this.dialog.open(RegisterComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+    });
+  }
+
+  openRegisterRestaurantDialog(): void {
+    const dialogRef = this.dialog.open(RegisterRestaurantComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');

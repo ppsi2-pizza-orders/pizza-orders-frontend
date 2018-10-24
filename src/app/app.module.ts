@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { routes } from './app.routing';
 import { RouterModule } from '@angular/router';
-import { MainModule } from './main/main.module';
-import { AdminModule } from './admin/admin.module';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './authorization/login/login.component';
@@ -14,6 +12,7 @@ import { AuthGuard } from './authorization/auth.guard';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { RoleGuard } from './authorization/role.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterRestaurantComponent } from './authorization/register-restaurant/register-restaurant.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -23,7 +22,8 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RegisterRestaurantComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +41,11 @@ export function tokenGetter() {
         ]
       }
     })
+  ],
+  entryComponents: [
+    LoginComponent,
+    RegisterComponent,
+    RegisterRestaurantComponent
   ],
   providers: [
     AuthGuard,

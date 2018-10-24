@@ -1,19 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MatDialog, ErrorStateMatcher } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control): boolean {
-    return (control && control.parent.get('password').value !== control.parent.get('confirm_password').value && control.dirty);
-  }
-}
+import { MyErrorStateMatcher } from '../register/register.component';
+import { MatDialogRef, MatDialog } from '@angular/material';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-register-restaurant',
+  templateUrl: './register-restaurant.component.html',
+  styleUrls: ['./register-restaurant.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterRestaurantComponent implements OnInit {
 
   registerForm: FormGroup;
   error = '';
@@ -21,7 +16,7 @@ export class RegisterComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   constructor(
-    public dialogRef: MatDialogRef<RegisterComponent>,
+    public dialogRef: MatDialogRef<RegisterRestaurantComponent>,
     public dialog: MatDialog,
     private formBuilder: FormBuilder) { }
 
@@ -32,7 +27,10 @@ export class RegisterComponent implements OnInit {
       phone: ['', [Validators.required, Validators.minLength(9), Validators.pattern('^[0-9]*$')]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirm_password: ['', Validators.required]
+      confirm_password: ['', Validators.required],
+      restaurant_name: ['', Validators.required],
+      city: ['', Validators.required],
+      adress: ['', Validators.required]
     }, {validator: this.checkPasswords });
   }
 
@@ -68,6 +66,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister() {
+    console.log(this.registerForm);
     if (this.registerForm.invalid) {
       return;
     }
