@@ -1,15 +1,24 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { CanLoad, Route, Router } from '@angular/router';
+import { AuthService } from './auth.service';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class RoleGuard implements CanLoad {
 
-    constructor(private router: Router, public dialog: MatDialog) { }
+    constructor(private auth: AuthService, private router: Router, public dialog: MatDialog) { }
 
-    canActivate(route: ActivatedRouteSnapshot) {
-        if (localStorage.getItem('token')) {
+    canLoad(route: Route) {
+        const expectedRole = route.data.expectedRole;
+        const token = localStorage.getItem('token');
+        // const tokenPayload = decode(token);
+        const tokenPayload = {role: 'admin2'};
+
+        if (
+            this.auth.isAuthenticated() ||
+            tokenPayload.role === expectedRole
+        ) {
             return true;
         }
 
@@ -27,3 +36,4 @@ export class AuthGuard implements CanActivate {
         });
     }
 }
+

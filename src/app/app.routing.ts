@@ -1,10 +1,23 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './authorization/login/login.component';
-import { RegisterComponent } from './authorization/register/register.component';
+import { RoleGuard } from './authorization/role.guard';
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComponent},
-    { path: 'register', component: RegisterComponent},
     { path: '', loadChildren: './main/main.module#MainModule' },
-    { path: 'admin', loadChildren: './admin/admin.module#AdminModule' }
+    {
+        path: 'admin',
+        loadChildren: './admin/admin.module#AdminModule',
+        canLoad: [RoleGuard],
+        data: {
+            expectedRole: 'admin'
+        }
+    },
+    {
+        path: 'managment',
+        loadChildren: './manage/manage.module#ManageModule',
+        canLoad: [RoleGuard],
+        data: {
+            expectedRole: 'manager'
+        }
+    },
+    { path: '**', redirectTo: '/' }
 ];

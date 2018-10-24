@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { User } from '../shared/models/User';
 import { environment } from 'src/environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 export const BackendEntryPoint_Login = environment.apiBaseUrl + 'auth/jwt/';
 export const BackendEntryPoint_Register = environment.apiBaseUrl + 'register';
@@ -13,7 +14,12 @@ export const BackendEntryPoint_Register = environment.apiBaseUrl + 'register';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public jwtHelper: JwtHelperService) { }
+
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 
   login(username: string, password: string) {
     return this.http.post(BackendEntryPoint_Login + '/api/authenticate',

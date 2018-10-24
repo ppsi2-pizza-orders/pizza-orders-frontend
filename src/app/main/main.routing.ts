@@ -26,10 +26,10 @@ export const routes: Routes = [
                 component: PizzaCreatorComponent
               }
             ]
-          }
+          },
+          { path: '**', redirectTo: '/' }
         ]
-      },
-      { path: '**', redirectTo: '/' }
+      }
     ]
   }
 ];
