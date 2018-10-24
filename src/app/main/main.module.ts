@@ -18,7 +18,6 @@ import { RestaurantComponent } from './components/restaurant/restaurant.componen
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    BrowserAnimationsModule,
     SharedModule,
   ],
   declarations: [

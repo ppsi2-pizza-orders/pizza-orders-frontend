@@ -12,6 +12,8 @@ import { RegisterComponent } from './authorization/register/register.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './authorization/auth.guard';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { RoleGuard } from './authorization/role.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -25,8 +27,7 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
-    MainModule,
-    AdminModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
     SharedModule,
@@ -41,13 +42,18 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [AuthGuard, {
-    provide: MatDialogRef,
-    useValue: {}
-  }, {
+  providers: [
+    AuthGuard,
+    RoleGuard,
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+    {
       provide: MAT_DIALOG_DATA,
       useValue: {}
-    }],
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

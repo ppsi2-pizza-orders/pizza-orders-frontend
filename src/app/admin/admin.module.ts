@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationComponent } from './navigation/navigation.component';
 import { AdminComponent } from './admin.component';
 import { MaterialModule } from '../shared/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './admin.routing';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,
-    BrowserAnimationsModule,
+    SharedModule
   ],
-  declarations: [NavigationComponent, AdminComponent]
+  declarations: [AdminComponent]
 })
 export class AdminModule { }
