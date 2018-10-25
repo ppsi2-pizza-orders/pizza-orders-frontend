@@ -13,6 +13,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { RoleGuard } from './authorization/role.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterRestaurantComponent } from './authorization/register-restaurant/register-restaurant.component';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { MockBackendService } from './shared/mock/mock-backend.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -31,6 +33,9 @@ export function tokenGetter() {
     RouterModule.forRoot(routes),
     HttpClientModule,
     SharedModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      MockBackendService, { dataEncapsulation: false }
+    ),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
