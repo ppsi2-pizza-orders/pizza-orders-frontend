@@ -1,5 +1,6 @@
 .rating {
     float:left;
+    margin-right: 8px;
 }
 
 .rating:not(:checked) > input {
@@ -37,4 +38,20 @@
 .rating > input:checked ~ label:hover ~ label,
 .rating > label:hover ~ input:checked ~ label {
     color: #ea0;
+}
+ 
+.nonclick:not(:checked) > label:hover,
+.nonclick:not(:checked) > label:hover ~ label {
+    color: #ddd;
+}
+
+
+.nonclick > input:checked ~ label:hover,
+.nonclick > input:checked ~ label:hover ~ label,
+.nonclick > label:hover ~ input:checked ~ label {
+    color: #f70;
+}
+
+.nonclick > label{
+    cursor: default !important;
 }

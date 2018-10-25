@@ -1,6 +1,5 @@
 @import 'styles.scss';
 .app-sidebar{
-    padding-top: $sidebar-margin;
     .restaurant-info{
         img{
             width: 100%;
@@ -17,12 +16,14 @@
         }
         a{
             font-weight: 700;
-            color: rgb(145, 145, 145);
+            color: $sidebar-text-color;
             &.active{
-                background-color: darken($color: $bg-color, $amount: 5);
+                //background-color: darken($color: $tethriary-color, $amount: 5);
+                background-color: $secondary-color;
+                color: #fff;
             }
             &:hover{
-                background-color: $primary-color;
+                background-color: $secondary-color;
                 color: #fff;
             }
         }
