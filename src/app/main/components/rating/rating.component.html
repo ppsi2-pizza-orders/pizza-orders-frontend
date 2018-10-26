@@ -1,4 +1,4 @@
-<fieldset class="rating">
+<fieldset [class]="clickable ? 'rating' : 'rating nonclick'">
     <input type="radio" [name]="inputName" value="5" [checked]="rating===5" />
     <label title="Rocks!" (click)='onClick(5)'>5 stars</label>
   

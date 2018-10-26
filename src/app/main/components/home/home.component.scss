@@ -1,9 +1,71 @@
 @import 'styles.scss';
-.home{
-    text-align: center;
-    color: #fff;
-    height: calc(100vh - 100px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.app-home{
+    .search{
+        background: url("src/assets/background.jpg") 0px 0px;
+        background-size: cover;
+        text-align: center;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        input, input:focus {
+            outline:none;
+            border: none;
+            width: 100%;
+            margin: 8px;
+            font-size: 1.4em;
+            text-align: left;
+        }
+        .mat-card{
+            padding: 0;
+            height: 50px;
+            margin: auto;
+            width: 440px;
+            .search-content{
+                height: 100%;
+                .mat-flat-button{
+                    border-radius: 0px 4px 4px 0;
+                    height: 100%;
+                }
+            }
+        }
+    }
+    .restaurants{
+        min-height: calc(100vh - 80px);
+        padding: 2em 0;
+        .restaurant-box{
+            margin-bottom: 2em;
+            a{
+                .mat-card{
+                    background-color: #fff;
+                }
+                &:hover{
+                    .mat-card{
+                        background-color: $tethriary-color;
+                    }
+                }
+            }
+            .mat-icon{
+                vertical-align: middle;
+                font-size: 1.3em;
+                color: #5a5a5a;
+            }
+        }
+        .spinner{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30vh;
+        }
+        .not-found{
+            margin-top: 30vh;
+            text-align: center;
+            color: gray;
+            .mat-icon{
+                font-size: 3em;
+            }
+        }
+    }
 }
+

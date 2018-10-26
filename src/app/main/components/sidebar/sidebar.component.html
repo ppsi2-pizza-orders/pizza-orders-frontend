@@ -2,14 +2,14 @@
   <div class="restaurant-info">
     <div class="row">
       <div class="col-4">
-        <img src="assets/restaurant.jpg" alt="">
+        <img [src]="restaurant.photo" alt="">
       </div>
       <div class="col-8 nopadding">
         <div class="restaurant-name">
-          <h3>Nocne Gastro</h3>
+          <h3>{{ restaurant.name }}</h3>
         </div>
         <div class="rating">
-            <app-rating [rating]='3' [itemId]='0' (ratingClick)='ratingComponentClick($event)'></app-rating>
+            <app-rating [rating]='3' [itemId]='0' [clickable]="false"></app-rating>
         </div>
       </div>
     </div>

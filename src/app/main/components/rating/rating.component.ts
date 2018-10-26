@@ -8,6 +8,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 export class RatingComponent implements OnInit {
   @Input() rating: number;
   @Input() itemId: number;
+  @Input() clickable = true;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
 
   inputName: string;
@@ -15,10 +16,12 @@ export class RatingComponent implements OnInit {
     this.inputName = this.itemId + '_rating';
   }
   onClick(rating: number): void {
-    this.rating = rating;
-    this.ratingClick.emit({
-      itemId: this.itemId,
-      rating: rating
-    });
+    if (this.clickable) {
+      this.rating = rating;
+      this.ratingClick.emit({
+        itemId: this.itemId,
+        rating: rating
+      });
+    }
   }
 }

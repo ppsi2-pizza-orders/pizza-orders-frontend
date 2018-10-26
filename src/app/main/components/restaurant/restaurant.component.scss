@@ -1,0 +1,10 @@
+@import 'styles.scss';
+.app-restaurant{
+    padding-top: 120px;
+    .spinner{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30vh;
+    }
+}

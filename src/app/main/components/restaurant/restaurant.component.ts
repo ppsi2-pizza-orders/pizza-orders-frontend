@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Restaurant } from 'src/app/shared/models/Restaurant';
+import { RestaurantService } from 'src/app/shared/services/restaurant.service';
 
 @Component({
   selector: 'app-restaurant',
@@ -8,18 +10,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RestaurantComponent implements OnInit {
 
-  restaurantId: number;
+  public restaurant: Restaurant;
+  public loading = true;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private restaurantService: RestaurantService) { }
 
   ngOnInit() {
-  //  this.router.routerState.parent(this.route)
-  //  .params.subscribe(params => {
-  //    this.restaurantId = +params['id'];
-  //    console.log(this.restaurantId);
-  //  });
-  this.restaurantId = +this.route.snapshot.paramMap.get('id');
-  console.log(this.restaurantId);
- }
+    const restaurantId = +this.route.snapshot.paramMap.get('id');
+    this.restaurantService.getRestaurant(restaurantId).subscribe(restaurant => {
+      this.restaurantService.setCurrentRestaurant(restaurant);
+      this.restaurant = restaurant;
+      this.loading = false;
+    });
+  }
 
 }

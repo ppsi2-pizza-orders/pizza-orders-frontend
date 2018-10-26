@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RestaurantService } from 'src/app/shared/services/restaurant.service';
+import { Restaurant } from 'src/app/shared/models/Restaurant';
 
 @Component({
   selector: 'app-offer',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OfferComponent implements OnInit {
 
-  restaurantId: number;
+  public restaurant: Restaurant;
 
-  constructor() { }
+  constructor(private restaurantService: RestaurantService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.restaurant = this.restaurantService.currentRestaurant;
+  }
 
 }

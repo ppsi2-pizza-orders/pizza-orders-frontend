@@ -6,21 +6,12 @@ import { Router } from '@angular/router';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, DoCheck {
-  url: String;
+export class MainComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   ngOnInit() {
-  }
-
-  ngDoCheck() {
-    this.url = this.router.url;
-  }
-
-  getBackground(): String {
-    return (this.url === '/') ? 'bg-home' : 'bg-default';
   }
 
 }

@@ -1,9 +1,65 @@
-<div class="home">
-  <div class="row justify-content-md-center">
-    <div class="col-12">
-      <h1>Pizza taka jak chcesz.</h1>
-      <br>
-      <button [routerLink]="['restaurant', 1, 'menu']" mat-raised-button>zamów teraz</button>
+<div class="app-home">
+  <div class="search">
+    <div class="row justify-content-md-center">
+      <div class="col-12">
+        <h1>Podaj miasto i znajdź restaurację</h1>
+        <br>
+        <mat-card>
+          <div class="row search-content">
+            <div class="col-10">
+              <input matInput type="text" placeholder="np. Wrocław" autocomplete="on" #search>
+            </div>
+            <div class="col-2">
+              <button (click)="getRestaurants()" mat-flat-button>
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <div #list class="restaurants" *ngIf="isListVisible">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-8">
+          <div *ngFor="let restaurant of restaurants">
+            <div class="restaurant-box">
+              <a [routerLink]="['restaurant', restaurant.id, 'menu']">
+                <mat-card>
+                    <div class="row">
+                      <div class="col-4">
+                        <img class="img-fluid" [src]="restaurant.photo" alt="">
+                      </div>
+                      <div class="col-8">
+                        <div class="title">
+                            <h2>{{ restaurant.name }}</h2>
+                        </div>
+                        <div class="rating">
+                            <app-rating [rating]='3' [itemId]='restaurant.id' [clickable]='false'></app-rating>
+                            <p>(129)</p>
+                        </div>
+                        <div class="description">
+                            <p>{{ restaurant.description }}</p>
+                        </div>
+                        <div class="adress">
+                            <p><mat-icon>location_on</mat-icon>{{ restaurant.adress }}, {{ restaurant.city }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card>
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="loading" class="spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="notFound" class="not-found">
+        <mat-icon>error_outline</mat-icon>
+        <h4>Brak restauracji w wybranej miejscowości</h4>
     </div>
   </div>
 </div>
