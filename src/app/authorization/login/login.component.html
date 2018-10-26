@@ -15,7 +15,7 @@
       <mat-error *ngIf="error">{{ error }}</mat-error>
       <button mat-flat-button class="custom-login" type="submit">Zaloguj się</button>
       <p class="lbl">lub</p>
-      <button mat-flat-button class="fb-login"><i class="fab fa-facebook-f"></i> Zaloguj się z Facebook</button>
+      <button mat-flat-button class="fb-login" (click)="onFacebookLogin()"><i class="fab fa-facebook-f"></i> Zaloguj się z Facebook</button>
       <p class="sgup">Nie masz jeszcze konta? <a (click)="openRegisterDialog()">Zarejestruj się</a></p>
     </div>
   </form>

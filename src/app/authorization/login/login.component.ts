@@ -2,6 +2,7 @@ import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { RegisterComponent } from '../register/register.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 export interface DialogData {
   isLoggedIn: boolean;
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     public dialogRef: MatDialogRef<LoginComponent>,
     public dialog: MatDialog,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -45,18 +47,29 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loading = true;
-    setTimeout(() => {
-      if (this.data != null) {
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
+    this.authService.login(email, password).subscribe(
+      (data) => {
         this.data.isLoggedIn = true;
         this.dialogRef.close(this.data);
-      } else {
-        this.dialogRef.close();
+      },
+      (err) => {
+        this.error = err;
       }
-    }, 2000);
+    );
   }
 
   onFacebookLogin() {
-
+    this.authService.facebookLogin().subscribe(
+      (data) => {
+        this.data.isLoggedIn = true;
+        this.dialogRef.close(this.data);
+      },
+      (err) => {
+        this.error = err;
+      }
+    );
   }
 
 }
