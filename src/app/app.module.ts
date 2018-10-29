@@ -5,8 +5,7 @@ import { routes } from './app.routing';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
-import { LoginComponent } from './authorization/login/login.component';
-import { RegisterComponent } from './authorization/register/register.component';
+import { AuthDialogComponent } from './authorization/auth-dialog/auth-dialog.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './authorization/auth.guard';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -37,8 +36,7 @@ export function getAuthServiceConfigs() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
+    AuthDialogComponent,
     RegisterRestaurantComponent
   ],
   imports: [
@@ -61,8 +59,7 @@ export function getAuthServiceConfigs() {
     })
   ],
   entryComponents: [
-    LoginComponent,
-    RegisterComponent,
+    AuthDialogComponent,
     RegisterRestaurantComponent
   ],
   providers: [

@@ -1,17 +1,18 @@
 @import 'styles.scss';
-.login-dialog{
+.login-form, .register-form{
     width: 420px;
     .form{
         .form-field{
             width: 100%;
         }
     }
-    .login-actions-btn{
+    .auth-actions-btn{
+        margin-bottom: 0;
         .mat-flat-button{
             width: 100%;
             height: 46px;
         }
-        .custom-login{
+        .login, .register{
             background-color: $accent-green !important;
             color: #fff !important;
         }
@@ -33,7 +34,7 @@
             padding: .4em 0;
         }
         .sgup{
-            padding: 2em 0;
+            padding-top: 2em;
             text-align: center;
             width: 100%;
             margin: 0;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from './authorization/login/login.component';
-import { RegisterComponent } from './authorization/register/register.component';
+import { AuthDialogComponent } from 'src/app/authorization/auth-dialog/auth-dialog.component';
 import { RegisterRestaurantComponent } from 'src/app/authorization/register-restaurant/register-restaurant.component';
 import { AuthService } from 'src/app/authorization/auth.service';
 import { Observable } from 'rxjs';
@@ -21,8 +20,8 @@ export class NavbarComponent implements OnInit {
     this.isLoggedIn = this.auth.isAuthenticated$();
   }
 
-  openLoginDialog(): void {
-    this.dialog.open(LoginComponent);
+  openAuthDialog(): void {
+    this.dialog.open(AuthDialogComponent);
   }
 
   openRegisterRestaurantDialog(): void {

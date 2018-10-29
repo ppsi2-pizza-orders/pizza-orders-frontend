@@ -14,7 +14,7 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button *ngIf="!(isLoggedIn | async)" (click)="openLoginDialog()" mat-menu-item>Logowanie</button>
+            <button *ngIf="!(isLoggedIn | async)" (click)="openAuthDialog()" mat-menu-item>Logowanie</button>
             <!-- <mat-divider></mat-divider> -->
             <button *ngIf="(isLoggedIn | async)" (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>
             <button *ngIf="(isLoggedIn | async)" (click)="logout()" mat-menu-item>Wyloguj</button>
