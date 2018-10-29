@@ -1,0 +1,53 @@
+@import 'styles.scss';
+.login-form, .register-form{
+    width: 420px;
+    .form{
+        .form-field{
+            width: 100%;
+        }
+    }
+    .auth-actions-btn{
+        margin-bottom: 0;
+        .mat-flat-button{
+            width: 100%;
+            height: 46px;
+        }
+        .login, .register{
+            background-color: $accent-green !important;
+            color: #fff !important;
+        }
+        .fb-login{
+            background-color: #4267b2 !important;
+            color: #fff !important;
+            i{
+                font-size: 1.4em;
+                margin-right: 6px;
+                margin-bottom: 4px;
+            }
+        }
+        .lbl{
+            text-align: center;
+            width: 100%;
+            margin: 0;
+            color: gray;
+            font-size: .9em;
+            padding: .4em 0;
+        }
+        .sgup{
+            padding-top: 2em;
+            text-align: center;
+            width: 100%;
+            margin: 0;
+            a{
+                color: $accent-green;
+                cursor: pointer;
+            }
+        }
+    }
+    .spinner{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3em;
+    }
+}

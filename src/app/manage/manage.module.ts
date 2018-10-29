@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminComponent } from './admin.component';
-import { MaterialModule } from '../shared/material';
-import { routes } from './admin.routing';
+import { ManageComponent } from './manage.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { MaterialModule } from '../shared/material';
+import { routes } from './manage.routing';
 
 @NgModule({
   imports: [
@@ -13,6 +13,6 @@ import { SharedModule } from '../shared/shared.module';
     MaterialModule,
     SharedModule
   ],
-  declarations: [AdminComponent]
+  declarations: [ManageComponent]
 })
-export class AdminModule { }
+export class ManageModule { }

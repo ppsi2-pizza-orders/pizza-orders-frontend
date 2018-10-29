@@ -1,0 +1,56 @@
+<div *ngIf="currentForm === 'loginForm'" class="login-form">
+  <h1 mat-dialog-title>Logowanie</h1>
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()" *ngIf="!loading">
+    <div mat-dialog-content class="auth-content">
+      <mat-form-field class="form-field">
+        <input matInput type="email" formControlName="email" placeholder="Email">
+        <mat-error *ngIf="loginForm.get('email').invalid">{{ getValidateMessage("email")}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput type="password" formControlName="password" placeholder="Hasło">
+        <mat-error *ngIf="loginForm.get('password').invalid">{{ getValidateMessage("password") }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="auth-actions-btn">
+      <mat-error>{{ loginError }}</mat-error>
+      <button mat-flat-button class="login" type="submit">Zaloguj się</button>
+      <p class="lbl">lub</p>
+      <button mat-flat-button class="fb-login" (click)="onFacebookLogin()"><i class="fab fa-facebook-f"></i> Zaloguj
+        się z Facebook</button>
+      <p class="sgup">Nie masz jeszcze konta? <a (click)="switchForm()">Zarejestruj się</a></p>
+    </div>
+  </form>
+  <div *ngIf="loading" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div *ngIf="currentForm === 'registerForm'" class="register-form">
+  <h1 mat-dialog-title>Rejestracja</h1>
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()" *ngIf="!loading">
+    <div mat-dialog-content class="auth-content">
+      <mat-form-field class="form-field">
+        <input type="email" matInput formControlName="email" placeholder="Email">
+        <mat-error *ngIf="registerForm.get('email').invalid">{{ getValidateMessage("email") }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input type="password" matInput formControlName="password" placeholder="Hasło">
+        <mat-error *ngIf="registerForm.get('password').invalid">{{ getValidateMessage("password") }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input type="password" matInput formControlName="password_confirmation" [errorStateMatcher]="matcher"
+          placeholder="Powtórz hasło">
+        <mat-error *ngIf="registerForm.hasError('notSame')">{{ getValidateMessage("password_confirmation") }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="auth-actions-btn">
+      <mat-error>{{ registerError }}</mat-error>
+      <button mat-flat-button class="register" type="submit">Zarejestruj się</button>
+      <p class="lbl">lub</p>
+      <button mat-flat-button class="fb-login" (click)="onFacebookLogin()"><i class="fab fa-facebook-f"></i> Zaloguj
+        się z Facebook</button>
+    </div>
+  </form>
+  <div *ngIf="loading" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
