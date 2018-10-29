@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from './login/login.component';
+import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-    constructor(private router: Router, public dialog: MatDialog) { }
+    constructor(private auth: AuthService, private router: Router, public dialog: MatDialog) { }
 
     canActivate(route: ActivatedRouteSnapshot) {
-        if (localStorage.getItem('token')) {
+        if (this.auth.isAuthenticated()) {
             return true;
         }
 
-        const dialogRef = this.dialog.open(LoginComponent, {
+        const dialogRef = this.dialog.open(AuthDialogComponent, {
             data: { isLoggedIn: false }
         });
 

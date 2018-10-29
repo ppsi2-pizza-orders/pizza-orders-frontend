@@ -16,9 +16,10 @@ import { RegisterRestaurantComponent } from './authorization/register-restaurant
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MockBackendService } from './shared/mock/mock-backend.service';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angular-6-social-login';
+import { environment } from 'src/environments/environment';
 
 export function tokenGetter() {
-  return localStorage.getItem('token');
+  return `Bearer ${localStorage.getItem('token')}`;
 }
 
 export function getAuthServiceConfigs() {
@@ -47,17 +48,15 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     SharedModule,
     SocialLoginModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      MockBackendService, { dataEncapsulation: false }
-    ),
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   MockBackendService, { dataEncapsulation: false }
+    // ),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
         headerName: 'Authorization',
-        whitelistedDomains: ['localhost:3001'],
-        blacklistedRoutes: [
-          'localhost:3001/auth/*',
-        ]
+        whitelistedDomains: environment.whitelist,
+        blacklistedRoutes: environment.blacklist
       }
     })
   ],

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, from } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { map, catchError } from 'rxjs/operators';
+import { Observable, from, BehaviorSubject } from 'rxjs';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { User } from '../shared/models/User';
 import { environment } from 'src/environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -10,37 +9,49 @@ import {
   AuthService as SocialAuthService,
   FacebookLoginProvider
 } from 'angular-6-social-login';
+import { Router } from '@angular/router';
 
-export const BackendEntryPoint_Login = environment.apiBaseUrl + 'auth/jwt';
-export const BackendEntryPoint_SocialLogin = environment.apiBaseUrl + 'auth/fb';
-export const BackendEntryPoint_RegisterUser = environment.apiBaseUrl + 'auth/register';
-export const BackendEntryPoint_RegisterRestaurant = environment.apiBaseUrl + 'auth/restaurant';
+export const BackendEntryPoint_Login = environment.apiBaseUrl + '/auth/login';
+export const BackendEntryPoint_SocialLogin = environment.apiBaseUrl + '/auth/facebook';
+export const BackendEntryPoint_RegisterUser = environment.apiBaseUrl + '/auth/register';
+export const BackendEntryPoint_RegisterRestaurant = environment.apiBaseUrl + '/auth/restaurant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, public jwtHelper: JwtHelperService, private socialAuthService: SocialAuthService) { }
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
+
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
+    private socialAuthService: SocialAuthService,
+    private router: Router) { }
+
+  public isAuthenticated$(): Observable<boolean> {
+    return this.isAuthenticatedSubject.asObservable();
+  }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    return !this.jwtHelper.isTokenExpired(token);
+    return this.hasToken();
+  }
+
+  public currentUser() {
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   public login(email: string, password: string) {
-    return this.http.post(BackendEntryPoint_Login,
-      { email: email, password: password }).pipe(
-        map(user => {
-          if (user && user['token']) {
-            localStorage.setItem('token', JSON.stringify(user));
-            return user;
-          }
-        }),
-        catchError(error => {
-          return Observable.throw(error);
-        })
-      );
+    return this.http.post(BackendEntryPoint_Login, {'email': email, 'password': password}).pipe(
+      map(data => {
+        if (data && data['data']['access_token']) {
+          localStorage.setItem('token', data['data']['access_token']);
+          localStorage.setItem('user', JSON.stringify(data['data']['user']));
+          this.isAuthenticatedSubject.next(true);
+          return data['data']['user'];
+        }
+      })
+    );
   }
 
   public facebookLogin() {
@@ -58,18 +69,20 @@ export class AuthService {
 
   public logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.isAuthenticatedSubject.next(false);
+    this.router.navigate([ '/' ]);
   }
 
-  public register(userData: User) {
+  public register(userData) {
     return this.http.post(BackendEntryPoint_RegisterUser, userData).pipe(
-      map(user => {
-        if (user && user['token']) {
-          localStorage.setItem('token', JSON.stringify(user));
-          return user;
+      map(data => {
+        if (data && data['data']['access_token']) {
+          localStorage.setItem('token', data['data']['access_token']);
+          localStorage.setItem('user', JSON.stringify(data['data']['user']));
+          this.isAuthenticatedSubject.next(true);
+          return data['data']['user'];
         }
-      }),
-      catchError(error => {
-        return Observable.throw(error);
       })
     );
   }
@@ -81,23 +94,24 @@ export class AuthService {
           localStorage.setItem('token', JSON.stringify(user));
           return user;
         }
-      }),
-      catchError(error => {
-        return Observable.throw(error);
       })
     );
   }
 
+  private hasToken(): boolean {
+    const token = localStorage.getItem('token');
+    return token ? true : false;
+  }
+
   private sendSocialToken(token: string) {
-    return this.http.post(BackendEntryPoint_SocialLogin, {'access_token' : token}).pipe(
-      map(user => {
-        if (user && user['token']) {
-          localStorage.setItem('token', JSON.stringify(user));
-          return user;
+    return this.http.post(BackendEntryPoint_SocialLogin, { 'access_token': token }).pipe(
+      map(data => {
+        if (data && data['data']['access_token']) {
+          localStorage.setItem('token', data['data']['access_token']);
+          localStorage.setItem('user', JSON.stringify(data['data']['user']));
+          this.isAuthenticatedSubject.next(true);
+          return data['data']['user'];
         }
-      }),
-      catchError(error => {
-        return Observable.throw(error);
       })
     );
   }

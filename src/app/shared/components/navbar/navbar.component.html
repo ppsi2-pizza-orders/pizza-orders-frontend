@@ -14,9 +14,10 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button (click)="openLoginDialog()" mat-menu-item>Logowanie</button>
+            <button *ngIf="!(isLoggedIn | async)" (click)="openLoginDialog()" mat-menu-item>Logowanie</button>
             <!-- <mat-divider></mat-divider> -->
-            <button (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>
+            <button *ngIf="(isLoggedIn | async)" (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>
+            <button *ngIf="(isLoggedIn | async)" (click)="logout()" mat-menu-item>Wyloguj</button>
         </mat-menu>
     </div>
 </div>
