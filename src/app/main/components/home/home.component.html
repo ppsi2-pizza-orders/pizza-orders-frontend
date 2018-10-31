@@ -48,8 +48,8 @@
                             <h2>{{ restaurant.name }}</h2>
                         </div>
                         <div class="rating">
-                            <app-rating [rating]='3' [itemId]='restaurant.id' [clickable]='false'></app-rating>
-                            <p>(129)</p>
+                            <app-rating [rating]='restaurant.rate' [itemId]='restaurant.id' [clickable]='false'></app-rating>
+                            <p></p>
                         </div>
                         <div class="description">
                             <p>{{ restaurant.description }}</p>
