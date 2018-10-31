@@ -2,14 +2,26 @@
   <div class="search">
     <div class="row justify-content-md-center">
       <div class="col-12">
-        <h1>Podaj miasto i znajdź restaurację</h1>
+        <h1>Znajdź restaurację</h1>
         <br>
         <mat-card>
           <div class="row search-content">
-            <div class="col-10">
-              <input matInput type="text" placeholder="np. Wrocław" autocomplete="on" #search>
+            <div class="col col-2">
+              <mat-select [(ngModel)]="searchBy">
+                  <mat-option value="city" (click)="clearSearch()">Miasto</mat-option>
+                  <mat-option value="name" (click)="clearSearch()">Nazwa</mat-option>
+                  <mat-option value="pizza" (click)="clearSearch()">Pizza</mat-option>
+              </mat-select>
             </div>
-            <div class="col-2">
+            <div class="col col-8">
+              <input matInput type="text" [placeholder]="placeholder" [matAutocomplete]="auto" [formControl]="sugestionsCtrl">
+              <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let sugestion of filteredSugestions | async" [value]="sugestion">
+                    <span>{{sugestion}}</span>
+                  </mat-option>
+                </mat-autocomplete>
+            </div>
+            <div class="col col-2">
               <button (click)="getRestaurants()" mat-flat-button>
                 <mat-icon>search</mat-icon>
               </button>

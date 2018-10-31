@@ -1,5 +1,6 @@
 import { MatButtonModule, MatCheckboxModule, MatIconModule, MatProgressSpinnerModule, MatListModule,
   MatTabsModule, MatStepperModule, MatMenuModule, MatCardModule, MatInputModule, MatFormFieldModule, MatDialogModule,
+  MatSelectModule, MatAutocompleteModule,
  } from '@angular/material';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgModule } from '@angular/core';
@@ -18,7 +19,9 @@ import { NgModule } from '@angular/core';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatButtonModule,
@@ -33,7 +36,9 @@ import { NgModule } from '@angular/core';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatAutocompleteModule
   ],
 })
 export class MaterialModule {

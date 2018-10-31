@@ -17,16 +17,33 @@
             font-size: 1.4em;
             text-align: left;
         }
+        .mat-select{
+            outline:none;
+            border: none;
+            width: 100%;
+            padding: 11px;
+            font-size: 1.2em;
+            text-align: left;
+            background-color: $secondary-color;
+            border-radius: 4px 0 0 4px;
+        }
+        ::ng-deep .mat-select-value-text, ::ng-deep .mat-select-arrow{
+            color: #fff !important;
+        }
         .mat-card{
             padding: 0;
             height: 50px;
             margin: auto;
-            width: 440px;
+            width: 600px;
             .search-content{
                 height: 100%;
                 .mat-flat-button{
                     border-radius: 0px 4px 4px 0;
                     height: 100%;
+                    margin-right: -24px;
+                }
+                .col{
+                    padding: 0;
                 }
             }
         }
@@ -68,4 +85,3 @@
         }
     }
 }
-

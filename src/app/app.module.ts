@@ -46,9 +46,9 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     SharedModule,
     SocialLoginModule,
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   MockBackendService, { dataEncapsulation: false }
-    // ),
+    HttpClientInMemoryWebApiModule.forRoot(
+      MockBackendService, { dataEncapsulation: false }
+    ),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
