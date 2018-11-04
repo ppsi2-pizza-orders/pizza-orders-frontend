@@ -17,6 +17,7 @@ export class MockBackendService implements InMemoryDbService {
         adress: 'Żeromskiego 12',
         phone: '79298729827',
         description: 'Włoska, Makarony, Pizza',
+        rate: 4.34,
         photo: '/assets/restaurant.jpg'
       },
       {
@@ -26,6 +27,7 @@ export class MockBackendService implements InMemoryDbService {
         adress: 'Młynarska 5',
         phone: '692893876',
         description: 'Włoska, Makarony, Pizza',
+        rate: 3.34,
         photo: '/assets/dagrasso.jpg'
       },
       {
@@ -35,9 +37,46 @@ export class MockBackendService implements InMemoryDbService {
         adress: 'Lotnicza 5',
         phone: '692893876',
         description: 'Włoska, Makarony, Pizza',
+        rate: 4.74,
         photo: '/assets/hanoi.png'
       },
+      {
+        id: 4,
+        name: 'Pizzeria Marco',
+        city: 'Kraków',
+        adress: 'Białska 5',
+        phone: '692893876',
+        description: 'Włoska, Makarony, Pizza',
+        rate: 5.0,
+      },
     ];
-    return { restaurant };
+    const autocomplete = {
+      cities: [
+        'Wrocław',
+        'Legnica',
+        'Jelenia Góra',
+        'Kalisz',
+        'Warszawa',
+        'Poznan',
+        'Kraków',
+        'Gdańsk',
+        'Sopot',
+        'Rzeszów',
+        'Katowice'
+      ],
+      names: [
+        'Pizzeria Hanoi Lotnicza',
+        'Da grasso',
+        'Nocne gastro',
+        'Pizzeria Marco'
+      ],
+      pizzas: [
+        'Hawajska',
+        'Margarita',
+        'Wiejska',
+        'Peperoni'
+      ]
+    };
+    return { restaurant, autocomplete };
   }
 }

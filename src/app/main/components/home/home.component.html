@@ -1,9 +1,83 @@
-<div class="home">
-  <div class="row justify-content-md-center">
-    <div class="col-12">
-      <h1>Pizza taka jak chcesz.</h1>
-      <br>
-      <button [routerLink]="['restaurant', 1, 'menu']" mat-raised-button>zamów teraz</button>
+<div class="app-home">
+  <div class="search">
+    <div class="row justify-content-md-center">
+      <div class="col-12">
+        <h1>Znajdź restaurację</h1>
+        <br>
+        <mat-card>
+          <div class="row search-content">
+            <div class="col col-2">
+              <mat-select [(ngModel)]="searchBy">
+                  <mat-option value="city">Miasto</mat-option>
+                  <mat-option value="name">Nazwa</mat-option>
+              </mat-select>
+            </div>
+            <div class="col col-8">
+              <input matInput type="text" *ngIf="searchBy==='city'" placeholder="Np. Wrocław" [matAutocomplete]="city" [formControl]="cityCtrl">
+              <mat-autocomplete #city="matAutocomplete">
+                <mat-option *ngFor="let sugestion of citySugestions | async" [value]="sugestion">
+                  <span>{{sugestion}}</span>
+                </mat-option>
+              </mat-autocomplete>
+
+              <input matInput type="text" *ngIf="searchBy==='name'" placeholder="Np. Nocne Gastro" [matAutocomplete]="name" [formControl]="nameCtrl">
+              <mat-autocomplete #name="matAutocomplete">
+                <mat-option *ngFor="let sugestion of nameSugestions | async" [value]="sugestion">
+                  <span>{{sugestion}}</span>
+                </mat-option>
+              </mat-autocomplete>
+            </div>
+            <div class="col col-2">
+              <button (click)="getRestaurants()" mat-flat-button>
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <div #list class="restaurants" *ngIf="isListVisible">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-8">
+          <div *ngFor="let restaurant of restaurants">
+            <div class="restaurant-box">
+              <a [routerLink]="['restaurant', restaurant.id, 'menu']">
+                <mat-card>
+                    <div class="row">
+                      <div class="col-4">
+                        <img class="img-fluid" [src]="restaurant.photo" alt="">
+                      </div>
+                      <div class="col-8">
+                        <div class="title">
+                            <h2>{{ restaurant.name }}</h2>
+                        </div>
+                        <div class="rating">
+                            <app-rating [rating]='restaurant.rate' [itemId]='restaurant.id' [clickable]='false'></app-rating>
+                            <p></p>
+                        </div>
+                        <div class="description">
+                            <p>{{ restaurant.description }}</p>
+                        </div>
+                        <div class="adress">
+                            <p><mat-icon>location_on</mat-icon>{{ restaurant.adress }}, {{ restaurant.city }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card>
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="loading" class="spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="notFound" class="not-found">
+        <mat-icon>error_outline</mat-icon>
+        <h4>Nie znaleziono restauracji.</h4>
     </div>
   </div>
 </div>
