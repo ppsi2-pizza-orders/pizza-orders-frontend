@@ -21,7 +21,7 @@ export const BackendEntryPoint_RegisterRestaurant = environment.apiBaseUrl + '/a
 })
 export class AuthService {
 
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
 
   constructor(
     private http: HttpClient,
@@ -29,26 +29,26 @@ export class AuthService {
     private socialAuthService: SocialAuthService,
     private router: Router) { }
 
-  public isAuthenticated$(): Observable<boolean> {
+  public isLoggedIn(): Observable<boolean> {
     return this.isAuthenticatedSubject.asObservable();
   }
 
   public isAuthenticated(): boolean {
-    return this.hasToken();
+    const token = localStorage.getItem('token');
+    return token && !this.jwtHelper.isTokenExpired(token);
   }
 
   public currentUser() {
-    return JSON.parse(localStorage.getItem('user'));
+    return this.jwtHelper.decodeToken(localStorage.getItem('token')).user;
   }
 
   public login(email: string, password: string) {
     return this.http.post(BackendEntryPoint_Login, {'email': email, 'password': password}).pipe(
       map(data => {
-        if (data && data['data']['access_token']) {
-          localStorage.setItem('token', data['data']['access_token']);
-          localStorage.setItem('user', JSON.stringify(data['data']['user']));
+        if (data && data['data']['token']) {
+          localStorage.setItem('token', data['data']['token']);
           this.isAuthenticatedSubject.next(true);
-          return data['data']['user'];
+          return this.currentUser();
         }
       })
     );
@@ -69,7 +69,6 @@ export class AuthService {
 
   public logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
     this.isAuthenticatedSubject.next(false);
     this.router.navigate([ '/' ]);
   }
@@ -77,11 +76,10 @@ export class AuthService {
   public register(userData) {
     return this.http.post(BackendEntryPoint_RegisterUser, userData).pipe(
       map(data => {
-        if (data && data['data']['access_token']) {
-          localStorage.setItem('token', data['data']['access_token']);
-          localStorage.setItem('user', JSON.stringify(data['data']['user']));
+        if (data && data['data']['token']) {
+          localStorage.setItem('token', data['data']['token']);
           this.isAuthenticatedSubject.next(true);
-          return data['data']['user'];
+          return this.currentUser();
         }
       })
     );
@@ -98,19 +96,13 @@ export class AuthService {
     );
   }
 
-  private hasToken(): boolean {
-    const token = localStorage.getItem('token');
-    return token ? true : false;
-  }
-
   private sendSocialToken(token: string) {
     return this.http.post(BackendEntryPoint_SocialLogin, { 'access_token': token }).pipe(
       map(data => {
-        if (data && data['data']['access_token']) {
-          localStorage.setItem('token', data['data']['access_token']);
-          localStorage.setItem('user', JSON.stringify(data['data']['user']));
+        if (data && data['data']['token']) {
+          localStorage.setItem('token', data['data']['token']);
           this.isAuthenticatedSubject.next(true);
-          return data['data']['user'];
+          return this.currentUser();
         }
       })
     );
