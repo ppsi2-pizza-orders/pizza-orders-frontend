@@ -14,64 +14,56 @@ export class HomeComponent implements OnInit, DoCheck, AfterContentInit {
 
   public restaurants: Restaurant[];
   public isListVisible = false;
-  public loading = true;
+  public loading = false;
   public notFound = false;
-  public placeholder = 'Np. Wrocław';
   public searchBy = 'city';
-  public filteredSugestions: Observable<string[]>;
-  public sugestionsCtrl = new FormControl();
+  public citySugestions: Observable<string[]>;
+  public nameSugestions: Observable<string[]>;
+  public cityCtrl = new FormControl();
+  public nameCtrl = new FormControl();
   private sugestions;
-  private autocomplete = { cities: [], names: [], pizzas: [] };
+  private autocomplete = { cities: [], names: [] };
   @ViewChild('list') public listRestaurant: ElementRef;
 
   constructor(
     private restaurantService: RestaurantService
   ) { }
 
-  ngOnInit() {
-    this.filteredSugestions = this.sugestionsCtrl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => value.length >= 1 ? this.filterSugestions(value) : [])
-      );
+  public ngOnInit() {
+    this.citySugestions = this.cityCtrl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => value.length >= 1 ? this.filterSugestions(value) : [])
+    );
+    this.nameSugestions = this.nameCtrl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => value.length >= 1 ? this.filterSugestions(value) : [])
+    );
   }
 
-  ngDoCheck(): void {
+  public ngDoCheck(): void {
     if (this.searchBy === 'city') {
-      this.placeholder = 'Np. Wrocław';
       this.sugestions = this.autocomplete['cities'];
     }
     if (this.searchBy === 'name') {
-      this.placeholder = 'Np. Nocne Gastro';
       this.sugestions = this.autocomplete['names'];
-    }
-    if (this.searchBy === 'pizza') {
-      this.placeholder = 'Np. Hawajska';
-      this.sugestions = this.autocomplete['pizzas'];
     }
   }
 
-  ngAfterContentInit(): void {
+  public ngAfterContentInit(): void {
     this.restaurantService.getAutocomplete().subscribe(data => Object.assign(this.autocomplete, data));
   }
 
-  filterSugestions(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.sugestions.filter(sugestion => sugestion.toLowerCase().includes(filterValue));
-  }
-
-  clearSearch() {
-    this.sugestionsCtrl.setValue('');
-  }
-
-  getRestaurants() {
-    const searchValue = this.sugestionsCtrl.value;
-    if (searchValue) {
+  public getRestaurants() {
+    const cityValue = this.cityCtrl.value;
+    const nameValue = this.nameCtrl.value;
+    if (cityValue || nameValue)  {
       this.isListVisible = true;
       this.restaurants = [];
       this.notFound = false;
       this.loading = true;
-      this.restaurantService.getRestaurants(this.searchBy, searchValue)
+      this.restaurantService.getRestaurants(cityValue, nameValue)
         .subscribe(restaurants => {
           this.restaurants = restaurants;
           this.loading = false;
@@ -84,6 +76,11 @@ export class HomeComponent implements OnInit, DoCheck, AfterContentInit {
         this.listRestaurant.nativeElement.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
+  }
+
+  private filterSugestions(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.sugestions.filter(sugestion => sugestion.toLowerCase().includes(filterValue));
   }
 
 }
