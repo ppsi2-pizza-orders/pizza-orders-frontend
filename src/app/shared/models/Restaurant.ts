@@ -17,6 +17,6 @@ export class Restaurant {
     description?: string;
     review?: number;
     reviews?: Array<Review>;
-    menu?: Array<Pizza>;
+    pizzas?: Array<Pizza>;
     ingredients?: Array<Ingredient>;
 }

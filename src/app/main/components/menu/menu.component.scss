@@ -1,0 +1,21 @@
+@import 'styles.scss';
+.app-menu{
+    .menu-item{
+        margin-bottom: 1em;
+        .mat-card{
+            &:hover{
+                background-color: $tethriary-color;
+            }
+        }
+        .content{
+            display: flex;
+            align-items: center;
+        }
+        .buttons{
+            button{
+                color: #fff;
+                margin: 0 4px;
+            }
+        }
+    }
+}

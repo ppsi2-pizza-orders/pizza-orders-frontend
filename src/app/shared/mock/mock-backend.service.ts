@@ -38,7 +38,219 @@ export class MockBackendService implements InMemoryDbService {
         phone: '692893876',
         description: 'Włoska, Makarony, Pizza',
         rate: 4.74,
-        photo: '/assets/hanoi.png'
+        photo: '/assets/hanoi.png',
+        pizzas: [
+          {
+            id: 1,
+            name: 'Margarita',
+            price: 19,
+            ingredients: [
+              {
+                id: 1,
+                name: 'ser',
+                cost: 6,
+                photo: '/assets/ser.png',
+                available: true
+              }
+            ]
+          },
+          {
+            id: 2,
+            name: 'Capriciosa',
+            price: 23,
+            ingredients: [
+              {
+                id: 1,
+                name: 'ser',
+                cost: 6,
+                photo: '/assets/ser.png',
+                available: true
+              },
+              {
+                id: 2,
+                name: 'szynka',
+                cost: 3,
+                photo: '/assets/ser.png',
+                available: true
+              },
+              {
+                id: 3,
+                name: 'pieczarki',
+                cost: 4,
+                photo: '/assets/pieczarki.png',
+                available: true
+              }
+            ]
+          },
+          {
+            id: 3,
+            name: 'Wiejska',
+            price: 25,
+            ingredients: [
+              {
+                id: 1,
+                name: 'ser',
+                cost: 6,
+                photo: '/assets/ser.png',
+                available: true
+              },
+              {
+                id: 3,
+                name: 'pieczarki',
+                cost: 4,
+                photo: '/assets/pieczarki.png',
+                available: true
+              },
+              {
+                id: 4,
+                name: 'boczek',
+                cost: 5,
+                photo: '/assets/boczek.png',
+                available: true
+              }
+            ]
+          },
+          {
+            id: 1,
+            name: 'Margarita',
+            price: 19,
+            ingredients: [
+              {
+                id: 1,
+                name: 'ser',
+                cost: 6,
+                photo: '/assets/ser.png',
+                available: true
+              }
+            ]
+          },
+          {
+            id: 2,
+            name: 'Capriciosa',
+            price: 23,
+            ingredients: [
+              {
+                id: 1,
+                name: 'ser',
+                cost: 6,
+                photo: '/assets/ser.png',
+                available: true
+              },
+              {
+                id: 2,
+                name: 'szynka',
+                cost: 3,
+                photo: '/assets/ser.png',
+                available: true
+              },
+              {
+                id: 3,
+                name: 'pieczarki',
+                cost: 4,
+                photo: '/assets/pieczarki.png',
+                available: true
+              }
+            ]
+          },
+          {
+            id: 3,
+            name: 'Wiejska',
+            price: 25,
+            ingredients: [
+              {
+                id: 1,
+                name: 'ser',
+                cost: 6,
+                photo: '/assets/ser.png',
+                available: true
+              },
+              {
+                id: 3,
+                name: 'pieczarki',
+                cost: 4,
+                photo: '/assets/pieczarki.png',
+                available: true
+              },
+              {
+                id: 4,
+                name: 'boczek',
+                cost: 5,
+                photo: '/assets/boczek.png',
+                available: true
+              }
+            ]
+          },
+          {
+            id: 1,
+            name: 'Margarita',
+            price: 19,
+            ingredients: [
+              {
+                id: 1,
+                name: 'ser',
+                cost: 6,
+                photo: '/assets/ser.png',
+                available: true
+              }
+            ]
+          },
+          {
+            id: 2,
+            name: 'Capriciosa',
+            price: 23,
+            ingredients: [
+              {
+                id: 1,
+                name: 'ser',
+                cost: 6,
+                photo: '/assets/ser.png',
+                available: true
+              },
+              {
+                id: 2,
+                name: 'szynka',
+                cost: 3,
+                photo: '/assets/ser.png',
+                available: true
+              },
+              {
+                id: 3,
+                name: 'pieczarki',
+                cost: 4,
+                photo: '/assets/pieczarki.png',
+                available: true
+              }
+            ]
+          },
+          {
+            id: 3,
+            name: 'Wiejska',
+            price: 25,
+            ingredients: [
+              {
+                id: 1,
+                name: 'ser',
+                cost: 6,
+                photo: '/assets/ser.png',
+                available: true
+              },
+              {
+                id: 3,
+                name: 'pieczarki',
+                cost: 4,
+                photo: '/assets/pieczarki.png',
+                available: true
+              },
+              {
+                id: 4,
+                name: 'boczek',
+                cost: 5,
+                photo: '/assets/boczek.png',
+                available: true
+              }
+            ]
+          },
+        ]
       },
       {
         id: 4,
