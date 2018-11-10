@@ -1,3 +1,60 @@
-<p>
-  pizza-creator works!
-</p>
+<div class="app-pizza-creator">
+  <div class="dragdrop">
+    <div class="row">
+      <div class="col-md-6">
+          <div class="ingredients-panel">
+            <div class="ingredients">
+              <div 
+              class="ingredient" 
+              *ngFor="let ingredient of displayIngredients" 
+              [appMovable]="true" 
+              [appMovableReset]="true" 
+              appDroppable 
+              [matTooltip]="ingredient.name"
+              (dragStart)="currentIngredient = ingredient">
+                <div [ngStyle]="{'background-image': 'url(' + ingredient.img + ')'}"></div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-panel">
+            <button mat-icon-button color="primary" (click)="prevPage()"><mat-icon>navigate_before</mat-icon></button>
+            <button mat-icon-button color="primary" (click)="nextPage()"><mat-icon>navigate_next</mat-icon></button>
+          </div>
+      </div>
+      <div class="col col-md-6">
+        <div class="pizza-panel">
+          <div 
+          class="dropzone" 
+          appDropzone 
+          (drop)="move(currentIngredient, dropzoneIngredients)" 
+          (remove)="move(currentIngredient, avaiableIngredients)">
+            <div 
+            class="ingredient"
+            *ngFor="let ingredient of dropzoneIngredients" 
+            [appMovable]="true" 
+            [appMovableReset]="false"
+            appDroppable 
+            (dragStart)="currentIngredient = ingredient">
+              <div [ngStyle]="{'background-image': 'url(' + ingredient.img + ')'}"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="summary-panel mat-card">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="pizza-name" color="accent">
+          <input matInput placeholder="Nazwa pizzy" autocomplete="off">
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <h5>Cena: {{getPrice()}}zł</h5>
+      </div>
+      <div class="col-3">
+        <button mat-flat-button>Dodaj do zamówienia</button>
+      </div>
+    </div>
+  </div>
+</div>
