@@ -7,8 +7,8 @@
     </div>
 
     <div class="btn">
-        <button mat-icon-button>
-            <mat-icon>shopping_basket</mat-icon>
+        <button mat-icon-button (click)="toggle()">
+            <mat-icon [matBadge]="itemsInBasket" [matBadgeHidden]="itemsInBasket==0" matBadgePosition="before">shopping_basket</mat-icon>
         </button>
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
@@ -20,4 +20,5 @@
             <button *ngIf="(isLoggedIn | async)" (click)="logout()" mat-menu-item>Wyloguj</button>
         </mat-menu>
     </div>
+    <app-basket-preview (itemInBasketCount)="setBasketItemCount($event)"></app-basket-preview>
 </div>

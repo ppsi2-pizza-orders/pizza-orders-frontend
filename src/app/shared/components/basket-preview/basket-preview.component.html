@@ -1,0 +1,14 @@
+<div [@openClose]="(isOpen | async) ? 'open' : 'closed'" class="app-basket-preview mat-card">
+  <div *ngFor="let pizza of basketItems">
+    <button mat-icon-button color="warn" (click)="remove(pizza)"><mat-icon>remove_circle</mat-icon></button>
+    1x {{ pizza.name }} {{ pizza.price }}zł
+    <button mat-icon-button color="primary" (click)="add(pizza)"><mat-icon>add_circle</mat-icon></button>
+  </div>
+  <div *ngIf="!basketItems || basketItems.length == 0">Twoje zamówienie jest puste.</div>
+  <hr>
+  <div *ngIf="basketItems && basketItems.length > 0"><h6>Koszt zamówienia: {{ totalCost() }}zł</h6></div>
+  <div class="buttons">
+    <button mat-flat-button color="warn" *ngIf="basketItems && basketItems.length > 0">Zamów</button>
+    <button mat-flat-button color="primary" (click)="close()">Kontynuuj</button>
+  </div>
+</div>
