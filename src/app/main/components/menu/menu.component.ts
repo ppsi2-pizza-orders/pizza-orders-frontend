@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
   }
 
   public addToBasket(pizza: Pizza) {
-    this.orderService.addToBasket(pizza);
+    this.orderService.addToBasket(pizza, this.restaurant.id);
   }
 
 }

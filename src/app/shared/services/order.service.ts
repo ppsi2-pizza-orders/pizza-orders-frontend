@@ -7,6 +7,7 @@ import { Pizza } from '../models/Pizza';
 })
 export class OrderService {
   private basket: Pizza[] = [];
+  private restaurantID: number;
   private basketItems = new BehaviorSubject<Pizza[]>(null);
   private basketPreviewVisible = new BehaviorSubject<boolean>(false);
 
@@ -20,7 +21,15 @@ export class OrderService {
     this.basketPreviewVisible.next(visible);
   }
 
-  public addToBasket(pizza: Pizza) {
+  public addToBasket(pizza: Pizza, restaurant?: number) {
+    if (restaurant) {
+      if (this.restaurantID !== restaurant && this.basket.length > 0) {
+        this.basket = [];
+        this.restaurantID = restaurant;
+      } else {
+        this.restaurantID = restaurant;
+      }
+    }
     this.basket.push(pizza);
     this.basketItems.next(this.basket);
     this.setBasketPreviewVisible(true);
