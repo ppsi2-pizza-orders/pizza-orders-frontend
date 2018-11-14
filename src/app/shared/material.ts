@@ -1,6 +1,6 @@
 import { MatButtonModule, MatCheckboxModule, MatIconModule, MatProgressSpinnerModule, MatListModule,
   MatTabsModule, MatStepperModule, MatMenuModule, MatCardModule, MatInputModule, MatFormFieldModule, MatDialogModule,
-  MatSelectModule, MatAutocompleteModule, MatTooltipModule,
+  MatSelectModule, MatAutocompleteModule, MatTooltipModule, MatBadgeModule,
  } from '@angular/material';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgModule } from '@angular/core';
@@ -22,7 +22,8 @@ import { NgModule } from '@angular/core';
     MatDialogModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatBadgeModule
   ],
   exports: [
     MatButtonModule,
@@ -40,7 +41,8 @@ import { NgModule } from '@angular/core';
     MatDialogModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatBadgeModule
   ],
 })
 export class MaterialModule {

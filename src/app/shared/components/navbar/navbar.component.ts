@@ -4,6 +4,7 @@ import { AuthDialogComponent } from 'src/app/authorization/auth-dialog/auth-dial
 import { RegisterRestaurantComponent } from 'src/app/authorization/register-restaurant/register-restaurant.component';
 import { AuthService } from 'src/app/authorization/auth.service';
 import { Observable } from 'rxjs';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,24 +13,35 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
 
-  private isLoggedIn: Observable<boolean>;
+  public isLoggedIn: Observable<boolean>;
+  public itemsInBasket: number;
+  private isBasketPreviewVisible = true;
 
-  constructor(public dialog: MatDialog, private auth: AuthService) { }
+  constructor(public dialog: MatDialog, private auth: AuthService, private order: OrderService) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.isLoggedIn = this.auth.isLoggedIn();
+    this.order.isBasketPreviewVisible().subscribe(visible => this.isBasketPreviewVisible = visible);
   }
 
-  openAuthDialog(): void {
+  public openAuthDialog(): void {
     this.dialog.open(AuthDialogComponent);
   }
 
-  openRegisterRestaurantDialog(): void {
+  public openRegisterRestaurantDialog(): void {
     this.dialog.open(RegisterRestaurantComponent);
   }
 
-  logout(): void {
+  public logout(): void {
     this.auth.logout();
+  }
+
+  public toggle() {
+    this.order.setBasketPreviewVisible(!this.isBasketPreviewVisible);
+  }
+
+  public setBasketItemCount(count: number) {
+    this.itemsInBasket = count;
   }
 
 }

@@ -16,6 +16,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { MockBackendService } from './shared/mock/mock-backend.service';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angular-6-social-login';
 import { environment } from 'src/environments/environment';
+import { OrderService } from './shared/services/order.service';
 
 export function tokenGetter() {
   return `Bearer ${localStorage.getItem('token')}`;
@@ -47,7 +48,7 @@ export function getAuthServiceConfigs() {
     SharedModule,
     SocialLoginModule,
     // HttpClientInMemoryWebApiModule.forRoot(
-    //   MockBackendService, { dataEncapsulation: false }
+    //   MockBackendService, { dataEncapsulation: false, delay: 1500 }
     // ),
     JwtModule.forRoot({
       config: {
@@ -65,6 +66,7 @@ export function getAuthServiceConfigs() {
   providers: [
     AuthGuard,
     RoleGuard,
+    OrderService,
     {
       provide: MatDialogRef,
       useValue: {}
