@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MockIngredients } from 'src/app/shared/mock/mock-ingredients';
 import { Ingredient } from 'src/app/shared/models/Ingredient';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { RestaurantService } from 'src/app/shared/services/restaurant.service';
+import { Restaurant } from 'src/app/shared/models/Restaurant';
 
 @Component({
   selector: 'app-pizza-creator',
@@ -11,17 +14,23 @@ export class PizzaCreatorComponent implements OnInit {
   public avaiableIngredients: Array<Ingredient> = [];
   public displayIngredients: Array<Ingredient> = [];
   public dropzoneIngredients: Array<Ingredient> = [];
-  public currentIngredient?: Ingredient;
+  public currentIngredient: Ingredient;
+  public currentRestaurant: Restaurant;
   private pizzaPrice = 14;
   private ingredientsPrice = 3;
   private currentPage = 0;
   private itemsPerPage = 20;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private restaurantService: RestaurantService) { }
 
   public ngOnInit() {
     Object.assign(this.avaiableIngredients, MockIngredients);
     this.displayIngredients = this.avaiableIngredients.slice(0, this.itemsPerPage);
+    this.currentRestaurant = this.restaurantService.currentRestaurant;
+    const pizzaId = Number(this.route.snapshot.paramMap.get('pizza'));
+    if (pizzaId) {
+      this.initPizza(pizzaId);
+    }
   }
 
   public move(item: Ingredient, list: Array<Ingredient>): void {
@@ -62,5 +71,15 @@ export class PizzaCreatorComponent implements OnInit {
     const begin = this.currentPage * this.itemsPerPage;
     const end = begin + this.itemsPerPage;
     this.displayIngredients = this.avaiableIngredients.slice(begin, end);
+  }
+
+  private initPizza(id: number) {
+    const pizza = this.currentRestaurant.pizzas.filter(p => p.id === id)[0];
+    const ingredients = pizza.ingredients.map(i => i.id);
+    this.avaiableIngredients.forEach(ingredient => {
+      if (ingredients.includes(ingredient.id)) {
+        this.move(ingredient, this.dropzoneIngredients);
+      }
+    });
   }
 }
