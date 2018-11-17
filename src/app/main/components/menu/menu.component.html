@@ -3,14 +3,14 @@
     <div class="menu-item">
       <mat-card>
         <div class="row content">
-            <div class="title col-md-8">
+            <div class="title col-sm-7">
               <h2>{{ pizza.name }}</h2>
               <span *ngFor="let ingredient of pizza.ingredients">{{ingredient.name}} </span>
             </div>
-            <div class="cost col-md-2">
+            <div class="cost col-sm-2">
               <h4>{{ pizza.price }}zł</h4>
             </div>
-            <div class="buttons col-md-2">
+            <div class="buttons col-sm-3">
               <button mat-mini-fab color="primary" matTooltip="Edytuj pizze"><mat-icon>edit</mat-icon></button>
               <button mat-mini-fab color="primary" matTooltip="Dodaj do zamówienia" (click)="addToBasket(pizza)"><mat-icon>add</mat-icon></button>
             </div>
