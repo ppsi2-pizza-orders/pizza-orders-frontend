@@ -1,6 +1,6 @@
 @import 'styles.scss';
 .login-form, .register-form{
-    width: 420px;
+    max-width: 420px;
     .form{
         .form-field{
             width: 100%;
@@ -49,5 +49,6 @@
         align-items: center;
         justify-content: center;
         padding: 3em;
+        margin: 3em;
     }
 }

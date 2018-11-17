@@ -360,7 +360,7 @@ $xl-width: 1200px;
 }
 
 @mixin xl {
-    @media (max-width: #{$xl-width}) {
+    @media (min-width: #{$lg-width}) {
         @content;
     }
 }

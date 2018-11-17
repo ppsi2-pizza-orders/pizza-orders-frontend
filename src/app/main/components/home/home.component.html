@@ -4,15 +4,14 @@
       <div class="col-12">
         <h1>Znajdź restaurację</h1>
         <br>
-        <mat-card>
           <div class="row search-content">
-            <div class="col col-2">
+            <div class="col-md-3 nopadding">
               <mat-select [(ngModel)]="searchBy">
                   <mat-option value="city">Miasto</mat-option>
                   <mat-option value="name">Nazwa</mat-option>
               </mat-select>
             </div>
-            <div class="col col-8">
+            <div class="col-md-8 space nopadding">
               <input matInput type="text" *ngIf="searchBy==='city'" placeholder="Np. Wrocław" [matAutocomplete]="city" [formControl]="cityCtrl">
               <mat-autocomplete #city="matAutocomplete">
                 <mat-option *ngFor="let sugestion of citySugestions | async" [value]="sugestion">
@@ -27,13 +26,12 @@
                 </mat-option>
               </mat-autocomplete>
             </div>
-            <div class="col col-2">
+            <div class="col-md-1 nopadding">
               <button (click)="getRestaurants()" mat-flat-button color="warn">
                 <mat-icon>search</mat-icon>
               </button>
             </div>
           </div>
-        </mat-card>
       </div>
     </div>
   </div>
