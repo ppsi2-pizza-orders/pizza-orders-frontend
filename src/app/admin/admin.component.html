@@ -1,2 +1,34 @@
-<router-outlet></router-outlet>
-admin works
+<div class="app-admin">
+  <mat-toolbar color="warn">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="title">Administracja</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+      #snav
+      [opened]="true"
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <mat-nav-list>
+        <a [routerLink]="['dashboard']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Kokpit</a>
+        <a [routerLink]="['restaurants']" [routerLinkActive]="['active']" mat-list-item><mat-icon>store_mall_directory</mat-icon>Restauracje</a>
+        <a [routerLink]="['users']" [routerLinkActive]="['active']" mat-list-item><mat-icon>people</mat-icon>Użtkownicy</a>
+        <a [routerLink]="['ingredients']" [routerLinkActive]="['active']" mat-list-item><mat-icon>group_work</mat-icon>Składniki</a>
+        <a [routerLink]="['logs']" [routerLinkActive]="['active']" mat-list-item><mat-icon>info</mat-icon>Zdarzenia</a>
+        <a (click)="logout()" mat-list-item><mat-icon>input</mat-icon>Wyloguj</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+    
+  </mat-sidenav-container>
+</div>

@@ -5,6 +5,11 @@ import { MaterialModule } from '../shared/material';
 import { routes } from './admin.routing';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RestaurantsComponent } from './components/restaurants/restaurants.component';
+import { UsersComponent } from './components/users/users.component';
+import { IngredientsComponent } from './components/ingredients/ingredients.component';
+import { LogsComponent } from './components/logs/logs.component';
 
 @NgModule({
   imports: [
@@ -13,6 +18,13 @@ import { SharedModule } from '../shared/shared.module';
     MaterialModule,
     SharedModule
   ],
-  declarations: [AdminComponent]
+  declarations: [
+    AdminComponent,
+    DashboardComponent,
+    RestaurantsComponent,
+    UsersComponent,
+    IngredientsComponent,
+    LogsComponent,
+  ]
 })
 export class AdminModule { }
