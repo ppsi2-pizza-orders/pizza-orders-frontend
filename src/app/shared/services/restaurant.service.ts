@@ -18,7 +18,7 @@ export class RestaurantService {
 
   constructor(private http: HttpClient) { }
 
-  public getRestaurants(city: string, name: string): Observable<Restaurant[]> {
+  public getRestaurants(city?: string, name?: string): Observable<Restaurant[]> {
     const query = { searchCity: city, searchName: name };
     return this.http.post<Restaurant[]>(BackendEntryPoint_GetRestaurants, query).pipe(
       map(restaurants => {

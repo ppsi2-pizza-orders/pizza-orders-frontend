@@ -1,0 +1,11 @@
+.admin-restaurants{
+    table{
+        width: 100%;
+    }
+    .table-row{
+        &:hover{
+            background-color: rgb(230, 230, 230);
+            cursor: pointer;
+        }
+    }
+}

@@ -17,7 +17,7 @@
       <mat-nav-list>
         <a [routerLink]="['dashboard']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Kokpit</a>
         <a [routerLink]="['restaurants']" [routerLinkActive]="['active']" mat-list-item><mat-icon>store_mall_directory</mat-icon>Restauracje</a>
-        <a [routerLink]="['users']" [routerLinkActive]="['active']" mat-list-item><mat-icon>people</mat-icon>Użtkownicy</a>
+        <a [routerLink]="['users']" [routerLinkActive]="['active']" mat-list-item><mat-icon>people</mat-icon>Użytkownicy</a>
         <a [routerLink]="['ingredients']" [routerLinkActive]="['active']" mat-list-item><mat-icon>group_work</mat-icon>Składniki</a>
         <a [routerLink]="['logs']" [routerLinkActive]="['active']" mat-list-item><mat-icon>info</mat-icon>Zdarzenia</a>
         <a (click)="logout()" mat-list-item><mat-icon>input</mat-icon>Wyloguj</a>
@@ -29,6 +29,6 @@
         <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>
-    
+
   </mat-sidenav-container>
 </div>
