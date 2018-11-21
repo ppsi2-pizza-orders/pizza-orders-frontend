@@ -1,8 +1,9 @@
 import { Component, OnInit, ElementRef, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { OrderService } from '../../services/order.service';
 import { Observable } from 'rxjs';
-import { Pizza } from '../../models/Pizza';
+import { Pizza } from 'src/app/shared/models/Pizza';
+import { OrderService } from 'src/app/shared/services/order.service';
+
 
 @Component({
   selector: 'app-basket-preview',

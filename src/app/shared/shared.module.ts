@@ -6,11 +6,9 @@ import { DroppableDirective } from './directives/droppable.directive';
 import { DraggableDirective } from './directives/draggable.directive';
 import { MovableDirective } from './directives/movable.directive';
 import { DroppableService } from './services/droppable.service';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RestaurantService } from './services/restaurant.service';
-import { BasketPreviewComponent } from './components/basket-preview/basket-preview.component';
 
 @NgModule({
   imports: [
@@ -22,7 +20,6 @@ import { BasketPreviewComponent } from './components/basket-preview/basket-previ
   ],
   exports: [
     MaterialModule,
-    NavbarComponent,
     DropzoneDirective,
     DroppableDirective,
     DraggableDirective,
@@ -35,8 +32,6 @@ import { BasketPreviewComponent } from './components/basket-preview/basket-previ
     DroppableDirective,
     DraggableDirective,
     MovableDirective,
-    NavbarComponent,
-    BasketPreviewComponent
   ],
   providers: [
     DroppableService,

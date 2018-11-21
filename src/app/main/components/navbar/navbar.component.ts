@@ -4,7 +4,7 @@ import { AuthDialogComponent } from 'src/app/authorization/auth-dialog/auth-dial
 import { RegisterRestaurantComponent } from 'src/app/authorization/register-restaurant/register-restaurant.component';
 import { AuthService } from 'src/app/authorization/auth.service';
 import { Observable } from 'rxjs';
-import { OrderService } from '../../services/order.service';
+import { OrderService } from 'src/app/shared/services/order.service';
 
 @Component({
   selector: 'app-navbar',
