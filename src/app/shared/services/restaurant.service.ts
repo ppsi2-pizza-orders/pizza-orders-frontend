@@ -37,8 +37,11 @@ export class RestaurantService {
 
   public getAutocomplete() {
     return this.http.get(BackendEntryPoint_GetAutocomplete).pipe(map(data => {
-      data['cities'] = [...new Set(data['cities'])];
-      data['names'] = [...new Set(data['names'])];
+      let cities = data['cities']
+      let names = data['names']
+      data['cities'] = Object.keys(cities).map((key)=>cities[key]);
+      data['names'] = Object.keys(names).map((key)=>names[key]);
+      
       return data;
     }));
   }
