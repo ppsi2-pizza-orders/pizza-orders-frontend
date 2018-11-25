@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RestaurantService } from './services/restaurant.service';
 import { UserService } from './services/user.service';
+import { IngredientService } from './services/ingredient.service';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { UserService } from './services/user.service';
   providers: [
     DroppableService,
     RestaurantService,
-    UserService
+    UserService,
+    IngredientService
   ]
 })
 export class SharedModule { }
