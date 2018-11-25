@@ -12,9 +12,7 @@ export class UsersComponent implements OnInit {
   public users: User[];
   public displayedColumns: string[] = ['id', 'name', 'email', 'action'];
   public dataSource: MatTableDataSource<User>;
-  public expandedElement: any;
   public loadingPage = false;
-  public loadingDetails = false;
   public totalItemCount: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -38,16 +36,6 @@ export class UsersComponent implements OnInit {
   public search(value: string) {
     let params = { 'search': value };
     this.performUserQuery(params);
-  }
-
-  public details(id: number){
-    if(this.expandedElement){
-      if(id === this.expandedElement){
-        this.expandedElement = null; 
-        return;
-      }
-    }
-    this.expandedElement = id;
   }
 
   public swithPage(){
