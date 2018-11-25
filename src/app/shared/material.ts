@@ -1,6 +1,6 @@
 import { MatButtonModule, MatCheckboxModule, MatIconModule, MatProgressSpinnerModule, MatListModule,
   MatTabsModule, MatStepperModule, MatMenuModule, MatCardModule, MatInputModule, MatFormFieldModule, MatDialogModule,
-  MatSelectModule, MatAutocompleteModule, MatTooltipModule, MatBadgeModule, MatToolbarModule, MatTableModule, MatPaginatorModule, MatSortModule,
+  MatSelectModule, MatAutocompleteModule, MatTooltipModule, MatBadgeModule, MatToolbarModule, MatTableModule, MatPaginatorModule, MatSortModule, MatProgressBarModule, MatChipsModule,
  } from '@angular/material';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgModule } from '@angular/core';
@@ -27,7 +27,9 @@ import { NgModule } from '@angular/core';
     MatToolbarModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressBarModule,
+    MatChipsModule
   ],
   exports: [
     MatButtonModule,
@@ -50,7 +52,9 @@ import { NgModule } from '@angular/core';
     MatToolbarModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressBarModule,
+    MatChipsModule
   ],
 })
 export class MaterialModule {
