@@ -18,7 +18,6 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class RestaurantsComponent implements OnInit {
   public restaurants: Restaurant[];
-  public restaurant: Restaurant;
   public displayedColumns: string[] = ['id', 'name', 'city', 'created_at'];
   public dataSource: MatTableDataSource<Restaurant>;
   public expandedElement: any;
