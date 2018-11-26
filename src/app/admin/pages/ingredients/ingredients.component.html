@@ -1,8 +1,9 @@
 <div class="admin-ingredients">
   <div class="admin-content" [hidden]="loadingPage">
     <mat-form-field class="search">
-      <input matInput (keyup)="search($event.target.value)" placeholder="Szukaj">
+      <input matInput (keyup)="searchIngredient($event.target.value)" placeholder="Szukaj">
     </mat-form-field>
+    <button mat-flat-button (click)="openDialog()" class="add-btn" color="primary">Dodaj składnik</button>
     <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 
       <ng-container matColumnDef="id">
@@ -24,8 +25,9 @@
 
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let ingredient">
-          <button mat-icon-button color="accent"><mat-icon>edit</mat-icon></button>
+        <td class="actions-button-column" mat-cell *matCellDef="let ingredient">
+          <button mat-icon-button (click)="deleteIngredient(ingredient)" color="accent"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button (click)="openDialog(ingredient)" color="accent"><mat-icon>edit</mat-icon></button>
         </td>
       </ng-container>
 

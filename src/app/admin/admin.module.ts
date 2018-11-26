@@ -10,6 +10,7 @@ import { RestaurantsComponent } from './pages/restaurants/restaurants.component'
 import { UsersComponent } from './pages/users/users.component';
 import { IngredientsComponent } from './pages/ingredients/ingredients.component';
 import { LogsComponent } from './pages/logs/logs.component';
+import { IngredientDialogComponent } from './components/ingredient-dialog/ingredient-dialog.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,10 @@ import { LogsComponent } from './pages/logs/logs.component';
     UsersComponent,
     IngredientsComponent,
     LogsComponent,
-  ]
+    IngredientDialogComponent
+  ],
+  entryComponents: [
+    IngredientDialogComponent
+  ],
 })
 export class AdminModule { }
