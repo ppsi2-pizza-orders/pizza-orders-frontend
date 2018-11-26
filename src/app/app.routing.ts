@@ -6,10 +6,10 @@ export const routes: Routes = [
     {
         path: 'admin',
         loadChildren: './admin/admin.module#AdminModule',
-        canLoad: [RoleGuard],
-        data: {
-            expectedRole: 'admin'
-        }
+        // canLoad: [RoleGuard],
+        // data: {
+        //     expectedRole: 'admin'
+        // }
     },
     {
         path: 'managment',

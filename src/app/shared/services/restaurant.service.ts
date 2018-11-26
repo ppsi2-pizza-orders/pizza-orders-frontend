@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 export const BackendEntryPoint_GetRestaurants = environment.apiBaseUrl + '/restaurants';
 export const BackendEntryPoint_GetRestaurant = environment.apiBaseUrl + '/restaurant';
 export const BackendEntryPoint_GetAutocomplete = environment.apiBaseUrl + '/restaurants';
+export const BackendEntryPoint_GetAdminRestaurnts = environment.apiBaseUrl + '/admin/restaurants';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class RestaurantService {
 
   constructor(private http: HttpClient) { }
 
-  public getRestaurants(city: string, name: string): Observable<Restaurant[]> {
+  public getRestaurants(city?: string, name?: string): Observable<Restaurant[]> {
     const query = { searchCity: city, searchName: name };
     return this.http.post<Restaurant[]>(BackendEntryPoint_GetRestaurants, query).pipe(
       map(restaurants => {
@@ -49,4 +50,9 @@ export class RestaurantService {
   public setCurrentRestaurant(restaurant: Restaurant) {
     this.currentRestaurant = restaurant;
   }
+
+  public getAdminRestaurants(params?) {
+    return this.http.get(BackendEntryPoint_GetAdminRestaurnts, { 'params': params });
+  }
+  
 }

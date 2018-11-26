@@ -1,0 +1,16 @@
+.admin-ingredients{
+    table{
+        width: 100%;
+    }
+    .table-row{}
+    .ingredient-preview-img{
+        width: 50px;
+    }
+    .loading{
+        width: 100%;
+        height: calc(100vh - 80px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

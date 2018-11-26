@@ -1,0 +1,69 @@
+<div class="admin-restaurants">
+  <div class="admin-content" [hidden]="loadingPage">
+    <mat-form-field class="search">
+      <input matInput (keyup)="search($event.target.value)" placeholder="Szukaj">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header (matSortChange)="sortBy($event)"> ID </th>
+        <td mat-cell *matCellDef="let restaurant"> {{restaurant.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa </th>
+        <td mat-cell *matCellDef="let restaurant"> {{restaurant.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Miasto </th>
+        <td mat-cell *matCellDef="let restaurant"> {{restaurant.city}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Utworzono </th>
+        <td mat-cell *matCellDef="let restaurant"> {{restaurant.created_at}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+          <td mat-cell *matCellDef="let restaurant">
+          <button (click)="details(restaurant.id)" mat-icon-button color="accent">
+              <mat-icon *ngIf="restaurant.id !== expandedElement">expand_more</mat-icon>
+              <mat-icon *ngIf="restaurant.id === expandedElement">expand_less</mat-icon>
+          </button>
+          </td>
+        </ng-container>
+
+      <ng-container matColumnDef="expandedDetail" >
+        <td mat-cel *matCellDef="let restaurant" [colSpan]="displayedColumns.length">
+          <div class="row align-items-center expanded-detail" [ngClass]="{'expand-hidden': restaurant.id !== expandedElement}">
+            <div class="col-md-3">
+              <img src="restaurant.photo" alt="" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+              <p><span>Właściciel:</span> {{ restaurant.owner.name }}</p>
+              <p><span>Opis:</span> {{ restaurant.description }}</p>
+              <p><span>Telefon:</span> {{ restaurant.phone }}</p>
+              <p><span>Adres:</span> {{ restaurant.address }}</p>
+            </div>
+            <div class="col-md-3">
+              <button mat-flat-button color="primary">Aktywuj</button>
+              <button mat-flat-button color="warn">Usuń</button>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row" [class.expanded]="expandedElement == row"
+         matRipple></tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail'];" [@detailExpand]="row.id == expandedElement ? 'expanded' : 'collapsed'"
+        style="overflow: hidden"></tr>
+    </table>
+    <mat-paginator [pageSize]="25" [length]="totalItemCount" showFirstLastButtons (page)="swithPage($event)"></mat-paginator>
+  </div>
+  <div class="loading" [hidden]="!loadingPage">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
