@@ -2,13 +2,6 @@
     table{
         width: 100%;
     }
-    .table-row{
-        position: relative;
-        &:hover{
-            background-color: rgb(230, 230, 230);
-            cursor: pointer;
-        }
-    }
     .expanded-detail{
         padding: 10px;
         p{

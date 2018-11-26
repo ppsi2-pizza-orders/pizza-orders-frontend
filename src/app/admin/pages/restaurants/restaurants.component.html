@@ -25,6 +25,16 @@
         <td mat-cell *matCellDef="let restaurant"> {{restaurant.created_at}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+          <td mat-cell *matCellDef="let restaurant">
+          <button (click)="details(restaurant.id)" mat-icon-button color="accent">
+              <mat-icon *ngIf="restaurant.id !== expandedElement">expand_more</mat-icon>
+              <mat-icon *ngIf="restaurant.id === expandedElement">expand_less</mat-icon>
+          </button>
+          </td>
+        </ng-container>
+
       <ng-container matColumnDef="expandedDetail" >
         <td mat-cel *matCellDef="let restaurant" [colSpan]="displayedColumns.length">
           <div class="row align-items-center expanded-detail" [ngClass]="{'expand-hidden': restaurant.id !== expandedElement}">
@@ -47,7 +57,7 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row" [class.expanded]="expandedElement == row"
-        (click)="details(row.id)" matRipple></tr>
+         matRipple></tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail'];" [@detailExpand]="row.id == expandedElement ? 'expanded' : 'collapsed'"
         style="overflow: hidden"></tr>
     </table>
