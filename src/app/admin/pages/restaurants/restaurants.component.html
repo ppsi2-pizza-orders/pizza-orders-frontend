@@ -61,7 +61,7 @@
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail'];" [@detailExpand]="row.id == expandedElement ? 'expanded' : 'collapsed'"
         style="overflow: hidden"></tr>
     </table>
-    <mat-paginator [pageSize]="25" [length]="totalItemCount" showFirstLastButtons (page)="swithPage($event)"></mat-paginator>
+    <mat-paginator [pageSize]="25" [length]="totalItemCount" showFirstLastButtons (page)="swithPage()"></mat-paginator>
   </div>
   <div class="loading" [hidden]="!loadingPage">
     <mat-spinner></mat-spinner>
