@@ -17,6 +17,7 @@ import { MockBackendService } from './shared/mock/mock-backend.service';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angular-6-social-login';
 import { environment } from 'src/environments/environment';
 import { OrderService } from './shared/services/order.service';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 
 export function tokenGetter() {
   return `Bearer ${localStorage.getItem('token')}`;
@@ -61,7 +62,8 @@ export function getAuthServiceConfigs() {
   ],
   entryComponents: [
     AuthDialogComponent,
-    RegisterRestaurantComponent
+    RegisterRestaurantComponent,
+    ConfirmDialogComponent
   ],
   providers: [
     AuthGuard,

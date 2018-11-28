@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ingredient } from 'src/app/shared/models/Ingredient';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
 import { IngredientService } from 'src/app/shared/services/ingredient.service';
-import { IngredientDialogComponent } from '../../components/ingredient-dialog/ingredient-dialog.component';
+import { AdminDialogService } from '../../admin-dialog.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-ingredients',
@@ -19,7 +20,10 @@ export class IngredientsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog, private ingredientService: IngredientService) { }
+  constructor(
+    private ingredientService: IngredientService, 
+    private adminDialogService: AdminDialogService,
+    private dialogService: DialogService) { }
 
   public ngOnInit() {
     this.loadingPage = true;
@@ -35,14 +39,14 @@ export class IngredientsComponent implements OnInit {
   }
 
   public searchIngredient(value: string) {
-    let params = { 'search': value };
-    this.performIngredientsQuery(params);
+    let query = { 'search': value };
+    this.performIngredientsQuery(query);
   }
 
   public swithPage(){
     let pageIndex = this.paginator.pageIndex + 1;
-    let params = { 'page': pageIndex }
-    this.performIngredientsQuery(params);
+    let query = { 'page': pageIndex }
+    this.performIngredientsQuery(query);
   }
 
   public sortBy(params){
@@ -56,25 +60,20 @@ export class IngredientsComponent implements OnInit {
   }
 
   public deleteIngredient(ingredient:Ingredient){
-    if(window.confirm(`Czy na pewno chcesz usunąć składnik "${ingredient.name}" ?`)){
-      this.ingredientService.deleteAdminIngredients(ingredient.id).subscribe(()=>{
-        this.performIngredientsQuery({});
-      });
-    }
+    this.dialogService.confirmDialog(`Czy na pewno chcesz usunąć składnik "${ingredient.name}" ?`).subscribe(result =>{
+      if(!!result){
+        this.ingredientService.deleteAdminIngredients(ingredient.id).subscribe(()=>{
+          this.performIngredientsQuery({});
+        });
+      }
+    });
   }
 
-  public openDialog(ingredient?:Ingredient){
-    let dialogRef;
-    if(ingredient){
-      dialogRef = this.dialog.open(IngredientDialogComponent, {data: ingredient});
-    }else{
-      dialogRef = this.dialog.open(IngredientDialogComponent);
-    }
-
-    return dialogRef.afterClosed().toPromise().then(()=> this.performIngredientsQuery({}));
+  public openIngredientDialog(ingredient?:Ingredient){
+    this.adminDialogService.ingredientDialog(ingredient).subscribe(()=>this.performIngredientsQuery());
   }
 
-  private performIngredientsQuery(params){
+  private performIngredientsQuery(params?){
     this.ingredientService.getAdminIngredients(params).subscribe(users => {
       this.ingredients = users['data'];
       this.dataSource = new MatTableDataSource<Ingredient>(this.ingredients);

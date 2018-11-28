@@ -22,7 +22,6 @@ export class RestaurantsComponent implements OnInit {
   public dataSource: MatTableDataSource<Restaurant>;
   public expandedElement: any;
   public loadingPage = false;
-  public loadingDetails = false;
   public totalItemCount: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -44,11 +43,11 @@ export class RestaurantsComponent implements OnInit {
   }
 
   public search(value: string) {
-    let params = { 'search': value };
-    this.performRestaurantQuery(params);
+    let query = { 'search': value };
+    this.performRestaurantQuery(query);
   }
 
-  public details(id: number){
+  public showDetails(id: number){
     if(this.expandedElement){
       if(id === this.expandedElement){
         this.expandedElement = null; 
@@ -60,8 +59,8 @@ export class RestaurantsComponent implements OnInit {
 
   public swithPage(){
     let pageIndex = this.paginator.pageIndex + 1;
-    let params = { 'page': pageIndex }
-    this.performRestaurantQuery(params);
+    let query = { 'page': pageIndex }
+    this.performRestaurantQuery(query);
   }
 
   public sortBy(params){

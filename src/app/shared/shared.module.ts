@@ -11,6 +11,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RestaurantService } from './services/restaurant.service';
 import { UserService } from './services/user.service';
 import { IngredientService } from './services/ingredient.service';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { DialogService } from './services/dialog.service';
 
 @NgModule({
   imports: [
@@ -34,12 +36,14 @@ import { IngredientService } from './services/ingredient.service';
     DroppableDirective,
     DraggableDirective,
     MovableDirective,
+    ConfirmDialogComponent
   ],
   providers: [
     DroppableService,
     RestaurantService,
     UserService,
-    IngredientService
+    IngredientService,
+    DialogService
   ]
 })
 export class SharedModule { }

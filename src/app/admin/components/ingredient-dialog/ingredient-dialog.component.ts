@@ -15,17 +15,17 @@ export class IngredientDialogComponent implements OnInit {
   public ingredientName = '';
   public fileName = '';
   public loading = false;
+  public ingredient: Ingredient;
 
   constructor(
     public dialogRef: MatDialogRef<IngredientDialogComponent>,
     public dialog: MatDialog,
-    private ingredientService: IngredientService,
-    @Optional() @Inject(MAT_DIALOG_DATA) public dialogData: Ingredient) { }
+    private ingredientService: IngredientService) { }
 
   public ngOnInit() {
-    if(this.dialogData){
-      this.fileName = this.dialogData.image;
-      this.ingredientName = this.dialogData.name;
+    if(this.ingredient){
+      this.fileName = this.ingredient.image;
+      this.ingredientName = this.ingredient.name;
     }
   }
 
@@ -37,7 +37,7 @@ export class IngredientDialogComponent implements OnInit {
     let formData = new FormData();
     this.loading = true;
 
-    if(this.dialogData) {
+    if(this.ingredient) {
       if(this.file){
         formData.append('image', this.file);
       }

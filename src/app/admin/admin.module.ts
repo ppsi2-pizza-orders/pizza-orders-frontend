@@ -11,13 +11,14 @@ import { UsersComponent } from './pages/users/users.component';
 import { IngredientsComponent } from './pages/ingredients/ingredients.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { IngredientDialogComponent } from './components/ingredient-dialog/ingredient-dialog.component';
+import { AdminDialogService } from './admin-dialog.service';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     AdminComponent,
@@ -31,5 +32,8 @@ import { IngredientDialogComponent } from './components/ingredient-dialog/ingred
   entryComponents: [
     IngredientDialogComponent
   ],
+  providers: [
+    AdminDialogService
+  ]
 })
 export class AdminModule { }
