@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { routes } from './app.routing';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthDialogComponent } from './authorization/auth-dialog/auth-dialog.component';
 import { SharedModule } from './shared/shared.module';
@@ -18,6 +18,7 @@ import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'ang
 import { environment } from 'src/environments/environment';
 import { OrderService } from './shared/services/order.service';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { ApiInterceptor } from './api-interceptor';
 
 export function tokenGetter() {
   return `Bearer ${localStorage.getItem('token')}`;
@@ -80,7 +81,11 @@ export function getAuthServiceConfigs() {
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, 
+      useClass: ApiInterceptor, 
+      multi: true 
+    },
   ],
   bootstrap: [AppComponent]
 })
