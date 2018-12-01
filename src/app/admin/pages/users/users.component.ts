@@ -34,14 +34,14 @@ export class UsersComponent implements OnInit {
   }
 
   public search(value: string) {
-    let params = { 'search': value };
-    this.performUserQuery(params);
+    let query = { 'search': value };
+    this.performUserQuery(query);
   }
 
   public swithPage(){
     let pageIndex = this.paginator.pageIndex + 1;
-    let params = { 'page': pageIndex }
-    this.performUserQuery(params);
+    let query = { 'page': pageIndex }
+    this.performUserQuery(query);
   }
 
   public sortBy(params){

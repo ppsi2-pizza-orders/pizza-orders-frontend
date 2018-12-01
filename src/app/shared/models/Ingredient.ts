@@ -4,9 +4,9 @@ export class Ingredient {
         Object.assign(this, init);
     }
 
-    id: number;
+    id?: number;
     name: string;
-    cost: number;
-    photo: string;
-    available: boolean;
+    cost?: number;
+    image: string;
+    // available: boolean;
 }

@@ -1,0 +1,34 @@
+<div class="ingredient-dialog">
+  <h1 mat-dialog-title>Składnik</h1>
+  <form class="form" (ngSubmit)="onConfirm()" *ngIf="!loading">
+    <div mat-dialog-content class="ingredient-content">
+
+      <mat-form-field class="form-field">
+        <input matInput id="name" type="text" name="name" [(ngModel)]="ingredientName" #name="ngModel" placeholder="Nazwa składnika" required>
+      </mat-form-field>
+
+      <table class="form-field">
+        <tr>
+          <td>
+            <button mat-flat-button color="warn" (click)="inputFile.click()" type="button">Wybierz plik</button>
+          </td>
+          <td>
+            <mat-form-field class="form-field input-file">
+              <input matInput id="file" type="text" name="file" [(ngModel)]="fileName" #file="ngModel" required readonly>
+              <mat-error *ngIf="file.errors && file.errors.required">Zdjęcie składnika jest wymagane</mat-error>
+            </mat-form-field>
+            <input #inputFile type="file" (change)="selectedImage($event)" style="display:none;" required>
+          </td>
+        </tr>
+      </table>
+
+
+    </div>
+    <div mat-dialog-actions class="ingredient-actions-btn">
+      <button mat-flat-button class="on-confirm" type="submit">Zapisz</button>
+    </div>
+  </form>
+  <div *ngIf="loading" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

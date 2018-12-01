@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ingredient } from 'src/app/shared/models/Ingredient';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
 import { IngredientService } from 'src/app/shared/services/ingredient.service';
+import { AdminDialogService } from '../../admin-dialog.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-ingredients',
@@ -18,11 +20,14 @@ export class IngredientsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private ingredientService: IngredientService) { }
+  constructor(
+    private ingredientService: IngredientService, 
+    private adminDialogService: AdminDialogService,
+    private dialogService: DialogService) { }
 
   public ngOnInit() {
     this.loadingPage = true;
-    this.ingredientService.getAdminUsers().subscribe(users => {
+    this.ingredientService.getAdminIngredients().subscribe(users => {
       this.ingredients = users['data'];
       this.totalItemCount = users['meta'].paginator.last_page * 25;
       this.dataSource = new MatTableDataSource<Ingredient>(this.ingredients);
@@ -33,15 +38,15 @@ export class IngredientsComponent implements OnInit {
     });
   }
 
-  public search(value: string) {
-    let params = { 'search': value };
-    this.performUserQuery(params);
+  public searchIngredient(value: string) {
+    let query = { 'search': value };
+    this.performIngredientsQuery(query);
   }
 
   public swithPage(){
     let pageIndex = this.paginator.pageIndex + 1;
-    let params = { 'page': pageIndex }
-    this.performUserQuery(params);
+    let query = { 'page': pageIndex }
+    this.performIngredientsQuery(query);
   }
 
   public sortBy(params){
@@ -51,11 +56,25 @@ export class IngredientsComponent implements OnInit {
     } else{
       query = {'orderByDesc': params['active']}
     }
-    this.performUserQuery(query);
+    this.performIngredientsQuery(query);
   }
 
-  private performUserQuery(params){
-    this.ingredientService.getAdminUsers(params).subscribe(users => {
+  public deleteIngredient(ingredient:Ingredient){
+    this.dialogService.confirmDialog(`Czy na pewno chcesz usunąć składnik "${ingredient.name}" ?`).subscribe(result =>{
+      if(!!result){
+        this.ingredientService.deleteAdminIngredients(ingredient.id).subscribe(()=>{
+          this.performIngredientsQuery({});
+        });
+      }
+    });
+  }
+
+  public openIngredientDialog(ingredient?:Ingredient){
+    this.adminDialogService.ingredientDialog(ingredient).subscribe(()=>this.performIngredientsQuery());
+  }
+
+  private performIngredientsQuery(params?){
+    this.ingredientService.getAdminIngredients(params).subscribe(users => {
       this.ingredients = users['data'];
       this.dataSource = new MatTableDataSource<Ingredient>(this.ingredients);
     });
