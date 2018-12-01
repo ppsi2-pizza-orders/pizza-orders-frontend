@@ -3,11 +3,12 @@ import { CanLoad, Route, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { MatDialog } from '@angular/material';
 import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
+import { DialogService } from '../shared/services/dialog.service';
 
 @Injectable()
 export class RoleGuard implements CanLoad {
 
-    constructor(private auth: AuthService, private router: Router, public dialog: MatDialog) { }
+    constructor(private auth: AuthService, private router: Router, private dialogService: DialogService) { }
 
     canLoad(route: Route) {
         const expectedRole = route.data.expectedRole;
@@ -19,12 +20,8 @@ export class RoleGuard implements CanLoad {
             return true;
         }
 
-        const dialogRef = this.dialog.open(AuthDialogComponent, {
-            data: { isLoggedIn: false }
-        });
-
-        return dialogRef.afterClosed().toPromise().then(result => {
-            if (result != null && result.isLoggedIn && result.userRole.includes(expectedRole) ) {
+        this.dialogService.authDialog().subscribe(data => {
+            if (data && data.isLoggedIn && data.userRole.includes(expectedRole) ) {
                 return true;
             } else {
                 this.router.navigate([ '/' ]);

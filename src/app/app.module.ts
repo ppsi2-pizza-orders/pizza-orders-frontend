@@ -11,18 +11,13 @@ import { AuthGuard } from './authorization/auth.guard';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { RoleGuard } from './authorization/role.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RegisterRestaurantComponent } from './authorization/register-restaurant/register-restaurant.component';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { MockBackendService } from './shared/mock/mock-backend.service';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angular-6-social-login';
 import { environment } from 'src/environments/environment';
 import { OrderService } from './shared/services/order.service';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { ApiInterceptor } from './api-interceptor';
-
-export function tokenGetter() {
-  return `Bearer ${localStorage.getItem('token')}`;
-}
+import { InfoDialogComponent } from './shared/components/info-dialog/info-dialog.component';
+import { RegisterRestaurantComponent } from './shared/components/register-restaurant/register-restaurant.component';
 
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
@@ -40,7 +35,6 @@ export function getAuthServiceConfigs() {
   declarations: [
     AppComponent,
     AuthDialogComponent,
-    RegisterRestaurantComponent
   ],
   imports: [
     BrowserModule,
@@ -49,13 +43,11 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     SharedModule,
     SocialLoginModule,
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   MockBackendService, { dataEncapsulation: false, delay: 1500 }
-    // ),
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-        headerName: 'Authorization',
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
         whitelistedDomains: environment.whitelist,
         blacklistedRoutes: environment.blacklist
       }
@@ -64,25 +56,19 @@ export function getAuthServiceConfigs() {
   entryComponents: [
     AuthDialogComponent,
     RegisterRestaurantComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    InfoDialogComponent
   ],
   providers: [
     AuthGuard,
     RoleGuard,
     OrderService,
     {
-      provide: MatDialogRef,
-      useValue: {}
-    },
-    {
-      provide: MAT_DIALOG_DATA,
-      useValue: {}
-    },
-    {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
     },
-    { provide: HTTP_INTERCEPTORS, 
+    { 
+      provide: HTTP_INTERCEPTORS, 
       useClass: ApiInterceptor, 
       multi: true 
     },

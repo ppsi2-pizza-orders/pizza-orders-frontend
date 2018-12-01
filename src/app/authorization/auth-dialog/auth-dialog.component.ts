@@ -21,18 +21,21 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class AuthDialogComponent implements OnInit {
 
-  loginForm: FormGroup;
-  registerForm: FormGroup;
-  currentForm = 'loginForm';
-  loginError = '';
-  registerError = '';
-  loading = false;
-  matcher = new MyErrorStateMatcher();
+  public dialogData: DialogData = {
+    isLoggedIn: false,
+    userRole: []
+  };
+  public loginForm: FormGroup;
+  public registerForm: FormGroup;
+  public currentForm = 'loginForm';
+  public loginError = '';
+  public registerError = '';
+  public loading = false;
+  public matcher = new MyErrorStateMatcher();
 
   constructor(
     public dialogRef: MatDialogRef<AuthDialogComponent>,
     public dialog: MatDialog,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private formBuilder: FormBuilder,
     private auth: AuthService) { }
 
@@ -90,13 +93,9 @@ export class AuthDialogComponent implements OnInit {
     const password = this.loginForm.value.password;
     this.auth.login(email, password).subscribe(
       (user) => {
-        if (this.data) {
-          this.data.isLoggedIn = true;
-          this.data.userRole = user['roles'];
-          this.dialogRef.close(this.data);
-        } else {
-          this.dialogRef.close();
-        }
+        this.dialogData.isLoggedIn = true;
+        this.dialogData.userRole = user['roles'];
+        this.dialogRef.close(this.dialogData);
       },
       (err) => {
         console.log(err);
@@ -113,13 +112,9 @@ export class AuthDialogComponent implements OnInit {
     this.loading = true;
     this.auth.register(this.registerForm.value).subscribe(
       (user) => {
-        if (this.data) {
-          this.data.isLoggedIn = true;
-          this.data.userRole = user.roles;
-          this.dialogRef.close(this.data);
-        } else {
-          this.dialogRef.close();
-        }
+        this.dialogData.isLoggedIn = true;
+        this.dialogData.userRole = user.roles;
+        this.dialogRef.close(this.dialogData);
       },
       (err) => {
         console.log(err);
@@ -133,13 +128,9 @@ export class AuthDialogComponent implements OnInit {
     this.loading = true;
     this.auth.facebookLogin().subscribe(
       (user) => {
-        if (this.data) {
-          this.data.isLoggedIn = true;
-          this.data.userRole = user.roles;
-          this.dialogRef.close(this.data);
-        } else {
-          this.dialogRef.close();
-        }
+          this.dialogData.isLoggedIn = true;
+          this.dialogData.userRole = user.roles;
+          this.dialogRef.close(this.dialogData);
       },
       (err) => {
         console.log(err);
