@@ -13,6 +13,8 @@ import { UserService } from './services/user.service';
 import { IngredientService } from './services/ingredient.service';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { DialogService } from './services/dialog.service';
+import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
+import { RegisterRestaurantComponent } from './components/register-restaurant/register-restaurant.component';
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import { DialogService } from './services/dialog.service';
     DroppableDirective,
     DraggableDirective,
     MovableDirective,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    InfoDialogComponent,
+    RegisterRestaurantComponent
   ],
   providers: [
     DroppableService,

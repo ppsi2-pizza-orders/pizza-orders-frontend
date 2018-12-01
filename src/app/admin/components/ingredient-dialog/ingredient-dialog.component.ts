@@ -1,5 +1,5 @@
-import { Component, OnInit, Optional, Inject } from '@angular/core';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { Ingredient } from 'src/app/shared/models/Ingredient';
 import { IngredientService } from 'src/app/shared/services/ingredient.service';
 
@@ -42,7 +42,8 @@ export class IngredientDialogComponent implements OnInit {
         formData.append('image', this.file);
       }
       formData.append('name', this.ingredientName);
-      this.ingredientService.updateAdminIngredients(formData).subscribe(()=>{
+      this.ingredientService.updateAdminIngredients(this.ingredient.id, formData)
+      .subscribe(() => {
         this.dialogRef.close();
       });
     } else {
