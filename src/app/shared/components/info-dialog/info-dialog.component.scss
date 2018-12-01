@@ -1,0 +1,23 @@
+.confirm-dialog {
+  height: 100%;
+  min-width: 400px;
+  padding: .4em;
+  text-align: center;
+  .dialog-buttons{
+    margin-top: 1.4em;
+    display: flex;
+    justify-content: center;
+    button{
+      &.warning{
+        background-color: #FFD600 !important;
+      }
+      &.error{
+        background-color: #D50000 !important;
+      }
+      &.info{
+        background-color: #0091EA !important;
+      }
+    }
+  }
+  
+}
