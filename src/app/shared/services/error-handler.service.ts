@@ -13,8 +13,8 @@ export class ErrorHandlerService {
 
   public handleError(error: HttpErrorResponse){
     switch(error.status){
-      case 400:
-        this.showErrorDialog('Błąd!', 'Serwer odrzucił rządanie');
+      case 0:
+        this.showErrorDialog('Bład połączenia!', 'Proszę sprawdzić połączenie z Internetem.');
         break;
       case 401:
         this.goToLogin();
