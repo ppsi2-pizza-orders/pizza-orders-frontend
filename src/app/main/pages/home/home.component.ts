@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, DoCheck, AfterContentInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterContentInit } from '@angular/core';
 import { RestaurantService } from 'src/app/shared/services/restaurant.service';
 import { Restaurant } from 'src/app/shared/models/Restaurant';
 import { Observable } from 'rxjs';
@@ -10,24 +10,26 @@ import { FormControl } from '@angular/forms';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, DoCheck, AfterContentInit {
+export class HomeComponent implements OnInit, AfterContentInit {
 
   public restaurants: Restaurant[];
   public isListVisible = false;
-  public loading = false;
+  public loadingSpinner = false;
   public notFound = false;
-  public searchBy = 'city';
   public citySugestions: Observable<string[]>;
   public nameSugestions: Observable<string[]>;
   public cityCtrl = new FormControl();
   public nameCtrl = new FormControl();
-  private sugestions;
+  private sugestions: Array<string>;
   private autocomplete = { cities: [], names: [] };
+  
   @ViewChild('list') public listRestaurant: ElementRef;
+  @ViewChild('nameSearch') public nameSearch: ElementRef;
+  @ViewChild('citySearch') public citySearch: ElementRef;
+  @ViewChild('invisibleInput') public invisibleInput: ElementRef;
 
-  constructor(
-    private restaurantService: RestaurantService
-  ) { }
+
+  constructor(private restaurantService: RestaurantService) { }
 
   public ngOnInit() {
     this.citySugestions = this.cityCtrl.valueChanges
@@ -35,20 +37,12 @@ export class HomeComponent implements OnInit, DoCheck, AfterContentInit {
       startWith(''),
       map(value => value.length >= 1 ? this.filterSugestions(value) : [])
     );
+
     this.nameSugestions = this.nameCtrl.valueChanges
     .pipe(
       startWith(''),
       map(value => value.length >= 1 ? this.filterSugestions(value) : [])
     );
-  }
-
-  public ngDoCheck(): void {
-    if (this.searchBy === 'city') {
-      this.sugestions = this.autocomplete['cities'];
-    }
-    if (this.searchBy === 'name') {
-      this.sugestions = this.autocomplete['names'];
-    }
   }
 
   public ngAfterContentInit(): void {
@@ -62,11 +56,11 @@ export class HomeComponent implements OnInit, DoCheck, AfterContentInit {
       this.isListVisible = true;
       this.restaurants = [];
       this.notFound = false;
-      this.loading = true;
+      this.loadingSpinner = true;
       this.restaurantService.getRestaurants(cityValue, nameValue)
         .subscribe(restaurants => {
           this.restaurants = restaurants;
-          this.loading = false;
+          this.loadingSpinner = false;
           if (this.restaurants.length === 0) {
             this.notFound = true;
           }
@@ -78,9 +72,43 @@ export class HomeComponent implements OnInit, DoCheck, AfterContentInit {
     }
   }
 
+  public onCityInputFocus(){
+    this.sugestions = this.autocomplete['cities'];
+    if(window.innerWidth > 768){
+      this.citySearch.nativeElement.classList.add('on-city-focus');
+      this.nameSearch.nativeElement.classList.add('on-name-hide');
+    }
+  }
+
+  public onNameInputFocus(){
+    this.sugestions = this.autocomplete['names'];
+    if(window.innerWidth > 768){
+      this.citySearch.nativeElement.classList.add('on-city-hide');
+      this.nameSearch.nativeElement.classList.add('on-name-focus');
+    }
+  }
+
+  public onCityInputFocusOut(){
+    if(window.innerWidth > 768){
+      this.citySearch.nativeElement.classList.remove('on-city-focus');
+      this.nameSearch.nativeElement.classList.remove('on-name-hide');
+    }
+  }
+
+  public onNameInputFocusOut(){
+    if(window.innerWidth > 768){
+      this.citySearch.nativeElement.classList.remove('on-city-hide');
+      this.nameSearch.nativeElement.classList.remove('on-name-focus');
+    }
+  }
+
+  public focusOutElements(){
+    this.nameSearch.nativeElement.blur();
+    this.citySearch.nativeElement.blur();
+  }
+
   private filterSugestions(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.sugestions.filter(sugestion => sugestion.toLowerCase().includes(filterValue));
   }
-
 }
