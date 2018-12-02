@@ -14,58 +14,55 @@
             min-height: 50px;
             margin: auto;
             width: 600px;
-            @include sm{
-                width: 80%;
-            }
             input, input:focus {
                 background-color: #fff;
                 color: #000;
-                outline:none;
+                outline: none;
                 border: none;
-                width: 100%;
+                height: 50px;
+                width: 320px;
                 margin: 0;
-                padding: 10px;
+                padding: 10px 24px;
                 font-size: 1.4em;
                 text-align: left;
-            }
-            .mat-select{
-                outline:none;
-                border: none;
-                width: 100%;
-                height: 100%;
-                padding: 11px;
-                font-size: 1.2em;
-                text-align: left;
-                background-color: $secondary-color;
-                border-radius: 4px 0 0 4px;
-            }
-            ::ng-deep .mat-select-value-text, ::ng-deep .mat-select-arrow{
-                color: #fff !important;
+                border-radius: 24px;
+                transition: 0.3s ease-out;
             }
             .mat-flat-button{
-                border-radius: 0px 4px 4px 0;
+                border-radius: 24px;
                 height: 100%;
                 width: 100%;
+                height: 50px;
             }
-            @include sm{
-                .space{
-                    margin-top: 10px;
-                    margin-bottom: 8px;
+            .city-search{
+                input, input:focus {
+                    background-color: $secondary-color;
+                    color: #fff;
+                    caret-color: #fff;
                 }
+                ::placeholder{
+                    color: #fff;
+                }
+            }
+            
+            @include md{
+                width: 80%;
                 .mat-flat-button{
-                    border-radius: 4px;
                     width: 100%;
-                    padding: 6px;
+                    height: 60px;
                 }
                 input, input:focus {
                     margin: 0;
+                    width: 100%;
                     padding: 8px;
-                    border-radius: 4px;
+                    text-align: center;
+                    height: 60px;
                 }
-                .mat-select{
-                    border-radius: 4px;
+                .name-search, .city-search, .mat-flat-button{
+                    margin-top: 1em;
                 }
             }
+
         }
     }
     .restaurants{
@@ -105,4 +102,17 @@
             }
         }
     }
+}
+
+// search inputs focus classes
+.on-name-hide{
+    transform: translateX(175px) !important;
+    width: 0 !important;
+}
+.on-city-focus{
+    width: 230% !important;
+}
+.on-name-focus{
+    width: 220% !important;
+    transform: translateX(-250px) !important;
 }
