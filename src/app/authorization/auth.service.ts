@@ -84,17 +84,6 @@ export class AuthService {
     );
   }
 
-  public registerRestaurant(restaurantData) {
-    return this.http.post(BackendEntryPoint_RegisterRestaurant, restaurantData).pipe(
-      map(user => {
-        if (user && user['token']) {
-          localStorage.setItem('token', JSON.stringify(user));
-          return user;
-        }
-      })
-    );
-  }
-
   private sendSocialToken(token: string) {
     return this.http.post(BackendEntryPoint_SocialLogin, { 'access_token': token }).pipe(
       map(data => {

@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 
 export const BackendEntryPoint_GetRestaurants = environment.apiBaseUrl + '/restaurants';
 export const BackendEntryPoint_GetRestaurant = environment.apiBaseUrl + '/restaurant';
+export const BackendEntryPoint_AddRestaurant = environment.apiBaseUrl + '/restaurant';
 export const BackendEntryPoint_GetAutocomplete = environment.apiBaseUrl + '/restaurants';
 export const BackendEntryPoint_GetAdminRestaurnts = environment.apiBaseUrl + '/admin/restaurants';
 
@@ -53,6 +54,10 @@ export class RestaurantService {
 
   public getAdminRestaurants(params?) {
     return this.http.get(BackendEntryPoint_GetAdminRestaurnts, { 'params': params });
+  }
+
+  public addRestaurant(restaurant: Restaurant) {
+    return this.http.post(BackendEntryPoint_AddRestaurant, restaurant);
   }
   
 }
