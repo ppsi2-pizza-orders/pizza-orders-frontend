@@ -4,8 +4,8 @@
   <div mat-dialog-content class="register-content">
 
     <mat-form-field class="form-field">
-      <input type="text" matInput formControlName="restaurant_name" placeholder="Nazwa restauracji">
-      <mat-error *ngIf="registerForm.get('restaurant_name').invalid">{{getErrorMessage("restaurant_name")}}</mat-error>
+      <input type="text" matInput formControlName="name" placeholder="Nazwa restauracji">
+      <mat-error *ngIf="registerForm.get('name').invalid">{{getErrorMessage("name")}}</mat-error>
     </mat-form-field>
 
     <table class="form-field">
@@ -26,11 +26,12 @@
     </table>
 
     <mat-form-field class="form-field">
-      <input type="text" matInput formControlName="adress" placeholder="Adres">
-      <mat-error *ngIf="registerForm.get('adress').invalid">{{getErrorMessage("adress")}}</mat-error>
+      <input type="text" matInput formControlName="address" placeholder="Adres">
+      <mat-error *ngIf="registerForm.get('address').invalid">{{getErrorMessage("address")}}</mat-error>
     </mat-form-field>
 
   </div>
+  <mat-error>{{ errorMeesage }}</mat-error>
   <div mat-dialog-actions class="register-actions-btn">
     <button mat-flat-button class="custom-register" type="submit">Zarejestruj pizzerie</button>
   </div>

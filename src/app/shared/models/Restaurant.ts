@@ -8,12 +8,14 @@ export class Restaurant {
         Object.assign(this, init);
     }
 
-    id: number;
+    id?: number;
     name: string;
     city: string;
-    adress: string;
+    address: string;
     phone: string;
     photo?: string;
+    owner?: Object;
+    created_at?: string;
     description?: string;
     review?: number;
     reviews?: Array<Review>;
