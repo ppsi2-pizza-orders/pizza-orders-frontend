@@ -20,12 +20,12 @@ export const routes: Routes = [
         // }
     },
     {
-        path: 'managment',
-        loadChildren: './modules/manage/manage.module#ManageModule',
-        canLoad: [RoleGuard],
-        data: {
-            expectedRole: 'manager'
-        }
+        path: 'management',
+        loadChildren: './modules/management/management.module#ManagementModule',
+        // canLoad: [RoleGuard],
+        // data: {
+        //     expectedRole: 'manager'
+        // }
     },
     { path: '**', redirectTo: '/' }
 ];

@@ -1,0 +1,16 @@
+@import 'styles.scss';
+.app-select-restaurant{
+    .restaurant-cards{
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .button{
+            text-align: center;
+            background-color: #fff;
+            @include md{
+                margin-bottom: 1em;
+            }
+        }
+    }
+}
