@@ -1,9 +1,8 @@
-import { Component, OnInit, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable } from 'rxjs';
-import { Pizza } from 'src/app/shared/models/Pizza';
 import { OrderService } from 'src/app/shared/services/order.service';
-
+import { Product } from 'src/app/shared/models/IProduct';
 
 @Component({
   selector: 'app-basket-preview',
@@ -32,15 +31,15 @@ import { OrderService } from 'src/app/shared/services/order.service';
 export class BasketPreviewComponent implements OnInit {
 
   public isOpen: Observable<boolean>;
-  public basketItems: Pizza[] = [];
+  public basketProducts: Product[] = [];
 
   @Output() itemInBasketCount = new EventEmitter<number>();
 
   constructor(private orderService: OrderService) { }
 
   public ngOnInit() {
-    this.orderService.getBasketItems().subscribe(items => {
-      this.basketItems = items;
+    this.orderService.getBasketProducts().subscribe(items => {
+      this.basketProducts = items;
       if (items) {
         this.itemInBasketCount.emit(items.length);
       }
@@ -49,18 +48,18 @@ export class BasketPreviewComponent implements OnInit {
   }
 
   public totalCost() {
-    return this.basketItems.reduce((cost: number, pizza: Pizza) => cost + pizza.price, 0);
+    return this.basketProducts.reduce((cost: number, product: Product) => cost + product.price, 0);
   }
 
-  public close() {
+  public closeBasket() {
     this.orderService.setBasketPreviewVisible(false);
   }
 
-  public remove(pizza: Pizza) {
-    this.orderService.removeFromBasket(pizza);
+  public removeProduct(product: Product) {
+    this.orderService.removeFromBasket(product);
   }
 
-  public add(pizza: Pizza) {
-    this.orderService.addToBasket(pizza);
+  public addProduct(product: Product) {
+    this.orderService.addToBasket(product);
   }
 }

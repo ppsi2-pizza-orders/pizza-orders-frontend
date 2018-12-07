@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Pizza } from '../models/Pizza';
+import { Product } from '../models/IProduct';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private basket: Pizza[] = [];
+  private basket: Product[] = [];
   private restaurantID: number;
-  private basketItems = new BehaviorSubject<Pizza[]>(null);
+  private basketProducts = new BehaviorSubject<Product[]>(null);
   private basketPreviewVisible = new BehaviorSubject<boolean>(false);
 
   constructor() { }
@@ -21,7 +21,7 @@ export class OrderService {
     this.basketPreviewVisible.next(visible);
   }
 
-  public addToBasket(pizza: Pizza, restaurant?: number) {
+  public addToBasket(product: Product, restaurant?: number) {
     if (restaurant) {
       if (this.restaurantID !== restaurant && this.basket.length > 0) {
         this.basket = [];
@@ -30,20 +30,20 @@ export class OrderService {
         this.restaurantID = restaurant;
       }
     }
-    this.basket.push(pizza);
-    this.basketItems.next(this.basket);
+    this.basket.push(product);
+    this.basketProducts.next(this.basket);
     this.setBasketPreviewVisible(true);
   }
 
-  public removeFromBasket(pizza: Pizza) {
-    const index = this.basket.indexOf(pizza);
+  public removeFromBasket(product: Product) {
+    const index = this.basket.indexOf(product);
     this.basket.splice(index, 1);
-    this.basketItems.next(this.basket);
+    this.basketProducts.next(this.basket);
     this.setBasketPreviewVisible(true);
   }
 
-  public getBasketItems() {
-    return this.basketItems.asObservable();
+  public getBasketProducts() {
+    return this.basketProducts.asObservable();
   }
 
 
