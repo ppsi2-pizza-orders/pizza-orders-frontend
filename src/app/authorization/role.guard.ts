@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, Route, Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { MatDialog } from '@angular/material';
-import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 import { DialogService } from '../shared/services/dialog.service';
 
 @Injectable()
@@ -15,7 +13,7 @@ export class RoleGuard implements CanLoad {
 
         if (
             this.auth.isAuthenticated() &&
-            this.auth.currentUser().roles.includes(expectedRole)
+            this.auth.userFromToken().roles.includes(expectedRole)
         ) {
             return true;
         }

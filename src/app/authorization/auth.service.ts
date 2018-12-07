@@ -9,6 +9,7 @@ import {
   FacebookLoginProvider
 } from 'angular-6-social-login';
 import { Router } from '@angular/router';
+import { User } from '../shared/models/User';
 
 export const BackendEntryPoint_Login = environment.apiBaseUrl + '/auth/login';
 export const BackendEntryPoint_SocialLogin = environment.apiBaseUrl + '/auth/facebook';
@@ -20,7 +21,8 @@ export const BackendEntryPoint_RegisterRestaurant = environment.apiBaseUrl + '/a
 })
 export class AuthService {
 
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
+  private $currentUser = new BehaviorSubject<User>(this.userFromToken());
+  private $isAuthenticated = new BehaviorSubject<boolean>(this.isAuthenticated());
 
   constructor(
     private http: HttpClient,
@@ -29,7 +31,11 @@ export class AuthService {
     private router: Router) { }
 
   public isLoggedIn(): Observable<boolean> {
-    return this.isAuthenticatedSubject.asObservable();
+    return this.$isAuthenticated.asObservable();
+  }
+
+  public getCurrentUser(): Observable<User> {
+    return this.$currentUser.asObservable();
   }
 
   public isAuthenticated(): boolean {
@@ -37,17 +43,11 @@ export class AuthService {
     return token && !this.jwtHelper.isTokenExpired(token);
   }
 
-  public currentUser() {
-    return this.jwtHelper.decodeToken(localStorage.getItem('token')).user;
-  }
-
   public login(email: string, password: string) {
     return this.http.post(BackendEntryPoint_Login, {'email': email, 'password': password}).pipe(
       map(data => {
         if (data && data['data']['token']) {
-          localStorage.setItem('token', data['data']['token']);
-          this.isAuthenticatedSubject.next(true);
-          return this.currentUser();
+          return this.handleAuthData(data);
         }
       })
     );
@@ -68,7 +68,7 @@ export class AuthService {
 
   public logout() {
     localStorage.removeItem('token');
-    this.isAuthenticatedSubject.next(false);
+    this.$isAuthenticated.next(false);
     this.router.navigate([ '/' ]);
   }
 
@@ -76,24 +76,35 @@ export class AuthService {
     return this.http.post(BackendEntryPoint_RegisterUser, userData).pipe(
       map(data => {
         if (data && data['data']['token']) {
-          localStorage.setItem('token', data['data']['token']);
-          this.isAuthenticatedSubject.next(true);
-          return this.currentUser();
+          return this.handleAuthData(data);
         }
       })
     );
+  }
+
+  public userFromToken() {
+    if(localStorage.getItem('token')){
+      return this.jwtHelper.decodeToken(localStorage.getItem('token')).user;
+    }
   }
 
   private sendSocialToken(token: string) {
     return this.http.post(BackendEntryPoint_SocialLogin, { 'access_token': token }).pipe(
       map(data => {
         if (data && data['data']['token']) {
-          localStorage.setItem('token', data['data']['token']);
-          this.isAuthenticatedSubject.next(true);
-          return this.currentUser();
+          return this.handleAuthData(data);
         }
       })
     );
+  }
+
+  private handleAuthData(data: any){
+    localStorage.setItem('token', data['data']['token']);
+    let user = this.userFromToken();
+    this.$currentUser.next(user);
+    this.$isAuthenticated.next(true);
+
+    return user;
   }
 
 }

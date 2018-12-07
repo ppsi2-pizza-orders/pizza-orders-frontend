@@ -13,12 +13,12 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <div *ngIf="(isLoggedIn | async)" mat-menu-item disabled class="text-center">{{userName}}</div>
-            <mat-divider *ngIf="(isLoggedIn | async)"></mat-divider>
-            <button *ngIf="!(isLoggedIn | async)" (click)="openAuthDialog()" mat-menu-item>Logowanie</button>
-            <button *ngIf="(isLoggedIn | async)" [routerLink]="['user']"  mat-menu-item>Moje konto</button>
-            <button *ngIf="(isLoggedIn | async)" (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>
-            <button *ngIf="(isLoggedIn | async)" (click)="logout()" mat-menu-item>Wyloguj</button>
+            <div *ngIf="isLoggedIn" mat-menu-item disabled class="text-center">{{userName}}</div>
+            <mat-divider *ngIf="isLoggedIn"></mat-divider>
+            <button *ngIf="!isLoggedIn" (click)="openAuthDialog()" mat-menu-item>Logowanie</button>
+            <button *ngIf="isLoggedIn" [routerLink]="['user']"  mat-menu-item>Moje konto</button>
+            <button *ngIf="isLoggedIn" (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>
+            <button *ngIf="isLoggedIn" (click)="logout()" mat-menu-item>Wyloguj</button>
         </mat-menu>
     </div>
 </div>

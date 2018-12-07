@@ -1,5 +1,5 @@
-import { Component, Inject, Optional, OnInit } from '@angular/core';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, ErrorStateMatcher } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef, MatDialog, ErrorStateMatcher } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
@@ -30,7 +30,8 @@ export class AuthDialogComponent implements OnInit {
   public currentForm = 'loginForm';
   public loginError = '';
   public registerError = '';
-  public loading = false;
+  public loadingSpinner = false;
+  public successLogin = false;
   public matcher = new MyErrorStateMatcher();
 
   constructor(
@@ -88,18 +89,17 @@ export class AuthDialogComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.loading = true;
+    this.loadingSpinner = true;
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
     this.auth.login(email, password).subscribe(
       (user) => {
         this.dialogData.isLoggedIn = true;
         this.dialogData.userRole = user['roles'];
-        this.dialogRef.close(this.dialogData);
+        this.confirmAndClose();
       },
       (err) => {
-        console.log(err);
-        this.loading = false;
+        this.loadingSpinner = false;
         this.loginError = 'Błędne dane logowania!';
       }
     );
@@ -109,36 +109,42 @@ export class AuthDialogComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    this.loading = true;
+    this.loadingSpinner = true;
     this.auth.register(this.registerForm.value).subscribe(
       (user) => {
         this.dialogData.isLoggedIn = true;
         this.dialogData.userRole = user.roles;
-        this.dialogRef.close(this.dialogData);
+        this.confirmAndClose();
       },
       (err) => {
-        console.log(err);
-        this.loading = false;
+        this.loadingSpinner = false;
         this.registerError = 'Podany email już istnieje!';
       }
     );
   }
 
   onFacebookLogin() {
-    this.loading = true;
+    this.loadingSpinner = true;
     this.auth.facebookLogin().subscribe(
       (user) => {
           this.dialogData.isLoggedIn = true;
           this.dialogData.userRole = user.roles;
-          this.dialogRef.close(this.dialogData);
+          this.confirmAndClose();
       },
       (err) => {
-        console.log(err);
-        this.loading = false;
+        this.loadingSpinner = false;
         this.loginError = err.message;
         this.registerError = err.message;
       }
     );
+  }
+
+  confirmAndClose(){
+    this.loadingSpinner = false;
+    this.successLogin = true;
+    setTimeout(()=>{
+      this.dialogRef.close(this.dialogData);
+    }, 2000);
   }
 
 }

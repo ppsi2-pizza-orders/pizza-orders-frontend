@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/authorization/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 
@@ -9,33 +9,47 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
-
-  public isLoggedIn: Observable<boolean>;
+export class NavbarComponent implements OnInit, OnDestroy {
+  public isLoggedIn: boolean;
   public itemsInOrder: number;
   public userName: string
+  private subscription: Subscription;
 
   constructor(private authService: AuthService, private orderService: OrderService, private dialogService: DialogService) { }
 
   public ngOnInit() {
-    this.isLoggedIn = this.authService.isLoggedIn();
-    this.userName = this.authService.currentUser().name;
-    this.orderService.getOrderProducts().subscribe(products => {
-      if(products){
-        this.itemsInOrder = products.length;
-      }
-    })
+    this.subscription = this.authService.isLoggedIn().subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+    });
+    this.subscription.add(
+      this.orderService.getOrderProducts().subscribe(products => {
+        if(products){
+          this.itemsInOrder = products.length;
+        }
+      })
+    );
+    this.subscription.add(
+      this.authService.getCurrentUser().subscribe(user => {
+        if(user){
+          this.userName = user.name;          
+        }
+      })
+    );
+  }
+
+  public ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   public openAuthDialog() {
     this.dialogService.authDialog();
   }
 
-  public openRegisterRestaurantDialog(): void {
+  public openRegisterRestaurantDialog() {
     this.dialogService.registerRestaurantDialog();
   }
 
-  public logout(): void {
+  public logout() {
     this.authService.logout();
   }
 
