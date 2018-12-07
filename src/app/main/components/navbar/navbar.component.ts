@@ -13,11 +13,13 @@ export class NavbarComponent implements OnInit {
 
   public isLoggedIn: Observable<boolean>;
   public itemsInOrder: number;
+  public userName: string
 
   constructor(private authService: AuthService, private orderService: OrderService, private dialogService: DialogService) { }
 
   public ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
+    this.userName = this.authService.currentUser().name;
     this.orderService.getOrderProducts().subscribe(products => {
       if(products){
         this.itemsInOrder = products.length;
