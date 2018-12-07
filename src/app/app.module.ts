@@ -8,17 +8,12 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthDialogComponent } from './authorization/auth-dialog/auth-dialog.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './authorization/auth.guard';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { RoleGuard } from './authorization/role.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angular-6-social-login';
 import { environment } from 'src/environments/environment';
 import { OrderService } from './shared/services/order.service';
-import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { ApiInterceptor } from './api-interceptor';
-import { InfoDialogComponent } from './shared/components/info-dialog/info-dialog.component';
-import { RegisterRestaurantComponent } from './shared/components/register-restaurant/register-restaurant.component';
-
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
       [
@@ -34,7 +29,6 @@ export function getAuthServiceConfigs() {
 @NgModule({
   declarations: [
     AppComponent,
-    AuthDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,12 +46,6 @@ export function getAuthServiceConfigs() {
         blacklistedRoutes: environment.blacklist
       }
     })
-  ],
-  entryComponents: [
-    AuthDialogComponent,
-    RegisterRestaurantComponent,
-    ConfirmDialogComponent,
-    InfoDialogComponent
   ],
   providers: [
     AuthGuard,

@@ -11,4 +11,5 @@ export class User {
     restaurant_id?: number;
     firstName?: string;
     lastName?: string;
+    name?:string;
 }

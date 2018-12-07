@@ -48,7 +48,24 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 3em;
-        margin: 3em;
+        padding: 6em;
+        @include md{
+            padding: 3em; 
+        }
+        &.success{
+            display: block;
+            color: $secondary-color;
+            text-align: center;
+            h3{
+                font-weight: 600;
+                text-align: center;
+            }
+            .mat-icon{
+                font-size: 6em;
+                height: auto;
+                width: auto;
+                margin-right: 10px;
+            }
+        }
     }
 }

@@ -1,0 +1,40 @@
+@import 'styles.scss';
+.app-basket-preview{
+    min-width: 300px;
+    max-height: 70vh;
+    overflow: scroll;
+    float: right;
+    .product{
+        display: flex;
+        align-items: baseline;
+        .product-name{
+            flex: 2;
+            text-align: left;
+        }
+        .product-price{
+            flex: 1;
+            text-align: right;
+        }
+        .product-actions{
+            flex: 1;
+            margin-left: 1.5em;
+        }
+        .mat-icon-button{
+            width: 30px;
+            height: 30px;
+        }
+    }
+    @include md{
+        min-width: unset;
+    }
+    .buttons{
+        height: 100%;
+        margin-top: 1em;
+        display: flex;
+        justify-content: center;
+        button{
+            margin: 4px;
+            color: #fff;
+        }
+    }
+}

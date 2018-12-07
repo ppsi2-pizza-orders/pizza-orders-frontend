@@ -15,6 +15,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { DialogService } from './services/dialog.service';
 import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
 import { RegisterRestaurantComponent } from './components/register-restaurant/register-restaurant.component';
+import { AuthDialogComponent } from '../authorization/auth-dialog/auth-dialog.component';
+import { OrderPreviewDialog } from './components/order-preview/order-preview.dialog';
 
 @NgModule({
   imports: [
@@ -38,9 +40,18 @@ import { RegisterRestaurantComponent } from './components/register-restaurant/re
     DroppableDirective,
     DraggableDirective,
     MovableDirective,
+    AuthDialogComponent,
     ConfirmDialogComponent,
     InfoDialogComponent,
-    RegisterRestaurantComponent
+    RegisterRestaurantComponent,
+    OrderPreviewDialog
+  ],
+  entryComponents: [
+    AuthDialogComponent,
+    RegisterRestaurantComponent,
+    ConfirmDialogComponent,
+    InfoDialogComponent,
+    OrderPreviewDialog
   ],
   providers: [
     DroppableService,

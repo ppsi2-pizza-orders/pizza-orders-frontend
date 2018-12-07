@@ -21,8 +21,8 @@ export class MenuComponent implements OnInit {
     this.pizzas = this.restaurant.pizzas;
   }
 
-  public addToBasket(pizza: Pizza) {
-    this.orderService.addToBasket(pizza, this.restaurant.id);
+  public addToOrder(pizza: Pizza) {
+    this.orderService.addToOrder(pizza, this.restaurant.id);
   }
 
 }

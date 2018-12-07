@@ -5,20 +5,20 @@
             <h5>PizzaOrders</h5>
         </a>
     </div>
-
     <div class="btn">
-        <button mat-icon-button (click)="toggleBasket()">
-            <mat-icon [matBadge]="itemsInBasket" [matBadgeHidden]="itemsInBasket==0" matBadgePosition="before">shopping_basket</mat-icon>
+        <button mat-icon-button (click)="openOrderPreview()">
+            <mat-icon [matBadge]="itemsInOrder" [matBadgeHidden]="itemsInOrder==0" matBadgePosition="before">shopping_basket</mat-icon>
         </button>
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button *ngIf="!(isLoggedIn | async)" (click)="openAuthDialog()" mat-menu-item>Logowanie</button>
-            <!-- <mat-divider></mat-divider> -->
-            <button *ngIf="(isLoggedIn | async)" (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>
-            <button *ngIf="(isLoggedIn | async)" (click)="logout()" mat-menu-item>Wyloguj</button>
+            <div *ngIf="isLoggedIn" mat-menu-item disabled class="text-center">{{userName}}</div>
+            <mat-divider *ngIf="isLoggedIn"></mat-divider>
+            <button *ngIf="!isLoggedIn" (click)="openAuthDialog()" mat-menu-item>Logowanie</button>
+            <button *ngIf="isLoggedIn" [routerLink]="['user']"  mat-menu-item>Moje konto</button>
+            <button *ngIf="isLoggedIn" (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>
+            <button *ngIf="isLoggedIn" (click)="logout()" mat-menu-item>Wyloguj</button>
         </mat-menu>
     </div>
-    <app-basket-preview (itemInBasketCount)="setBasketItemCount($event)"></app-basket-preview>
 </div>

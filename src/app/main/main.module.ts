@@ -12,7 +12,6 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { RestaurantComponent } from './pages/restaurant/restaurant.component';
 import { AgmCoreModule } from '@agm/core';
-import { BasketPreviewComponent } from './components/basket-preview/basket-preview.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
@@ -34,8 +33,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     SidebarComponent,
     RatingComponent,
     RestaurantComponent,
-    NavbarComponent,
-    BasketPreviewComponent
+    NavbarComponent
   ],
   providers: [
   ]

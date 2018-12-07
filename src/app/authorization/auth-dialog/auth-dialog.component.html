@@ -1,6 +1,6 @@
 <div *ngIf="currentForm === 'loginForm'" class="login-form">
-  <h1 mat-dialog-title>Logowanie</h1>
-  <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()" *ngIf="!loading">
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()" *ngIf="!loadingSpinner && !successLogin">
+    <h1 mat-dialog-title>Logowanie</h1>
     <div mat-dialog-content class="auth-content">
       <mat-form-field class="form-field">
         <input matInput type="email" formControlName="email" placeholder="Email">
@@ -20,13 +20,17 @@
       <p class="sgup">Nie masz jeszcze konta? <a (click)="switchForm()">Zarejestruj się</a></p>
     </div>
   </form>
-  <div *ngIf="loading" class="spinner">
+  <div *ngIf="loadingSpinner" class="spinner">
     <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="successLogin" class="spinner success">
+    <h3>Zalogowano!</h3>
+    <mat-icon>done</mat-icon>
   </div>
 </div>
 <div *ngIf="currentForm === 'registerForm'" class="register-form">
-  <h1 mat-dialog-title>Rejestracja</h1>
-  <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()" *ngIf="!loading">
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()" *ngIf="!loadingSpinner && !successLogin">
+    <h1 mat-dialog-title>Rejestracja</h1>
     <div mat-dialog-content class="auth-content">
       <mat-form-field class="form-field">
         <input type="email" matInput formControlName="email" placeholder="Email">
@@ -50,7 +54,11 @@
         się z Facebook</button>
     </div>
   </form>
-  <div *ngIf="loading" class="spinner">
+  <div *ngIf="loadingSpinner" class="spinner">
     <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="successLogin" class="spinner success">
+    <h3>Zarejestrowano!</h3>
+    <mat-icon>done</mat-icon>
   </div>
 </div>

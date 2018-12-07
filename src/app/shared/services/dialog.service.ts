@@ -4,12 +4,13 @@ import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dia
 import { AuthDialogComponent } from 'src/app/authorization/auth-dialog/auth-dialog.component';
 import { InfoDialogComponent, DialogTypes } from '../components/info-dialog/info-dialog.component';
 import { RegisterRestaurantComponent } from '../components/register-restaurant/register-restaurant.component';
+import { OrderPreviewDialog } from '../components/order-preview/order-preview.dialog';
+import { Product } from '../models/IProduct';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
-  private config = new MatDialogConfig();
 
   constructor(private dialog: MatDialog) { }
 
@@ -34,6 +35,18 @@ export class DialogService {
   public authDialog(){
     let dialogRef: MatDialogRef<AuthDialogComponent>;
     dialogRef = this.dialog.open(AuthDialogComponent);
+
+    return dialogRef.beforeClose();
+  }
+
+  public orderPreviewDialog(products: Product[]){
+    let config = new MatDialogConfig();
+    config.autoFocus = false;
+    config.restoreFocus = false;
+    config.disableClose = true;
+    let dialogRef: MatDialogRef<OrderPreviewDialog>;
+    dialogRef = this.dialog.open(OrderPreviewDialog, config);
+    dialogRef.componentInstance.orderProducts = products;
 
     return dialogRef.beforeClose();
   }
