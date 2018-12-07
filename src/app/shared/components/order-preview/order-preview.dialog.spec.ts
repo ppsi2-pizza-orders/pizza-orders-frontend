@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BasketPreviewComponent } from './basket-preview.component';
+import { BasketPreviewComponent } from './basket-preview.dialog';
 
 describe('BasketPreviewComponent', () => {
   let component: BasketPreviewComponent;

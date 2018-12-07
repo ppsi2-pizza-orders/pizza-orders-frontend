@@ -12,14 +12,17 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
 export class NavbarComponent implements OnInit {
 
   public isLoggedIn: Observable<boolean>;
-  public itemsInBasket: number;
-  private isBasketPreviewVisible = true;
+  public itemsInOrder: number;
 
   constructor(private authService: AuthService, private orderService: OrderService, private dialogService: DialogService) { }
 
   public ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
-    this.orderService.isBasketPreviewVisible().subscribe(visible => this.isBasketPreviewVisible = visible);
+    this.orderService.getOrderProducts().subscribe(products => {
+      if(products){
+        this.itemsInOrder = products.length;
+      }
+    })
   }
 
   public openAuthDialog() {
@@ -34,12 +37,8 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
   }
 
-  public toggleBasket() {
-    this.orderService.setBasketPreviewVisible(!this.isBasketPreviewVisible);
-  }
-
-  public setBasketItemCount(count: number) {
-    this.itemsInBasket = count;
+  public openOrderPreview() {
+    this.orderService.openOrderPreview();
   }
 
 }
