@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MatDialog, ErrorStateMatcher } from '@angular/material';
+import { MatDialogRef, ErrorStateMatcher } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
@@ -36,7 +36,6 @@ export class AuthDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AuthDialogComponent>,
-    public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private auth: AuthService) { }
 

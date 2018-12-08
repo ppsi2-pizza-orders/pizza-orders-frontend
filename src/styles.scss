@@ -17,3 +17,11 @@ a{
 .nopadding {
     padding: 0 !important;
  }
+.snackBarStyle {
+    text-align: center !important;
+    color: #fff !important;
+    background-color: $secondary-color !important;
+    span{
+        width: 100% !important;
+    }
+}
