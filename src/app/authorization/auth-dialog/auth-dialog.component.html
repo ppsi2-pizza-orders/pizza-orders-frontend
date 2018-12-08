@@ -1,5 +1,5 @@
 <div *ngIf="currentForm === 'loginForm'" class="login-form">
-  <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()" *ngIf="!loadingSpinner && !successLogin">
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()" *ngIf="!loadingSpinner">
     <h1 mat-dialog-title>Logowanie</h1>
     <div mat-dialog-content class="auth-content">
       <mat-form-field class="form-field">
@@ -23,13 +23,9 @@
   <div *ngIf="loadingSpinner" class="spinner">
     <mat-spinner></mat-spinner>
   </div>
-  <div *ngIf="successLogin" class="spinner success">
-    <h3>Zalogowano!</h3>
-    <mat-icon>done</mat-icon>
-  </div>
 </div>
 <div *ngIf="currentForm === 'registerForm'" class="register-form">
-  <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()" *ngIf="!loadingSpinner && !successLogin">
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()" *ngIf="!loadingSpinner">
     <h1 mat-dialog-title>Rejestracja</h1>
     <div mat-dialog-content class="auth-content">
       <mat-form-field class="form-field">
@@ -56,9 +52,5 @@
   </form>
   <div *ngIf="loadingSpinner" class="spinner">
     <mat-spinner></mat-spinner>
-  </div>
-  <div *ngIf="successLogin" class="spinner success">
-    <h3>Zarejestrowano!</h3>
-    <mat-icon>done</mat-icon>
   </div>
 </div>

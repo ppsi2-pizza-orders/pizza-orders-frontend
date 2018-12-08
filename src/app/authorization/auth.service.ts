@@ -4,12 +4,15 @@ import { Observable, from, BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import {MatSnackBar} from '@angular/material';
 import {
   AuthService as SocialAuthService,
   FacebookLoginProvider
 } from 'angular-6-social-login';
 import { Router } from '@angular/router';
 import { User } from '../shared/models/User';
+import { DialogService } from '../shared/services/dialog.service';
+import { DialogTypes } from '../shared/components/info-dialog/info-dialog.component';
 
 export const BackendEntryPoint_Login = environment.apiBaseUrl + '/auth/login';
 export const BackendEntryPoint_SocialLogin = environment.apiBaseUrl + '/auth/facebook';
@@ -28,7 +31,8 @@ export class AuthService {
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
     private socialAuthService: SocialAuthService,
-    private router: Router) { }
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   public isLoggedIn(): Observable<boolean> {
     return this.$isAuthenticated.asObservable();
@@ -70,6 +74,10 @@ export class AuthService {
     localStorage.removeItem('token');
     this.$isAuthenticated.next(false);
     this.router.navigate([ '/' ]);
+    this.snackBar.open('Wylogowano!', '',{
+      duration: 1500,
+      panelClass: 'snackBarStyle'
+    });
   }
 
   public register(userData) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MatDialog, ErrorStateMatcher } from '@angular/material';
+import { MatDialogRef, ErrorStateMatcher, MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
@@ -31,14 +31,13 @@ export class AuthDialogComponent implements OnInit {
   public loginError = '';
   public registerError = '';
   public loadingSpinner = false;
-  public successLogin = false;
   public matcher = new MyErrorStateMatcher();
 
   constructor(
     public dialogRef: MatDialogRef<AuthDialogComponent>,
-    public dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private auth: AuthService) { }
+    private auth: AuthService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -141,10 +140,11 @@ export class AuthDialogComponent implements OnInit {
 
   confirmAndClose(){
     this.loadingSpinner = false;
-    this.successLogin = true;
-    setTimeout(()=>{
-      this.dialogRef.close(this.dialogData);
-    }, 2000);
+    this.dialogRef.close(this.dialogData);
+    this.snackBar.open('Zalogowano!', '',{
+      duration: 1500,
+      panelClass: 'snackBarStyle'
+    });
   }
 
 }
