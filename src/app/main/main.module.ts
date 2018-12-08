@@ -13,6 +13,9 @@ import { HomeComponent } from './views/home/home.component';
 import { RestaurantComponent } from './views/restaurant/restaurant.component';
 import { AgmCoreModule } from '@agm/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { OrderComponent } from './views/order/order.component';
+import { UserOrdersComponent } from './views/user-orders/user-orders.component';
+import { UserSettingsComponent } from './views/user-settings/user-settings.component';
 
 @NgModule({
   imports: [
@@ -33,7 +36,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     SidebarComponent,
     RatingComponent,
     RestaurantComponent,
-    NavbarComponent
+    NavbarComponent,
+    OrderComponent,
+    UserOrdersComponent,
+    UserSettingsComponent
   ],
   providers: [
   ]

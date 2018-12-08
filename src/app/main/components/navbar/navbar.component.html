@@ -16,7 +16,8 @@
             <div *ngIf="isLoggedIn" mat-menu-item disabled class="text-center">{{userName}}</div>
             <mat-divider *ngIf="isLoggedIn"></mat-divider>
             <button *ngIf="!isLoggedIn" (click)="openAuthDialog()" mat-menu-item>Logowanie</button>
-            <button *ngIf="isLoggedIn" [routerLink]="['user']"  mat-menu-item>Moje konto</button>
+            <button *ngIf="isLoggedIn" [routerLink]="['/', 'user-orders']"  mat-menu-item>Moje zamówienia</button>
+            <button *ngIf="isLoggedIn" [routerLink]="['/', 'user-settings']"  mat-menu-item>Ustawienia</button>
             <button *ngIf="isLoggedIn" (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>
             <button *ngIf="isLoggedIn" (click)="logout()" mat-menu-item>Wyloguj</button>
         </mat-menu>
