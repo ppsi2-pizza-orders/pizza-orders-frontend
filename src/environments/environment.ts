@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://api.pizzaorders.pl',
+  apiBaseUrl: 'https://api.pizzaorders.pl',
   whitelist: [
     'api.pizzaorders.pl',
   ],
