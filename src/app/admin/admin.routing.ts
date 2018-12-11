@@ -1,10 +1,10 @@
-import { IngredientsComponent } from './pages/ingredients/ingredients.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { IngredientsComponent } from './views/ingredients/ingredients.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
-import { RestaurantsComponent } from './pages/restaurants/restaurants.component';
-import { LogsComponent } from './pages/logs/logs.component';
-import { UsersComponent } from './pages/users/users.component';
+import { RestaurantsComponent } from './views/restaurants/restaurants.component';
+import { LogsComponent } from './views/logs/logs.component';
+import { UsersComponent } from './views/users/users.component';
 
 export const routes: Routes = [
   { path: '', component: AdminComponent,
