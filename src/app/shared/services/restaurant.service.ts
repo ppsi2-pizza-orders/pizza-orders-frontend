@@ -3,7 +3,6 @@ import { environment } from 'src/environments/environment';
 import { Restaurant } from '../models/Restaurant';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 
 export const BackendEntryPoint_GetRestaurants = environment.apiBaseUrl + '/restaurants';
 export const BackendEntryPoint_GetRestaurant = environment.apiBaseUrl + '/restaurant';
@@ -22,34 +21,15 @@ export class RestaurantService {
 
   public getRestaurants(city?: string, name?: string): Observable<Restaurant[]> {
     const query = { searchCity: city, searchName: name };
-    return this.http.post<Restaurant[]>(BackendEntryPoint_GetRestaurants, query).pipe(
-      map(restaurants => {
-        return restaurants['data'];
-      })
-    );
+    return this.http.post<Restaurant[]>(BackendEntryPoint_GetRestaurants, query);
   }
 
   public getRestaurant(id: number): Observable<Restaurant> {
-    return this.http.get<Restaurant>(BackendEntryPoint_GetRestaurant + '/' + id).pipe(
-      map(restaurant => {
-        return restaurant['data'];
-      })
-    );
+    return this.http.get<Restaurant>(BackendEntryPoint_GetRestaurant + '/' + id);
   }
 
   public getAutocomplete() {
-    return this.http.get(BackendEntryPoint_GetAutocomplete).pipe(map(data => {
-      let cities = data['cities']
-      let names = data['names']
-      data['cities'] = Object.keys(cities).map((key)=>cities[key]);
-      data['names'] = Object.keys(names).map((key)=>names[key]);
-      
-      return data;
-    }));
-  }
-
-  public setCurrentRestaurant(restaurant: Restaurant) {
-    this.currentRestaurant = restaurant;
+    return this.http.get(BackendEntryPoint_GetAutocomplete);
   }
 
   public getAdminRestaurants(params?) {
@@ -58,6 +38,10 @@ export class RestaurantService {
 
   public addRestaurant(restaurant: Restaurant) {
     return this.http.post(BackendEntryPoint_AddRestaurant, restaurant);
+  }
+
+  public setCurrentRestaurant(restaurant: Restaurant) {
+    this.currentRestaurant = restaurant;
   }
   
 }

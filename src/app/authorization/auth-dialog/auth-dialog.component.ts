@@ -99,7 +99,7 @@ export class AuthDialogComponent implements OnInit {
       },
       (err) => {
         this.loadingSpinner = false;
-        this.loginError = 'Błędne dane logowania!';
+        this.loginError = err.error.messages;
       }
     );
   }
@@ -117,7 +117,7 @@ export class AuthDialogComponent implements OnInit {
       },
       (err) => {
         this.loadingSpinner = false;
-        this.registerError = 'Podany email już istnieje!';
+        this.registerError = err.error.messages;
       }
     );
   }
