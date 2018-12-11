@@ -46,7 +46,9 @@ export class HomeComponent implements OnInit, AfterContentInit {
   }
 
   public ngAfterContentInit(): void {
-    this.restaurantService.getAutocomplete().subscribe(data => Object.assign(this.autocomplete, data));
+    this.restaurantService.getAutocomplete().subscribe(autocomplete => {
+      Object.assign(this.autocomplete, autocomplete['data']);
+    });
   }
 
   public getRestaurants() {
@@ -59,7 +61,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
       this.loadingSpinner = true;
       this.restaurantService.getRestaurants(cityValue, nameValue)
         .subscribe(restaurants => {
-          this.restaurants = restaurants;
+          this.restaurants = restaurants['data'];
           this.loadingSpinner = false;
           if (this.restaurants.length === 0) {
             this.notFound = true;

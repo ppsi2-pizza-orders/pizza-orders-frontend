@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, ErrorStateMatcher, MatSnackBar } from '@angular/material';
+import { MatDialogRef, ErrorStateMatcher } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 export interface DialogData {
   isLoggedIn: boolean;
@@ -37,7 +38,7 @@ export class AuthDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<AuthDialogComponent>,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: SnackBarService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -99,7 +100,7 @@ export class AuthDialogComponent implements OnInit {
       },
       (err) => {
         this.loadingSpinner = false;
-        this.loginError = 'Błędne dane logowania!';
+        this.loginError = err.error.messages;
       }
     );
   }
@@ -117,7 +118,7 @@ export class AuthDialogComponent implements OnInit {
       },
       (err) => {
         this.loadingSpinner = false;
-        this.registerError = 'Podany email już istnieje!';
+        this.registerError = err.error.messages;
       }
     );
   }
@@ -141,10 +142,7 @@ export class AuthDialogComponent implements OnInit {
   confirmAndClose(){
     this.loadingSpinner = false;
     this.dialogRef.close(this.dialogData);
-    this.snackBar.open('Zalogowano!', '',{
-      duration: 1500,
-      panelClass: 'snackBarStyle'
-    });
+    this.snackBar.show('Zalogowano!');
   }
 
 }

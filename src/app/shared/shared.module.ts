@@ -17,6 +17,7 @@ import { InfoDialogComponent } from './components/info-dialog/info-dialog.compon
 import { RegisterRestaurantComponent } from './components/register-restaurant/register-restaurant.component';
 import { AuthDialogComponent } from '../authorization/auth-dialog/auth-dialog.component';
 import { OrderPreviewDialog } from './components/order-preview/order-preview.dialog';
+import { SnackBarService } from './services/snack-bar.service';
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import { OrderPreviewDialog } from './components/order-preview/order-preview.dia
     RestaurantService,
     UserService,
     IngredientService,
-    DialogService
+    DialogService,
+    SnackBarService
   ]
 })
 export class SharedModule { }

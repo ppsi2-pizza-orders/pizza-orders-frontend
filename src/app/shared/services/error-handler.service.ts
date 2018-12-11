@@ -20,7 +20,7 @@ export class ErrorHandlerService {
         this.goToLogin();
         break;
       case 500:
-        this.showErrorDialog('Błąd!', 'Wystąpił błąd aplikacji, spróbój ponownie.');
+        this.showErrorDialog('Błąd!', 'Wystąpił błąd aplikacji, spróbuj ponownie.');
         break;
     }
   }
@@ -33,13 +33,9 @@ export class ErrorHandlerService {
   private goToLogin() {
     this.dialogService.authDialog().subscribe(resp => {
       if(!resp){
-        this.goToHomePage();
+        this.router.navigate(['/']);
       }
     });
-  }
-
-  private goToHomePage() {
-    this.router.navigate(['/home']);
   }
 
 }
