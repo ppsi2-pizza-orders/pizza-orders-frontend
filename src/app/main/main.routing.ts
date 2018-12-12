@@ -7,6 +7,7 @@ import { OfferComponent } from './views/offer/offer.component';
 import { RestaurantComponent } from './views/restaurant/restaurant.component';
 import { UserOrdersComponent } from './views/user-orders/user-orders.component';
 import { UserSettingsComponent } from './views/user-settings/user-settings.component';
+import { OrderComponent } from './views/order/order.component';
 
 export const routes: Routes = [
   {
@@ -14,8 +15,12 @@ export const routes: Routes = [
     component: MainComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'user-orders', component: UserOrdersComponent },
-      { path: 'user-settings', component: UserSettingsComponent },
+      { path: 'user', children: [
+          { path: 'orders', component: UserOrdersComponent },
+          { path: 'data', component: UserSettingsComponent }
+        ]
+      },
+      { path: 'order', component: OrderComponent },
       { path: 'restaurant/:id', component: RestaurantComponent,
         children: [
           { path: '', redirectTo: 'menu', pathMatch: 'full' },
