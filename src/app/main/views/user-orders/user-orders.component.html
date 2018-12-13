@@ -2,64 +2,8 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-md-10">
-        <div class="orders-panel">
-          <p class="section-title">Zamówienia w toku</p>
-          <mat-card>
-            <div class="row align-items-center">
-              <div class="col-md-12 order-header">
-                  <p class="text-left">Zamówienie #12</p>
-                  <p class="text-right">12.10.2018 14:49</p>
-              </div>
-              <div class="col-md-4 order-details">
-                <ul>
-                  <li>1x Margherita 29zł</li>
-                  <li>1x Hawajska 29zł</li>
-                </ul>
-              </div>
-              <div class="col-md-4 order-details">
-                <p>Nocne Gastro, Wrocław</p>
-              </div>
-              <div class="col-md-4 order-status">
-                <h6>Status:
-                  <span class="badge badge-pill badge-primary">W przygowaniu</span>
-                </h6>
-                <h5>Łączny koszt: 59zł</h5>
-              </div>
-            </div>
-          </mat-card>
-        </div>
-        <div class="orders-panel">
-          <p class="section-title">Historia zamówień</p>
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Zamówienie #13
-                </mat-panel-title>
-                <mat-panel-description>
-                    12.10.2018 14:49
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <div class="row align-items-center">
-                  <div class="col-md-4 order-details">
-                    <ul>
-                      <li>1x Margherita 29zł</li>
-                      <li>1x Hawajska 29zł</li>
-                    </ul>
-                  </div>
-                  <div class="col-md-4 order-details">
-                    <p>Nocne Gastro, Wrocław</p>
-                  </div>
-                  <div class="col-md-4 order-status">
-                    <h6>Status:
-                      <span class="badge badge-pill badge-secondary">Zrealizowane</span>
-                    </h6>
-                    <h5>Łączny koszt: 59zł</h5>
-                  </div>
-                </div>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
+        <app-progress-orders></app-progress-orders>
+        <app-history-orders></app-history-orders>
       </div>
     </div>
   </div>

@@ -16,6 +16,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { OrderComponent } from './views/order/order.component';
 import { UserOrdersComponent } from './views/user-orders/user-orders.component';
 import { UserSettingsComponent } from './views/user-settings/user-settings.component';
+import { ProgressOrdersComponent } from './components/progress-orders/progress-orders.component';
+import { HistoryOrdersComponent } from './components/history-orders/history-orders.component';
+import { UserDataComponent } from './components/user-data/user-data.component';
 
 @NgModule({
   imports: [
@@ -39,7 +42,10 @@ import { UserSettingsComponent } from './views/user-settings/user-settings.compo
     NavbarComponent,
     OrderComponent,
     UserOrdersComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    ProgressOrdersComponent,
+    HistoryOrdersComponent,
+    UserDataComponent
   ],
   providers: [
   ]
