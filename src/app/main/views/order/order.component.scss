@@ -1,4 +1,41 @@
 @import 'styles.scss';
 .app-order{
     padding-top: 120px;
+    padding-bottom: 40px;
+
+    .user-data{
+        p{
+            margin: 0;
+            font-weight: 500;
+        }
+    }
+    .order-pickup{
+        .mat-radio-button{
+            margin-right: 1em;
+        }
+        .mat-form-field{
+            width: 100%;
+            padding-right: 1em;
+        }
+        .adresses{
+            margin-top: 1em;
+        }
+    }
+    .order-comment{
+        .mat-form-field{
+            width: 100%;
+        }
+    }
+    .order-payments{
+        .mat-radio-group{
+            .mat-radio-button{
+                padding-right: 25%;
+                padding-top: 1em;
+            }
+        }
+        button{
+            display: block;
+            margin: 3em auto 2em auto;
+        }
+    }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/cor
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/shared/models/IProduct';
 import { MatDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-preview',
@@ -17,7 +18,8 @@ export class OrderPreviewDialog implements OnInit, OnDestroy {
   @Output() itemInOrderCount = new EventEmitter<number>();
 
   constructor(
-    private dialogRef: MatDialogRef<OrderPreviewDialog>) { }
+    private dialogRef: MatDialogRef<OrderPreviewDialog>,
+    private router: Router) { }
 
   public ngOnInit() {
     this.subscription = this.dialogRef.backdropClick().subscribe(() => this.onClose());
@@ -29,6 +31,11 @@ export class OrderPreviewDialog implements OnInit, OnDestroy {
 
   public totalCost() {
     return this.orderProducts.reduce((cost: number, product: Product) => cost + product.price, 0);
+  }
+
+  public goToCheckout(){
+    this.router.navigateByUrl('order');
+    this.dialogRef.close(this.orderProducts);
   }
 
   public onClose() {

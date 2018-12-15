@@ -1,0 +1,29 @@
+@import 'styles.scss';
+.restaurant-preview{
+    img{
+        width: 100px;
+        display: inline;
+    }
+    h5{
+        display: inline;
+    }
+}
+.summary-order{
+    .product{
+        margin-bottom: 1em;
+        .product-name{
+            font-weight: 500;
+            margin: 0;
+        }
+        .product-ingredients{
+            margin: 0;
+        }
+        .product-price{
+            font-weight: 500;
+            color: $primary-color;
+        }
+    }
+    .total-cost{
+        text-align: right;
+    }
+}

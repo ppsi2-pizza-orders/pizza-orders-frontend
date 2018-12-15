@@ -19,6 +19,7 @@ import { UserSettingsComponent } from './views/user-settings/user-settings.compo
 import { ProgressOrdersComponent } from './components/progress-orders/progress-orders.component';
 import { HistoryOrdersComponent } from './components/history-orders/history-orders.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
+import { SummaryOrderComponent } from './components/summary-order/summary-order.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { UserDataComponent } from './components/user-data/user-data.component';
     UserSettingsComponent,
     ProgressOrdersComponent,
     HistoryOrdersComponent,
-    UserDataComponent
+    UserDataComponent,
+    SummaryOrderComponent
   ],
   providers: [
   ]
