@@ -1,0 +1,47 @@
+<mat-card class="app-order-pickup">
+    <mat-card-subtitle>Dostawa / Odbiór</mat-card-subtitle>
+    <mat-card-content>
+      <mat-radio-group [(ngModel)]="orderPickupType">
+        <mat-radio-button [value]="orderPickupTypes.DELIVER">
+          Dostawa
+        </mat-radio-button>
+        <mat-radio-button [value]="orderPickupTypes.PICKUP">
+          Odbiór w restauracji
+        </mat-radio-button>
+      </mat-radio-group>
+      <div class="adresses row">
+        <div *ngIf="orderPickupType === orderPickupTypes.DELIVER" class="col-6">
+          <h6>Adres dostawy</h6>
+          <form class="order-pickup-form" [formGroup]="orderPickupForm">
+            <mat-form-field>
+              <input matInput formControlName="city" placeholder="Miejscowość">
+              <mat-error *ngIf="orderPickupForm.get('city').invalid">Proszę wypełnić to pole</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput formControlName="street" placeholder="Ulica">
+              <mat-error *ngIf="orderPickupForm.get('street').invalid">Proszę wypełnić to pole</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput formControlName="house_number" placeholder="Numer domu">
+              <mat-error *ngIf="orderPickupForm.get('house_number').invalid">Proszę wypełnić to pole</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput formControlName="flat_number" placeholder="Numer mieszkania">
+            </mat-form-field>
+
+            <input #submit style="display: none;" type="submit">
+
+          </form>
+        </div>
+        <div class="col-6 restaurant-data" *ngIf="restaurant">
+          <h6>Adres restauracji</h6>
+          <p>{{ restaurant.name }}</p>
+          <p>{{ restaurant.address }}</p>
+          <p>{{ restaurant.city }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>

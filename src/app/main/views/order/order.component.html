@@ -1,0 +1,25 @@
+<div class="app-order">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <app-order-pickup [restaurant]="orderRestaurant" #orderpickup></app-order-pickup>
+        <br>
+        <app-user-data [user]="user"></app-user-data>
+        <br>
+        <mat-card class="order-comment">
+          <mat-card-subtitle>Komentarz do zamówienia</mat-card-subtitle>
+          <mat-card-content>
+            <mat-form-field>
+              <textarea matInput></textarea>
+            </mat-form-field>
+          </mat-card-content>
+        </mat-card>
+        <br>
+        <app-order-payments (submit)="onSubmit()"></app-order-payments>
+      </div>
+      <div class="col-md-4">
+        <app-summary-order [orderRestaurant]="orderRestaurant" [orderProducts]="orderProducts"></app-summary-order>
+      </div>
+    </div>
+  </div>
+</div>

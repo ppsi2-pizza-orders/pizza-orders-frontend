@@ -62,6 +62,10 @@ export class OrderService {
     return this.orderProducts.asObservable();
   }
 
+  public getOrderRestaurantID() {
+    return this.restaurantID;
+  }
+
   private storeOrder(){
     localStorage.setItem(STORAGE_RESTAURANT_ID_KEY, this.restaurantID.toString());
     localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(this.order));

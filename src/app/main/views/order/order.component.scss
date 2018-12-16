@@ -1,0 +1,10 @@
+@import 'styles.scss';
+.app-order{
+    padding-top: 120px;
+    padding-bottom: 40px;
+    .order-comment{
+        .mat-form-field{
+            width: 100%;
+        }
+    }
+}
