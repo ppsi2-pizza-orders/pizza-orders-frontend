@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'src/app/shared/models/IProduct';
+import { Restaurant } from 'src/app/shared/models/Restaurant';
 
 @Component({
   selector: 'app-summary-order',
@@ -8,6 +9,7 @@ import { Product } from 'src/app/shared/models/IProduct';
 })
 export class SummaryOrderComponent implements OnInit {
   @Input() public orderProducts: Product[];
+  @Input() public orderRestaurant: Restaurant;
   
   constructor() { }
 

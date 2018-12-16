@@ -20,6 +20,8 @@ import { ProgressOrdersComponent } from './components/progress-orders/progress-o
 import { HistoryOrdersComponent } from './components/history-orders/history-orders.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { SummaryOrderComponent } from './components/summary-order/summary-order.component';
+import { OrderPickupComponent } from './components/order-pickup/order-pickup.component';
+import { OrderPaymentsComponent } from './components/order-payments/order-payments.component';
 
 @NgModule({
   imports: [
@@ -47,7 +49,9 @@ import { SummaryOrderComponent } from './components/summary-order/summary-order.
     ProgressOrdersComponent,
     HistoryOrdersComponent,
     UserDataComponent,
-    SummaryOrderComponent
+    SummaryOrderComponent,
+    OrderPickupComponent,
+    OrderPaymentsComponent
   ],
   providers: [
   ]

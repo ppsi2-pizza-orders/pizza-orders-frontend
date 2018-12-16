@@ -2,54 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <mat-card class="order-pickup">
-          <mat-card-subtitle>Dostawa / Odbiór</mat-card-subtitle>
-          <mat-card-content>
-            <mat-radio-group>
-              <mat-radio-button value="1">
-                Dostawa
-              </mat-radio-button>
-              <mat-radio-button value="2">
-                Odbiór w restauracji
-              </mat-radio-button>
-            </mat-radio-group>
-            <div class="adresses row">
-              <div class="col-6">
-                <h6>Adres dostawy</h6>
-                <form class="example-form">
-                  <mat-form-field>
-                    <input matInput placeholder="Miejscowość">
-                  </mat-form-field>
-
-                  <mat-form-field>
-                    <input matInput placeholder="Ulica">
-                  </mat-form-field>
-
-                  <mat-form-field>
-                    <input matInput placeholder="Numer domu">
-                  </mat-form-field>
-
-                  <mat-form-field>
-                    <input matInput placeholder="Numer mieszkania">
-                  </mat-form-field>
-
-                </form>
-              </div>
-              <div class="col-6">
-                <h6>Adres restauracji</h6>
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
+        <app-order-pickup [restaurant]="orderRestaurant" #orderpickup></app-order-pickup>
         <br>
-        <mat-card class="user-data">
-          <mat-card-subtitle>Twoje dane</mat-card-subtitle>
-          <mat-card-content>
-            <p>Filip Fonał</p>
-            <p>filipfonal@gmail.com</p>
-            <p>792893485</p>
-          </mat-card-content>
-        </mat-card>
+        <app-user-data [user]="user"></app-user-data>
         <br>
         <mat-card class="order-comment">
           <mat-card-subtitle>Komentarz do zamówienia</mat-card-subtitle>
@@ -60,21 +15,10 @@
           </mat-card-content>
         </mat-card>
         <br>
-        <mat-card class="order-payments">
-          <mat-card-subtitle>Płatności</mat-card-subtitle>
-          <mat-card-content>
-            <mat-radio-group class="row">
-              <mat-radio-button *ngFor="let payment of payments" class="col-6" [value]="payment">
-                <img [src]="payment.img" class="img-fluid" alt="">
-              </mat-radio-button>
-            </mat-radio-group>
-          </mat-card-content>
-          <hr>
-          <button mat-raised-button color="primary">Zamawiam i płacę</button>
-        </mat-card>
+        <app-order-payments (submit)="onSubmit()"></app-order-payments>
       </div>
       <div class="col-md-4">
-        <app-summary-order [orderProducts]="orderProducts"></app-summary-order>
+        <app-summary-order [orderRestaurant]="orderRestaurant" [orderProducts]="orderProducts"></app-summary-order>
       </div>
     </div>
   </div>

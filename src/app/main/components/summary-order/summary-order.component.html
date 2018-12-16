@@ -4,7 +4,7 @@
       <img class="img-fluid" src="/assets/hanoi.png" alt="">
     </div>
     <div class="col-8 align-self-center">
-      <h5>Da Grasso Legnica</h5>
+      <h5 *ngIf="orderRestaurant">{{ orderRestaurant.name }}</h5>
     </div>
   </div>
 </mat-card>
