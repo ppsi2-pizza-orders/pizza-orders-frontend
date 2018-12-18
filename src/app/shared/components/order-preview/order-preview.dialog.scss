@@ -1,8 +1,6 @@
 @import 'styles.scss';
 .app-basket-preview{
     min-width: 300px;
-    max-height: 70vh;
-    overflow: scroll;
     float: right;
     .product{
         display: flex;

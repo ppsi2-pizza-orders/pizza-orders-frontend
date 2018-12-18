@@ -44,6 +44,7 @@ export class DialogService {
     config.autoFocus = false;
     config.restoreFocus = false;
     config.disableClose = true;
+    config.maxHeight = '70vh';
     let dialogRef: MatDialogRef<OrderPreviewComponent>;
     dialogRef = this.dialog.open(OrderPreviewComponent, config);
     dialogRef.componentInstance.orderProducts = products;

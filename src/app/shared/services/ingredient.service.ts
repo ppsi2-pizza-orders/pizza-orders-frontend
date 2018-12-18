@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { patchParams } from '../utils';
+import { PATH_PARAMS } from '../const';
 
 export const BackendEntryPoint_GetAdminIngredients = environment.apiBaseUrl + '/admin/ingredients';
 export const BackendEntryPoint_AddAdminIngredients = environment.apiBaseUrl + '/ingredient';
@@ -22,7 +22,7 @@ export class IngredientService {
   }
 
   public updateAdminIngredients(id: number, data: FormData) {
-    return this.http.post(`${BackendEntryPoint_AddAdminIngredients}/${id}`, data, patchParams);
+    return this.http.post(`${BackendEntryPoint_AddAdminIngredients}/${id}`, data, PATH_PARAMS);
   }
 
   public getAdminIngredients(params?) {
