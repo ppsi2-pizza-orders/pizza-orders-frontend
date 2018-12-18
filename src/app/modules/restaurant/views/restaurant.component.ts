@@ -21,6 +21,7 @@ export class RestaurantComponent implements OnInit {
       this.restaurant = restaurant['data'];
       this.restaurantService.setCurrentRestaurant(this.restaurant);
       this.loading = false;
+      console.log(restaurant);
     });
   }
 
