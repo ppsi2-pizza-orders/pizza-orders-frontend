@@ -18,21 +18,21 @@ export class OrderComponent implements OnInit, OnDestroy {
   public orderProducts: Product[];
   public orderRestaurant: Restaurant;
   public user: User;
-  private subscribtion : Subscription;
+  private subscribtion: Subscription;
   @ViewChild('orderpickup') orderPickup: OrderPickupComponent;
 
 
-  constructor(private orderService: OrderService, 
+  constructor(private orderService: OrderService,
               private restaurantSevice: RestaurantService,
               private authService: AuthService) { }
 
   ngOnInit() {
-    this.subscribtion = this.orderService.getOrderProducts().subscribe(products =>{
+    this.subscribtion = this.orderService.getOrderProducts().subscribe(products => {
       this.orderProducts = products;
     });
 
-    this.subscribtion.add(this.authService.getCurrentUser().subscribe(user =>this.user = user));
-    
+    this.subscribtion.add(this.authService.getCurrentUser().subscribe(user => this.user = user));
+
     this.restaurantSevice.getRestaurant(this.orderService.getOrderRestaurantID())
     .subscribe(restaurant => this.orderRestaurant = restaurant['data']);
   }
@@ -41,12 +41,10 @@ export class OrderComponent implements OnInit, OnDestroy {
     this.subscribtion.unsubscribe();
   }
 
-  public onSubmit(){
-    if(this.orderPickup.orderPickupType === ORDER_PICKUP_TYPES.DELIVER){
-      if(this.orderPickup.isFormValid()){
-      
-      }
-    }else{
+  public onSubmit() {
+    if (this.orderPickup.orderPickupType === ORDER_PICKUP_TYPES.DELIVER) {
+      if (this.orderPickup.isFormValid()) {}
+    } else {
 
     }
   }

@@ -22,7 +22,8 @@ export class UsersComponent implements OnInit {
 
   public ngOnInit() {
     this.loadingPage = true;
-    this.restaurantService.getAdminUsers().subscribe(users => {
+    this.restaurantService.getAdminUsers()
+    .subscribe(users => {
       this.users = users['data'];
       this.totalItemCount = users['meta'].paginator.last_page * 25;
       this.dataSource = new MatTableDataSource<User>(this.users);
@@ -34,28 +35,29 @@ export class UsersComponent implements OnInit {
   }
 
   public search(value: string) {
-    let query = { 'search': value };
+    const query = { 'search': value };
     this.performUserQuery(query);
   }
 
-  public swithPage(){
-    let pageIndex = this.paginator.pageIndex + 1;
-    let query = { 'page': pageIndex }
+  public swithPage() {
+    const pageIndex = this.paginator.pageIndex + 1;
+    const query = { 'page': pageIndex };
     this.performUserQuery(query);
   }
 
-  public sortBy(params){
+  public sortBy(params) {
     let query;
-    if(params['direction'] === 'asc'){
-      query = {'orderBy': params['active']}
-    } else{
-      query = {'orderByDesc': params['active']}
+    if (params['direction'] === 'asc') {
+      query = {'orderBy': params['active']};
+    } else {
+      query = {'orderByDesc': params['active']};
     }
     this.performUserQuery(query);
   }
 
-  private performUserQuery(params){
-    this.restaurantService.getAdminUsers(params).subscribe(users => {
+  private performUserQuery(params) {
+    this.restaurantService.getAdminUsers(params)
+    .subscribe(users => {
       this.users = users['data'];
       this.dataSource = new MatTableDataSource<User>(this.users);
     });

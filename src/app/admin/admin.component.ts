@@ -12,7 +12,7 @@ export class AdminComponent implements OnDestroy {
   private mobileQueryListener: () => void;
 
   constructor(
-    changeDetectorRef: ChangeDetectorRef, 
+    changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private authService: AuthService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');

@@ -2,9 +2,8 @@
 .app-order{
     padding-top: 120px;
     padding-bottom: 40px;
-    .order-comment{
-        .mat-form-field{
-            width: 100%;
-        }
+    .order-section-box{
+        display: block;
+        margin-bottom: 30px;
     }
 }

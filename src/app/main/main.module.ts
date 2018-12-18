@@ -22,6 +22,7 @@ import { UserDataComponent } from './components/user-data/user-data.component';
 import { SummaryOrderComponent } from './components/summary-order/summary-order.component';
 import { OrderPickupComponent } from './components/order-pickup/order-pickup.component';
 import { OrderPaymentsComponent } from './components/order-payments/order-payments.component';
+import { OrderCommentComponent } from './components/order-comment/order-comment.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { OrderPaymentsComponent } from './components/order-payments/order-paymen
     UserDataComponent,
     SummaryOrderComponent,
     OrderPickupComponent,
-    OrderPaymentsComponent
+    OrderPaymentsComponent,
+    OrderCommentComponent
   ],
   providers: [
   ]

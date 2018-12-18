@@ -8,7 +8,7 @@ export enum DialogTypes {
 }
 
 @Component({
-  selector: 'ch-info-dialog',
+  selector: 'app-info-dialog',
   templateUrl: './info-dialog.component.html',
   styleUrls: [ './info-dialog.component.scss' ],
 })
@@ -20,11 +20,11 @@ export class InfoDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<InfoDialogComponent>) { }
 
-  public getDialogClass(){
-    switch(this.type){
-      case 0: return 'info'; break;
-      case 1: return 'warning'; break;
-      case 2: return 'error'; break;
+  public getDialogClass() {
+    switch (this.type) {
+      case 0: return 'info';
+      case 1: return 'warning';
+      case 2: return 'error';
     }
   }
 }

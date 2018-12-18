@@ -21,7 +21,7 @@ export class IngredientsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private ingredientService: IngredientService, 
+    private ingredientService: IngredientService,
     private adminDialogService: AdminDialogService,
     private dialogService: DialogService) { }
 
@@ -39,41 +39,44 @@ export class IngredientsComponent implements OnInit {
   }
 
   public searchIngredient(value: string) {
-    let query = { 'search': value };
+    const query = { 'search': value };
     this.performIngredientsQuery(query);
   }
 
-  public swithPage(){
-    let pageIndex = this.paginator.pageIndex + 1;
-    let query = { 'page': pageIndex }
+  public swithPage() {
+    const pageIndex = this.paginator.pageIndex + 1;
+    const query = { 'page': pageIndex };
     this.performIngredientsQuery(query);
   }
 
-  public sortBy(params){
+  public sortBy(params) {
     let query;
-    if(params['direction'] === 'asc'){
-      query = {'orderBy': params['active']}
-    } else{
-      query = {'orderByDesc': params['active']}
+    if (params['direction'] === 'asc') {
+      query = {'orderBy': params['active']};
+    } else {
+      query = {'orderByDesc': params['active']};
     }
     this.performIngredientsQuery(query);
   }
 
-  public deleteIngredient(ingredient:Ingredient){
-    this.dialogService.confirmDialog(`Czy na pewno chcesz usunąć składnik "${ingredient.name}" ?`).subscribe(result =>{
-      if(!!result){
-        this.ingredientService.deleteAdminIngredients(ingredient.id).subscribe(()=>{
+  public deleteIngredient(ingredient: Ingredient) {
+    this.dialogService.confirmDialog(`Czy na pewno chcesz usunąć składnik "${ingredient.name}" ?`)
+    .subscribe(result => {
+      if (!!result) {
+        this.ingredientService.deleteAdminIngredients(ingredient.id)
+        .subscribe(() => {
           this.performIngredientsQuery({});
         });
       }
     });
   }
 
-  public openIngredientDialog(ingredient?:Ingredient){
-    this.adminDialogService.ingredientDialog(ingredient).subscribe(()=>this.performIngredientsQuery());
+  public openIngredientDialog(ingredient?: Ingredient) {
+    this.adminDialogService.ingredientDialog(ingredient)
+    .subscribe(() => this.performIngredientsQuery());
   }
 
-  private performIngredientsQuery(params?){
+  private performIngredientsQuery(params?) {
     this.ingredientService.getAdminIngredients(params).subscribe(users => {
       this.ingredients = users['data'];
       this.dataSource = new MatTableDataSource<Ingredient>(this.ingredients);

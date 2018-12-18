@@ -23,22 +23,22 @@ export class IngredientDialogComponent implements OnInit {
     private ingredientService: IngredientService) { }
 
   public ngOnInit() {
-    if(this.ingredient){
+    if (this.ingredient) {
       this.fileName = this.ingredient.image;
       this.ingredientName = this.ingredient.name;
     }
   }
 
   public onConfirm() {
-    if(this.fileName === '' || this.ingredientName === '') {
+    if (this.fileName === '' || this.ingredientName === '') {
       return;
     }
 
-    let formData = new FormData();
+    const formData = new FormData();
     this.loading = true;
 
-    if(this.ingredient) {
-      if(this.file){
+    if (this.ingredient) {
+      if (this.file) {
         formData.append('image', this.file);
       }
       formData.append('name', this.ingredientName);
@@ -49,13 +49,13 @@ export class IngredientDialogComponent implements OnInit {
     } else {
       formData.append('name', this.ingredientName);
       formData.append('image', this.file);
-      this.ingredientService.addAdminIngredients(formData).subscribe(()=>{
+      this.ingredientService.addAdminIngredients(formData).subscribe(() => {
         this.dialogRef.close();
       });
     }
   }
 
-  public selectedImage(event){
+  public selectedImage(event) {
     this.file = event.target.files[0];
     this.fileName = event.target.files[0].name;
   }

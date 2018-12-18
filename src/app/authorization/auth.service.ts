@@ -86,7 +86,7 @@ export class AuthService {
   }
 
   public userFromToken() {
-    if(localStorage.getItem('token')){
+    if (localStorage.getItem('token')) {
       return this.jwtHelper.decodeToken(localStorage.getItem('token')).user;
     }
   }
@@ -101,9 +101,9 @@ export class AuthService {
     );
   }
 
-  private handleAuthData(data: any){
+  private handleAuthData(data: any) {
     localStorage.setItem('token', data['data']['token']);
-    let user = this.userFromToken();
+    const user = this.userFromToken();
     this.$currentUser.next(user);
     this.$isAuthenticated.next(true);
 

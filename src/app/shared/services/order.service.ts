@@ -15,14 +15,15 @@ export class OrderService {
   private orderProducts = new BehaviorSubject<Product[]>(null);
 
   constructor(private dialogService: DialogService) {
-    let storedProducts = localStorage.getItem(STORAGE_ORDER_KEY);
-    let storedRestaurantID = localStorage.getItem(STORAGE_RESTAURANT_ID_KEY);
-    if(storedProducts && storedRestaurantID){
+    const storedProducts = localStorage.getItem(STORAGE_ORDER_KEY);
+    const storedRestaurantID = localStorage.getItem(STORAGE_RESTAURANT_ID_KEY);
+    if (storedProducts && storedRestaurantID) {
       try {
         this.order = JSON.parse(storedProducts);
         this.orderProducts.next(this.order);
+        // tslint:disable-next-line:radix
         this.restaurantID = parseInt(storedRestaurantID);
-      } catch{
+      } catch {
         this.order = [];
       }
     }
@@ -66,7 +67,7 @@ export class OrderService {
     return this.restaurantID;
   }
 
-  private storeOrder(){
+  private storeOrder() {
     localStorage.setItem(STORAGE_RESTAURANT_ID_KEY, this.restaurantID.toString());
     localStorage.setItem(STORAGE_ORDER_KEY, JSON.stringify(this.order));
   }

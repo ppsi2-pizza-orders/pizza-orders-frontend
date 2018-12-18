@@ -43,5 +43,4 @@ export class RestaurantService {
   public setCurrentRestaurant(restaurant: Restaurant) {
     this.currentRestaurant = restaurant;
   }
-  
 }

@@ -13,15 +13,15 @@ export class IngredientService {
 
   constructor(private http: HttpClient) { }
 
-  public deleteAdminIngredients(id: number){
+  public deleteAdminIngredients(id: number) {
     return this.http.delete(`${BackendEntryPoint_AddAdminIngredients}/${id}`);
   }
 
-  public addAdminIngredients(data: FormData){
+  public addAdminIngredients(data: FormData) {
     return this.http.post(BackendEntryPoint_AddAdminIngredients, data);
   }
 
-  public updateAdminIngredients(id: number, data: FormData){
+  public updateAdminIngredients(id: number, data: FormData) {
     return this.http.post(`${BackendEntryPoint_AddAdminIngredients}/${id}`, data, patchParams);
   }
 

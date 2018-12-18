@@ -31,7 +31,8 @@ export class RestaurantsComponent implements OnInit {
 
   public ngOnInit() {
     this.loadingPage = true;
-    this.restaurantService.getAdminRestaurants().subscribe(restaurants => {
+    this.restaurantService.getAdminRestaurants()
+    .subscribe(restaurants => {
       this.restaurants = restaurants['data'];
       this.totalItemCount = restaurants['meta'].paginator.last_page * 25;
       this.dataSource = new MatTableDataSource<Restaurant>(this.restaurants);
@@ -43,38 +44,39 @@ export class RestaurantsComponent implements OnInit {
   }
 
   public search(value: string) {
-    let query = { 'search': value };
+    const query = { 'search': value };
     this.performRestaurantQuery(query);
   }
 
-  public showDetails(id: number){
-    if(this.expandedElement){
-      if(id === this.expandedElement){
-        this.expandedElement = null; 
+  public showDetails(id: number) {
+    if (this.expandedElement) {
+      if (id === this.expandedElement) {
+        this.expandedElement = null;
         return;
       }
     }
     this.expandedElement = id;
   }
 
-  public swithPage(){
-    let pageIndex = this.paginator.pageIndex + 1;
-    let query = { 'page': pageIndex }
+  public swithPage() {
+    const pageIndex = this.paginator.pageIndex + 1;
+    const query = { 'page': pageIndex };
     this.performRestaurantQuery(query);
   }
 
-  public sortBy(params){
+  public sortBy(params) {
     let query;
-    if(params['direction'] === 'asc'){
-      query = {'orderBy': params['active']}
-    } else{
-      query = {'orderByDesc': params['active']}
+    if (params['direction'] === 'asc') {
+      query = {'orderBy': params['active']};
+    } else {
+      query = {'orderByDesc': params['active']};
     }
     this.performRestaurantQuery(query);
   }
 
-  private performRestaurantQuery(params){
-    this.restaurantService.getAdminRestaurants(params).subscribe(restaurants => {
+  private performRestaurantQuery(params) {
+    this.restaurantService.getAdminRestaurants(params)
+    .subscribe(restaurants => {
       this.restaurants = restaurants['data'];
       this.dataSource = new MatTableDataSource<Restaurant>(this.restaurants);
     });

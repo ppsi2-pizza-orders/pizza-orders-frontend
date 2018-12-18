@@ -1,6 +1,7 @@
 import { MatButtonModule, MatCheckboxModule, MatIconModule, MatProgressSpinnerModule, MatListModule,
   MatTabsModule, MatStepperModule, MatMenuModule, MatCardModule, MatInputModule, MatFormFieldModule, MatDialogModule,
-  MatSelectModule, MatAutocompleteModule, MatTooltipModule, MatBadgeModule, MatToolbarModule, MatTableModule, MatPaginatorModule, MatSortModule, MatProgressBarModule, MatChipsModule, MatSnackBarModule, MatExpansionModule, MatRadioModule,
+  MatSelectModule, MatAutocompleteModule, MatTooltipModule, MatBadgeModule, MatToolbarModule, MatTableModule,
+  MatPaginatorModule, MatSortModule, MatProgressBarModule, MatChipsModule, MatSnackBarModule, MatExpansionModule, MatRadioModule,
  } from '@angular/material';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgModule } from '@angular/core';

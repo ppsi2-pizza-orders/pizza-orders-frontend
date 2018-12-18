@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./order-preview.dialog.scss'],
 })
 
-export class OrderPreviewDialog implements OnInit, OnDestroy {
+export class OrderPreviewComponent implements OnInit, OnDestroy {
 
   public orderProducts: Product[] = [];
   private subscription: Subscription;
@@ -18,7 +18,7 @@ export class OrderPreviewDialog implements OnInit, OnDestroy {
   @Output() itemInOrderCount = new EventEmitter<number>();
 
   constructor(
-    private dialogRef: MatDialogRef<OrderPreviewDialog>,
+    private dialogRef: MatDialogRef<OrderPreviewComponent>,
     private router: Router) { }
 
   public ngOnInit() {
@@ -33,7 +33,7 @@ export class OrderPreviewDialog implements OnInit, OnDestroy {
     return this.orderProducts.reduce((cost: number, product: Product) => cost + product.price, 0);
   }
 
-  public goToCheckout(){
+  public goToCheckout() {
     this.router.navigateByUrl('order');
     this.dialogRef.close(this.orderProducts);
   }
@@ -43,7 +43,7 @@ export class OrderPreviewDialog implements OnInit, OnDestroy {
   }
 
   public removeProduct(product: Product) {
-    let index = this.orderProducts.indexOf(product);
+    const index = this.orderProducts.indexOf(product);
     this.orderProducts.splice(index, 1);
   }
 

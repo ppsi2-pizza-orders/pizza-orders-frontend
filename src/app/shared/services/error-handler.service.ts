@@ -11,8 +11,8 @@ export class ErrorHandlerService {
 
   constructor(private dialogService: DialogService, private router: Router) { }
 
-  public handleError(error: HttpErrorResponse){
-    switch(error.status){
+  public handleError(error: HttpErrorResponse) {
+    switch (error.status) {
       case 0:
         this.showErrorDialog('Bład połączenia!', 'Proszę sprawdzić połączenie z Internetem.');
         break;
@@ -25,14 +25,14 @@ export class ErrorHandlerService {
     }
   }
 
-  private showErrorDialog(title, message){
+  private showErrorDialog(title, message) {
     this.dialogService.closeAll();
     this.dialogService.infoDialog(title, message, DialogTypes.ERROR);
   }
 
   private goToLogin() {
     this.dialogService.authDialog().subscribe(resp => {
-      if(!resp){
+      if (!resp) {
         this.router.navigate(['/']);
       }
     });

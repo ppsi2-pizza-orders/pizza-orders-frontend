@@ -10,7 +10,7 @@ import { Restaurant } from 'src/app/shared/models/Restaurant';
 export class SummaryOrderComponent implements OnInit {
   @Input() public orderProducts: Product[];
   @Input() public orderRestaurant: Restaurant;
-  
+
   constructor() { }
 
   ngOnInit() {

@@ -16,7 +16,7 @@ import { DialogService } from './services/dialog.service';
 import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
 import { RegisterRestaurantComponent } from './components/register-restaurant/register-restaurant.component';
 import { AuthDialogComponent } from '../authorization/auth-dialog/auth-dialog.component';
-import { OrderPreviewDialog } from './components/order-preview/order-preview.dialog';
+import { OrderPreviewComponent } from './components/order-preview/order-preview.dialog';
 import { SnackBarService } from './services/snack-bar.service';
 
 @NgModule({
@@ -45,14 +45,14 @@ import { SnackBarService } from './services/snack-bar.service';
     ConfirmDialogComponent,
     InfoDialogComponent,
     RegisterRestaurantComponent,
-    OrderPreviewDialog
+    OrderPreviewComponent
   ],
   entryComponents: [
     AuthDialogComponent,
     RegisterRestaurantComponent,
     ConfirmDialogComponent,
     InfoDialogComponent,
-    OrderPreviewDialog
+    OrderPreviewComponent
   ],
   providers: [
     DroppableService,

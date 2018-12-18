@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/authorization/auth.service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 
@@ -12,10 +12,13 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
 export class NavbarComponent implements OnInit, OnDestroy {
   public isLoggedIn: boolean;
   public itemsInOrder: number;
-  public userName: string
+  public userName: string;
   private subscription: Subscription;
 
-  constructor(private authService: AuthService, private orderService: OrderService, private dialogService: DialogService) { }
+  constructor(
+    private authService: AuthService,
+    private orderService: OrderService,
+    private dialogService: DialogService) { }
 
   public ngOnInit() {
     this.subscription = this.authService.isLoggedIn().subscribe(loggedIn => {
@@ -23,15 +26,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
     this.subscription.add(
       this.orderService.getOrderProducts().subscribe(products => {
-        if(products){
+        if (products) {
           this.itemsInOrder = products.length;
         }
       })
     );
     this.subscription.add(
       this.authService.getCurrentUser().subscribe(user => {
-        if(user){
-          this.userName = user.name;          
+        if (user) {
+          this.userName = user.name;
         }
       })
     );
