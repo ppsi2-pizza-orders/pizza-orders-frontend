@@ -5,7 +5,6 @@ import { routes } from './app.routing';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
-import { AuthDialogComponent } from './authorization/auth-dialog/auth-dialog.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './authorization/auth.guard';
 import { RoleGuard } from './authorization/role.guard';
@@ -55,10 +54,10 @@ export function getAuthServiceConfigs() {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
     },
-    { 
-      provide: HTTP_INTERCEPTORS, 
-      useClass: ApiInterceptor, 
-      multi: true 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true
     },
   ],
   bootstrap: [AppComponent]

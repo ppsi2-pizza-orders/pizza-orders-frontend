@@ -12,6 +12,7 @@ import { IngredientsComponent } from './views/ingredients/ingredients.component'
 import { LogsComponent } from './views/logs/logs.component';
 import { IngredientDialogComponent } from './components/ingredient-dialog/ingredient-dialog.component';
 import { AdminDialogService } from './admin-dialog.service';
+import { BaseTableViewComponent } from './views/base-table-view/base-table-view.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { AdminDialogService } from './admin-dialog.service';
     UsersComponent,
     IngredientsComponent,
     LogsComponent,
-    IngredientDialogComponent
+    IngredientDialogComponent,
+    BaseTableViewComponent
   ],
   entryComponents: [
     IngredientDialogComponent

@@ -1,24 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 import { User } from 'src/app/shared/models/User';
 import { UserService } from 'src/app/shared/services/user.service';
+import { BaseTableViewComponent } from '../base-table-view/base-table-view.component';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent extends BaseTableViewComponent implements OnInit {
   public users: User[];
   public displayedColumns: string[] = ['id', 'name', 'email', 'action'];
   public dataSource: MatTableDataSource<User>;
-  public loadingPage = false;
-  public totalItemCount: number;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private restaurantService: UserService) { }
+  constructor(private restaurantService: UserService) {
+    super();
+  }
 
   public ngOnInit() {
     this.loadingPage = true;
@@ -34,28 +32,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  public search(value: string) {
-    const query = { 'search': value };
-    this.performUserQuery(query);
-  }
-
-  public swithPage() {
-    const pageIndex = this.paginator.pageIndex + 1;
-    const query = { 'page': pageIndex };
-    this.performUserQuery(query);
-  }
-
-  public sortBy(params) {
-    let query;
-    if (params['direction'] === 'asc') {
-      query = {'orderBy': params['active']};
-    } else {
-      query = {'orderByDesc': params['active']};
-    }
-    this.performUserQuery(query);
-  }
-
-  private performUserQuery(params) {
+  protected performQuery(params) {
     this.restaurantService.getAdminUsers(params)
     .subscribe(users => {
       this.users = users['data'];

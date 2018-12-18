@@ -1,8 +1,9 @@
 import { Restaurant } from 'src/app/shared/models/Restaurant';
 import { RestaurantService } from './../../../shared/services/restaurant.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { BaseTableViewComponent } from '../base-table-view/base-table-view.component';
 
 @Component({
   selector: 'app-restaurants',
@@ -16,18 +17,15 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ]),
   ],
 })
-export class RestaurantsComponent implements OnInit {
+export class RestaurantsComponent extends BaseTableViewComponent implements OnInit {
   public restaurants: Restaurant[];
   public displayedColumns: string[] = ['id', 'name', 'city', 'created_at', 'action'];
   public dataSource: MatTableDataSource<Restaurant>;
   public expandedElement: any;
-  public loadingPage = false;
-  public totalItemCount: number;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private restaurantService: RestaurantService) { }
+  constructor(private restaurantService: RestaurantService) {
+    super();
+  }
 
   public ngOnInit() {
     this.loadingPage = true;
@@ -43,11 +41,6 @@ export class RestaurantsComponent implements OnInit {
     });
   }
 
-  public search(value: string) {
-    const query = { 'search': value };
-    this.performRestaurantQuery(query);
-  }
-
   public showDetails(id: number) {
     if (this.expandedElement) {
       if (id === this.expandedElement) {
@@ -58,23 +51,7 @@ export class RestaurantsComponent implements OnInit {
     this.expandedElement = id;
   }
 
-  public swithPage() {
-    const pageIndex = this.paginator.pageIndex + 1;
-    const query = { 'page': pageIndex };
-    this.performRestaurantQuery(query);
-  }
-
-  public sortBy(params) {
-    let query;
-    if (params['direction'] === 'asc') {
-      query = {'orderBy': params['active']};
-    } else {
-      query = {'orderByDesc': params['active']};
-    }
-    this.performRestaurantQuery(query);
-  }
-
-  private performRestaurantQuery(params) {
+  protected performQuery(params) {
     this.restaurantService.getAdminRestaurants(params)
     .subscribe(restaurants => {
       this.restaurants = restaurants['data'];

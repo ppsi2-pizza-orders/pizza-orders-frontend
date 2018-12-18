@@ -1,7 +1,7 @@
 <div class="admin-ingredients">
   <div class="admin-content" [hidden]="loadingPage">
     <mat-form-field class="search">
-      <input matInput (keyup)="searchIngredient($event.target.value)" placeholder="Szukaj">
+      <input matInput (keyup)="search($event.target.value)" placeholder="Szukaj">
     </mat-form-field>
     <button mat-flat-button (click)="openIngredientDialog()" class="add-btn" color="primary">Dodaj składnik</button>
     <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
