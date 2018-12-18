@@ -8,6 +8,7 @@ import { RestaurantComponent } from './views/restaurant/restaurant.component';
 import { UserOrdersComponent } from './views/user-orders/user-orders.component';
 import { UserSettingsComponent } from './views/user-settings/user-settings.component';
 import { OrderComponent } from './views/order/order.component';
+import { AuthGuard } from '../authorization/auth.guard';
 
 export const routes: Routes = [
   {
@@ -18,9 +19,10 @@ export const routes: Routes = [
       { path: 'user', children: [
           { path: 'orders', component: UserOrdersComponent },
           { path: 'data', component: UserSettingsComponent }
-        ]
+        ],
+        canActivate: [AuthGuard]
       },
-      { path: 'order', component: OrderComponent },
+      { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
       { path: 'restaurant/:id', component: RestaurantComponent,
         children: [
           { path: '', redirectTo: 'menu', pathMatch: 'full' },
