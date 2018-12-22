@@ -7,6 +7,10 @@ import { SelectRestaurantComponent } from './views/select-restaurant/select-rest
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { RestaurantGuard } from '../../core/guards/restaurant.guard';
 import { SharedModule } from 'src/app/shared';
+import { OrdersComponent } from './views/orders/orders.component';
+import { StoreComponent } from './views/store/store.component';
+import { SettingsComponent } from './views/settings/settings.component';
+import { CustomizationsComponent } from './views/customizations/customizations.component';
 
 @NgModule({
   imports: [
@@ -17,7 +21,11 @@ import { SharedModule } from 'src/app/shared';
   declarations: [
     ManagementComponent,
     SelectRestaurantComponent,
-    DashboardComponent
+    DashboardComponent,
+    OrdersComponent,
+    StoreComponent,
+    SettingsComponent,
+    CustomizationsComponent
   ],
   providers: [
     RestaurantGuard

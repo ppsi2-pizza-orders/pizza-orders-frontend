@@ -4,6 +4,10 @@ import { SelectRestaurantComponent } from './views/select-restaurant/select-rest
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { RESTAURANT_ROLES } from 'src/app/core';
 import { ManagementGuard, RestaurantGuard } from 'src/app/core/guards';
+import { SettingsComponent } from './views/settings/settings.component';
+import { CustomizationsComponent } from './views/customizations/customizations.component';
+import { StoreComponent } from './views/store/store.component';
+import { OrdersComponent } from './views/orders/orders.component';
 
 export const routes: Routes = [
   { path: '', component: SelectRestaurantComponent },
@@ -12,11 +16,41 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       {
-        path: 'ingredients',
-        component: DashboardComponent,
+        path: 'orders',
+        component: OrdersComponent,
         canActivate: [ManagementGuard],
         data: {
-          expectedRole: RESTAURANT_ROLES.OWNER
+          expectedRole: [
+            RESTAURANT_ROLES.OWNER,
+            RESTAURANT_ROLES.COOK
+          ]
+        }
+      },
+      {
+        path: 'store',
+        component: StoreComponent,
+        canActivate: [ManagementGuard],
+        data: {
+          expectedRole: [
+            RESTAURANT_ROLES.OWNER,
+            RESTAURANT_ROLES.MANAGER
+          ]
+        }
+      },
+      {
+        path: 'customizations',
+        component: CustomizationsComponent,
+        canActivate: [ManagementGuard],
+        data: {
+          expectedRole: [RESTAURANT_ROLES.OWNER]
+        }
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+        canActivate: [ManagementGuard],
+        data: {
+          expectedRole: [RESTAURANT_ROLES.OWNER]
         }
       }
     ]
