@@ -1,0 +1,34 @@
+@import 'styles';
+.app-user-orders{
+    margin-top: $navbar-height;
+    .orders-panel{
+        margin-top: 40px;
+        .section-title{
+            margin-bottom: 1em;
+            color: #9b9b9b;
+            font-weight: 600;
+        }
+        .order-header{
+            display: flex;
+            p{
+                width: 100%;
+                margin: 0;
+                border-bottom: 1px solid #e2e2e2;
+            }
+        }
+        .order-details{
+            margin-top: 1em;
+            p{
+                text-align: center;
+                color: rgba(0, 0, 0, 0.54);
+            }
+        }
+        .order-status{
+            margin-top: 1em;
+            text-align: right;
+            span{
+                padding: 8px;
+            }
+        }
+    }
+}

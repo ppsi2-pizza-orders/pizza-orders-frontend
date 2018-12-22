@@ -1,0 +1,62 @@
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { Ingredient } from 'src/app/core/models/Ingredient';
+import { AdminService } from '../../admin.service';
+
+@Component({
+  selector: 'app-ingredient-dialog',
+  templateUrl: './ingredient-dialog.component.html',
+  styleUrls: ['./ingredient-dialog.component.scss']
+})
+export class IngredientDialogComponent implements OnInit {
+
+  public error = '';
+  public file;
+  public ingredientName = '';
+  public fileName = '';
+  public loading = false;
+  public ingredient: Ingredient;
+
+  constructor(
+    public dialogRef: MatDialogRef<IngredientDialogComponent>,
+    public dialog: MatDialog,
+    private adminService: AdminService) { }
+
+  public ngOnInit() {
+    if (this.ingredient) {
+      this.fileName = this.ingredient.image;
+      this.ingredientName = this.ingredient.name;
+    }
+  }
+
+  public onConfirm() {
+    if (this.fileName === '' || this.ingredientName === '') {
+      return;
+    }
+
+    const formData = new FormData();
+    this.loading = true;
+
+    if (this.ingredient) {
+      if (this.file) {
+        formData.append('image', this.file);
+      }
+      formData.append('name', this.ingredientName);
+      this.adminService.updateIngredients(this.ingredient.id, formData)
+      .subscribe(() => {
+        this.dialogRef.close();
+      });
+    } else {
+      formData.append('name', this.ingredientName);
+      formData.append('image', this.file);
+      this.adminService.addIngredients(formData).subscribe(() => {
+        this.dialogRef.close();
+      });
+    }
+  }
+
+  public selectedImage(event) {
+    this.file = event.target.files[0];
+    this.fileName = event.target.files[0].name;
+  }
+}

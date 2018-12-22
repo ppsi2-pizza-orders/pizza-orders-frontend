@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Product } from 'src/app/shared/models/IProduct';
+import { Product } from 'src/app/core/models/IProduct';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 

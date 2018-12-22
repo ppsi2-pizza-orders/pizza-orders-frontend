@@ -1,11 +1,19 @@
 import { Routes } from '@angular/router';
-import { RoleGuard } from './authorization/role.guard';
+import {AuthGuard, RoleGuard} from './core/guards';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 export const routes: Routes = [
-    { path: '', loadChildren: './main/main.module#MainModule' },
+    { path: '',
+      component: MainLayoutComponent,
+      loadChildren: './modules/home/home.module#HomeModule'
+    },
+    { path: 'restaurant/:id',
+      component: MainLayoutComponent,
+      loadChildren: './modules/restaurant/restaurant.module#RestaurantModule'
+    },
     {
         path: 'admin',
-        loadChildren: './admin/admin.module#AdminModule',
+        loadChildren: './modules/admin/admin.module#AdminModule',
         // canLoad: [RoleGuard],
         // data: {
         //     expectedRole: 'admin'
@@ -13,7 +21,7 @@ export const routes: Routes = [
     },
     {
         path: 'managment',
-        loadChildren: './manage/manage.module#ManageModule',
+        loadChildren: './modules/manage/manage.module#ManageModule',
         canLoad: [RoleGuard],
         data: {
             expectedRole: 'manager'

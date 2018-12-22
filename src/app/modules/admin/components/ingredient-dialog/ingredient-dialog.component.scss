@@ -1,20 +1,24 @@
 @import 'styles';
-.register-dialog{
+.ingredient-dialog{
     min-width: 350px;
-    min-height: 320px;
+    height: 250px;
     .form{
         .form-field{
-            width: 100%;
+            &.input-file{
+                margin-left: 10px;
+                padding-right: 10px;
+            }
         }
     }  
-    .register-actions-btn{
-        .custom-register{
+    .ingredient-actions-btn{
+        .mat-flat-button{
             width: 100%;
             height: 46px;
+        }
+        .on-confirm{
             background-color: $secondary-color !important;
             color: #fff !important;
             margin-top: 4px;
-            margin-bottom: 1.2em;
         }
     }
     .spinner{

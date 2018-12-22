@@ -1,0 +1,14 @@
+@import 'styles';
+.app-user-data{
+    .mat-card-content{
+        i{
+            font-size: 5em;
+            color: $secondary-color;
+        }
+        p{
+            margin: 0;
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import { Directive, HostListener } from '@angular/core';
-import { DroppableService } from '../services/droppable.service';
+import { DroppableService } from '../../core/services/droppable.service';
 
 @Directive({
   selector: '[appDroppable]'

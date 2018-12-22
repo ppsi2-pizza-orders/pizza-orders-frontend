@@ -1,40 +1,40 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { routes } from './app.routing';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtModule } from '@auth0/angular-jwt';
-import { SharedModule } from './shared/shared.module';
-import { AuthGuard } from './authorization/auth.guard';
-import { RoleGuard } from './authorization/role.guard';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angular-6-social-login';
-import { environment } from 'src/environments/environment';
-import { OrderService } from './shared/services/order.service';
-import { ApiInterceptor } from './api-interceptor';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {routes} from './app.routing';
+import {RouterModule} from '@angular/router';
+import {JwtModule} from '@auth0/angular-jwt';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AuthServiceConfig, FacebookLoginProvider, SocialLoginModule} from 'angular-6-social-login';
+import {environment} from 'src/environments/environment';
+import {CoreModule} from './core';
+import {SharedModule} from './shared';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+
 export function getAuthServiceConfigs() {
-  const config = new AuthServiceConfig(
-      [
-        {
-          id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider('1852349398175426')
-        }
-      ]
+  return new AuthServiceConfig(
+    [
+      {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider('1852349398175426')
+      }
+    ]
   );
-  return config;
 }
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainLayoutComponent,
+    AdminLayoutComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes),
-    HttpClientModule,
+    CoreModule,
     SharedModule,
+    RouterModule.forRoot(routes),
     SocialLoginModule,
     JwtModule.forRoot({
       config: {
@@ -47,17 +47,9 @@ export function getAuthServiceConfigs() {
     })
   ],
   providers: [
-    AuthGuard,
-    RoleGuard,
-    OrderService,
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiInterceptor,
-      multi: true
     },
   ],
   bootstrap: [AppComponent]

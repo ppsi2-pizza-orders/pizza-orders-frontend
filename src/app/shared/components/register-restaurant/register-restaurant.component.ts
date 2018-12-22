@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
-import { RestaurantService } from '../../services/restaurant.service';
-import { Restaurant } from '../../models/Restaurant';
+import { RestaurantService } from '../../../core/services/restaurant.service';
+import { Restaurant } from '../../../core/models/Restaurant';
 
 @Component({
   selector: 'app-register-restaurant',
@@ -45,9 +45,9 @@ export class RegisterRestaurantComponent implements OnInit {
       return;
     }
     this.loading = true;
-    let restaurant = new Restaurant(this.registerForm.value);
+    const restaurant = new Restaurant(this.registerForm.value);
     this.restaurantService.addRestaurant(restaurant).subscribe(data => {
-        if(data){
+        if (data) {
           this.dialogRef.close();
           this.router.navigate([ '/managment' ]);
         }

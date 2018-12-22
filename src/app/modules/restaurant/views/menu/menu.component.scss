@@ -1,0 +1,33 @@
+@import 'styles';
+.app-menu{
+    .menu-item{
+        margin-bottom: 1em;
+        .mat-card{
+            &:hover{
+                background-color: $tethriary-color;
+            }
+        }
+        .content{
+            display: flex;
+            align-items: center;
+            .cost{
+                text-align: right;
+            }
+            @include sm{
+                text-align: center;
+                .cost{
+                    text-align: center;
+                }
+            }
+        }
+        .buttons{
+            button{
+                color: #fff;
+                margin: 0 4px;
+                @include xl{
+                    float: right;
+                }
+            }
+        }
+    }
+}

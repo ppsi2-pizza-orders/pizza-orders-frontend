@@ -1,40 +1,41 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from './material';
-import { DropzoneDirective } from './directives/dropzone.directive';
-import { DroppableDirective } from './directives/droppable.directive';
-import { DraggableDirective } from './directives/draggable.directive';
-import { MovableDirective } from './directives/movable.directive';
-import { DroppableService } from './services/droppable.service';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { RestaurantService } from './services/restaurant.service';
-import { UserService } from './services/user.service';
-import { IngredientService } from './services/ingredient.service';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { DialogService } from './services/dialog.service';
-import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
-import { RegisterRestaurantComponent } from './components/register-restaurant/register-restaurant.component';
-import { AuthDialogComponent } from '../authorization/auth-dialog/auth-dialog.component';
-import { OrderPreviewComponent } from './components/order-preview/order-preview.dialog';
-import { SnackBarService } from './services/snack-bar.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material';
+import {
+  DraggableDirective,
+  DroppableDirective,
+  DropzoneDirective,
+  MovableDirective
+} from './directives';
+import {AuthDialogComponent} from './components/auth-dialog/auth-dialog.component';
+import {OrderPreviewComponent} from './components/order-preview/order-preview.dialog';
+import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
+import {InfoDialogComponent} from './components/info-dialog/info-dialog.component';
+import {RegisterRestaurantComponent} from './components/register-restaurant/register-restaurant.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {RatingComponent} from './components/rating/rating.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
     MaterialModule,
+    FormsModule,
     ReactiveFormsModule,
-    FormsModule
+    RouterModule,
   ],
   exports: [
     MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
     DropzoneDirective,
     DroppableDirective,
     DraggableDirective,
     MovableDirective,
-    ReactiveFormsModule,
-    FormsModule
+    NavbarComponent,
+    RatingComponent
   ],
   declarations: [
     DropzoneDirective,
@@ -42,10 +43,12 @@ import { SnackBarService } from './services/snack-bar.service';
     DraggableDirective,
     MovableDirective,
     AuthDialogComponent,
+    RegisterRestaurantComponent,
     ConfirmDialogComponent,
     InfoDialogComponent,
-    RegisterRestaurantComponent,
-    OrderPreviewComponent
+    OrderPreviewComponent,
+    NavbarComponent,
+    RatingComponent
   ],
   entryComponents: [
     AuthDialogComponent,
@@ -54,13 +57,5 @@ import { SnackBarService } from './services/snack-bar.service';
     InfoDialogComponent,
     OrderPreviewComponent
   ],
-  providers: [
-    DroppableService,
-    RestaurantService,
-    UserService,
-    IngredientService,
-    DialogService,
-    SnackBarService
-  ]
 })
 export class SharedModule { }

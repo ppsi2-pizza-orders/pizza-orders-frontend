@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, OnInit, Output, SkipSelf } from '@angular/core';
-import { DroppableService } from '../services/droppable.service';
+import { DroppableService } from '../../core/services/droppable.service';
 
 @Directive({
   selector: '[appDropzone]',
