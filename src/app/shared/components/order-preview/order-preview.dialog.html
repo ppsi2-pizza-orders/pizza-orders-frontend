@@ -10,7 +10,7 @@
   </div>
   <div *ngIf="!orderProducts || orderProducts.length == 0">Twoje zamówienie jest puste.</div>
   <hr>
-  <div *ngIf="orderProducts && orderProducts.length > 0"><h6>Koszt zamówienia: {{ totalCost() }}zł</h6></div>
+  <div *ngIf="orderProducts && orderProducts.length > 0"><h6>Koszt zamówienia: {{ totalCost() | number:'0.0-2' }}zł</h6></div>
   <div class="buttons">
     <button mat-flat-button color="warn" (click)="goToCheckout()" *ngIf="orderProducts && orderProducts.length > 0">Zamów</button>
     <button mat-flat-button color="primary" (click)="onClose()">Kontynuuj</button>
