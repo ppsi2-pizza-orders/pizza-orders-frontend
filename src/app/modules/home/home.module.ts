@@ -14,6 +14,7 @@ import { OrderComponent } from './views/order/order.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { OrderCommentComponent } from './components/order-comment/order-comment.component';
 import { ProgressOrdersComponent } from './components/progress-orders/progress-orders.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -32,6 +33,8 @@ import { ProgressOrdersComponent } from './components/progress-orders/progress-o
     OrderPickupComponent,
     OrderPaymentsComponent,
     OrderCommentComponent
+  ],
+  providers: [
   ]
 })
 export class HomeModule { }

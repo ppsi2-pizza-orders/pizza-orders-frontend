@@ -8,6 +8,7 @@ import { PizzaCreatorComponent } from './views/pizza-creator/pizza-creator.compo
 import { OfferComponent } from './views/offer/offer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RestaurantComponent } from './views/restaurant.component';
+import { ReviewsComponent } from './views/reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { RestaurantComponent } from './views/restaurant.component';
     PizzaCreatorComponent,
     OfferComponent,
     SidebarComponent,
-    RestaurantComponent
+    RestaurantComponent,
+    ReviewsComponent
   ],
   imports: [
     CommonModule,
