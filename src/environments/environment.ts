@@ -4,12 +4,12 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://api.pizzaorders.pl',
+  apiBaseUrl: 'http://localhost:8080',
   whitelist: [
-    'api.pizzaorders.pl',
+    'localhost:8080',
   ],
   blacklist: [
-    'api.pizzaorders.pl/auth/*',
+    'localhost:8080/auth/*',
   ],
 };
 
