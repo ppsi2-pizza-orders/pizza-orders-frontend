@@ -21,6 +21,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 80%;
+        padding: 6em;
+        @include md{
+            padding: 3em; 
+        }
     }
 }

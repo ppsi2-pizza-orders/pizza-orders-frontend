@@ -6,7 +6,8 @@ import { AuthService } from '../../../core/services/auth.service';
 
 export interface DialogData {
   isLoggedIn: boolean;
-  userRole: Array<string>;
+  isAdmin: boolean;
+  isRestaurantMember: boolean;
 }
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -24,7 +25,8 @@ export class AuthDialogComponent implements OnInit {
 
   public dialogData: DialogData = {
     isLoggedIn: false,
-    userRole: []
+    isAdmin: false,
+    isRestaurantMember: false
   };
   public loginForm: FormGroup;
   public registerForm: FormGroup;
@@ -95,7 +97,8 @@ export class AuthDialogComponent implements OnInit {
     this.auth.login(email, password).subscribe(
       (user) => {
         this.dialogData.isLoggedIn = true;
-        this.dialogData.userRole = user['roles'];
+        this.dialogData.isAdmin = user.isAdmin();
+        this.dialogData.isRestaurantMember = user.isRestaurantMember();
         this.confirmAndClose();
       },
       (err) => {
@@ -113,7 +116,8 @@ export class AuthDialogComponent implements OnInit {
     this.auth.register(this.registerForm.value).subscribe(
       (user) => {
         this.dialogData.isLoggedIn = true;
-        this.dialogData.userRole = user.roles;
+        this.dialogData.isAdmin = user.isAdmin();
+        this.dialogData.isRestaurantMember = user.isRestaurantMember();
         this.confirmAndClose();
       },
       (err) => {
@@ -128,7 +132,8 @@ export class AuthDialogComponent implements OnInit {
     this.auth.facebookLogin().subscribe(
       (user) => {
           this.dialogData.isLoggedIn = true;
-          this.dialogData.userRole = user.roles;
+          this.dialogData.isAdmin = user.isAdmin();
+          this.dialogData.isRestaurantMember = user.isRestaurantMember();
           this.confirmAndClose();
       },
       (err) => {
@@ -139,7 +144,7 @@ export class AuthDialogComponent implements OnInit {
     );
   }
 
-  confirmAndClose(){
+  confirmAndClose() {
     this.loadingSpinner = false;
     this.dialogRef.close(this.dialogData);
     this.snackBar.show('Zalogowano!');

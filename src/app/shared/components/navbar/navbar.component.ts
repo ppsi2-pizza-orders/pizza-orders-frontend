@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Subscription } from 'rxjs';
 import { OrderService } from 'src/app/core/services/order.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
+import { User } from 'src/app/core';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,8 @@ import { DialogService } from 'src/app/core/services/dialog.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   public isLoggedIn: boolean;
+  public isAdmin: boolean;
+  public isRestaurantMember: boolean;
   public itemsInOrder: number;
   public userName: string;
   private subscription: Subscription;
@@ -35,6 +38,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.authService.getCurrentUser().subscribe(user => {
         if (user) {
           this.userName = user.name;
+          this.isAdmin = user.isAdmin();
+          this.isRestaurantMember = user.isRestaurantMember();
         }
       })
     );

@@ -1,0 +1,39 @@
+@import "styles.scss";
+.app-management {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .container{
+    padding-top: 1em;
+  }
+
+  .title {
+    margin-left: 14px;
+  }
+  .leave-btn{
+    float: right;
+  }
+
+  .sidenav-container {
+    flex: 1;
+    .mat-list-item {
+      min-width: 200px;
+      color: $sidebar-text-color;
+      &.active {
+        background-color: $secondary-color;
+        color: #fff;
+      }
+      .mat-icon {
+        margin-right: 12px;
+      }
+    }
+    .mat-sidenav-content{
+      background-color: #fff;
+    }
+  }
+}

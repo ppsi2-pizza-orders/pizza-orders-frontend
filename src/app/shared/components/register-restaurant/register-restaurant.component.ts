@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { RestaurantService } from '../../../core/services/restaurant.service';
+import { SnackBarService } from '../../../core/services/snack-bar.service';
 import { Restaurant } from '../../../core/models/Restaurant';
 
 @Component({
@@ -20,7 +21,8 @@ export class RegisterRestaurantComponent implements OnInit {
     private dialogRef: MatDialogRef<RegisterRestaurantComponent>,
     private formBuilder: FormBuilder,
     private router: Router,
-    private restaurantService: RestaurantService) { }
+    private restaurantService: RestaurantService,
+    private snackBarService: SnackBarService) { }
 
   public ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -49,6 +51,7 @@ export class RegisterRestaurantComponent implements OnInit {
     this.restaurantService.addRestaurant(restaurant).subscribe(data => {
         if (data) {
           this.dialogRef.close();
+          this.snackBarService.show(data.messages[0]);
           this.router.navigate([ '/managment' ]);
         }
       }, error => {

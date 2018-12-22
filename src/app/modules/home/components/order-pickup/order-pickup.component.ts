@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ORDER_PICKUP_TYPES } from 'src/app/core/const';
 import { Restaurant } from 'src/app/core/models/Restaurant';
+import { ORDER_PICKUP_TYPES } from 'src/app/core';
 
 @Component({
   selector: 'app-order-pickup',
@@ -11,9 +11,9 @@ import { Restaurant } from 'src/app/core/models/Restaurant';
 export class OrderPickupComponent implements OnInit {
   public orderPickupForm: FormGroup;
   public orderPickupTypes = ORDER_PICKUP_TYPES;
-  public orderPickupType = this.orderPickupTypes.DELIVER;
+  public orderPickupType = ORDER_PICKUP_TYPES.DELIVER;
   @Input() public restaurant: Restaurant;
-  @ViewChild('submit') submit : ElementRef;
+  @ViewChild('submit') submit: ElementRef;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -27,9 +27,9 @@ export class OrderPickupComponent implements OnInit {
   }
 
   public isFormValid(): boolean {
-    if(this.orderPickupType === this.orderPickupTypes.DELIVER){
+    if (this.orderPickupType === ORDER_PICKUP_TYPES.DELIVER) {
       this.submit.nativeElement.click();
-      if(!this.orderPickupForm.valid){
+      if (!this.orderPickupForm.valid) {
         window.scrollTo(0, 0);
         return false;
       }

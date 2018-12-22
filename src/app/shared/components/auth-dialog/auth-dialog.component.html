@@ -1,6 +1,6 @@
 <div *ngIf="currentForm === 'loginForm'" class="login-form">
+  <h1 mat-dialog-title>Logowanie</h1>
   <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()" *ngIf="!loadingSpinner">
-    <h1 mat-dialog-title>Logowanie</h1>
     <div mat-dialog-content class="auth-content">
       <mat-form-field class="form-field">
         <input matInput type="email" formControlName="email" placeholder="Email">
@@ -25,8 +25,8 @@
   </div>
 </div>
 <div *ngIf="currentForm === 'registerForm'" class="register-form">
+  <h1 mat-dialog-title>Rejestracja</h1>
   <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()" *ngIf="!loadingSpinner">
-    <h1 mat-dialog-title>Rejestracja</h1>
     <div mat-dialog-content class="auth-content">
       <mat-form-field class="form-field">
         <input type="email" matInput formControlName="email" placeholder="Email">
