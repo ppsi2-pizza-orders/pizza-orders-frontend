@@ -16,10 +16,14 @@
             <div *ngIf="isLoggedIn" mat-menu-item disabled class="text-center"><mat-icon>person_pin</mat-icon>{{userName}}</div>
             <mat-divider *ngIf="isLoggedIn"></mat-divider>
             <button *ngIf="!isLoggedIn" (click)="openAuthDialog()" mat-menu-item>Logowanie</button>
-            <button *ngIf="isLoggedIn" [routerLink]="['/', 'user', 'orders']"  mat-menu-item>Moje zamówienia</button>
-            <button *ngIf="isLoggedIn" [routerLink]="['/', 'user', 'data']"  mat-menu-item>Moje dane</button>
-            <button *ngIf="isLoggedIn" (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>
-            <button *ngIf="isLoggedIn" (click)="logout()" mat-menu-item>Wyloguj</button>
+            <ng-container *ngIf="isLoggedIn">
+                <button *ngIf="isAdmin" [routerLink]="['/', 'admin']"  mat-menu-item>Administracja</button>
+                <button *ngIf="isRestaurantMember" [routerLink]="['/','management']"  mat-menu-item>Moje restauracje</button>
+                <button [routerLink]="['/', 'user', 'orders']"  mat-menu-item>Moje zamówienia</button>
+                <button [routerLink]="['/', 'user', 'data']"  mat-menu-item>Moje dane</button>
+                <button (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>
+                <button (click)="logout()" mat-menu-item>Wyloguj</button>
+            </ng-container>
         </mat-menu>
     </div>
 </div>

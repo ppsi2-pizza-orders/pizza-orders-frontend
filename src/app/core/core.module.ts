@@ -1,4 +1,4 @@
-import {NgModule, Optional, SkipSelf} from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ApiInterceptor } from './interceptors/api-interceptor';
@@ -10,7 +10,7 @@ import {
   SnackBarService,
   ApiService
 } from './services';
-import { RoleGuard, AuthGuard } from './guards';
+import { AdminGuard, AuthGuard, ManagementGuard, RestaurantGuard } from './guards';
 
 
 @NgModule({
@@ -26,7 +26,9 @@ import { RoleGuard, AuthGuard } from './guards';
     SnackBarService,
     ApiService,
     AuthGuard,
-    RoleGuard,
+    AdminGuard,
+    ManagementGuard,
+    RestaurantGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,

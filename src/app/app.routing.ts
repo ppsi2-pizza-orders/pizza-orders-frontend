@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import {AuthGuard, RoleGuard} from './core/guards';
+import { AdminGuard, ManagementGuard } from './core/guards';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 export const routes: Routes = [
@@ -14,18 +14,12 @@ export const routes: Routes = [
     {
         path: 'admin',
         loadChildren: './modules/admin/admin.module#AdminModule',
-        // canLoad: [RoleGuard],
-        // data: {
-        //     expectedRole: 'admin'
-        // }
+        canLoad: [AdminGuard]
     },
     {
         path: 'management',
         loadChildren: './modules/management/management.module#ManagementModule',
-        // canLoad: [RoleGuard],
-        // data: {
-        //     expectedRole: 'manager'
-        // }
+        // canLoad: [ManagementGuard]
     },
     { path: '**', redirectTo: '/' }
 ];

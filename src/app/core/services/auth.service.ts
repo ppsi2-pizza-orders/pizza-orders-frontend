@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { User } from '../models';
 import { SnackBarService } from './snack-bar.service';
 import { ApiService } from './api.service';
-import { API_URLS } from '../const';
+import { API_URLS, RESTAURANT_ROLES } from '../const';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,18 @@ export class AuthService {
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     return token && !this.jwtHelper.isTokenExpired(token);
+  }
+
+  public isAdmin(): boolean {
+    return this.userFromToken().isAdmin();
+  }
+
+  public isRestaurantMember(id?: number): boolean {
+    return this.userFromToken().isRestaurantMember(id);
+  }
+
+  public haveRestaurantRole(role: RESTAURANT_ROLES) {
+    return this.userFromToken().getRestaurantRole() === role;
   }
 
   public login(email: string, password: string) {
@@ -80,9 +92,9 @@ export class AuthService {
     );
   }
 
-  public userFromToken() {
+  private userFromToken(): User {
     if (localStorage.getItem('token')) {
-      return this.jwtHelper.decodeToken(localStorage.getItem('token')).user;
+      return new User(this.jwtHelper.decodeToken(localStorage.getItem('token')).user);
     }
   }
 

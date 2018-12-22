@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './management.routing';
 import { SelectRestaurantComponent } from './views/select-restaurant/select-restaurant.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { RestaurantGuard } from './restaurant.guard';
+import { RestaurantGuard } from '../../core/guards/restaurant.guard';
 import { SharedModule } from 'src/app/shared';
 
 @NgModule({

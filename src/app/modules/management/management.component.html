@@ -16,10 +16,10 @@
       >
         <mat-nav-list>
           <a [routerLink]="['dashboard']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Kokpit</a>
-          <a [routerLink]="['orders']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Zamówienia</a>
-          <a [routerLink]="['magazine']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Magazyn</a>
-          <a [routerLink]="['customization']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Definicje</a>
-          <a [routerLink]="['ustawienia']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Ustawienia</a>
+          <a *ngIf="hasRestaurantRole([role.owner, role.cook])" [routerLink]="['orders']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Zamówienia</a>
+          <a *ngIf="hasRestaurantRole([role.owner, role.manager])" [routerLink]="['magazine']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Magazyn</a>
+          <a *ngIf="hasRestaurantRole([role.owner])" [routerLink]="['customization']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Składniki</a>
+          <a *ngIf="hasRestaurantRole([role.owner])" [routerLink]="['ustawienia']" [routerLinkActive]="['active']" mat-list-item><mat-icon>dashboard</mat-icon>Ustawienia</a>
           <a (click)="logout()" mat-list-item><mat-icon>input</mat-icon>Wyloguj</a>
         </mat-nav-list>
       </mat-sidenav>
