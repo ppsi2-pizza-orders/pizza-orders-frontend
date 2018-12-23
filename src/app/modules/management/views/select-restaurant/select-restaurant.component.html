@@ -1,19 +1,11 @@
 <div class="app-select-restaurant">
-  <div class="restaurant-cards">
+  <div *ngIf="userRestaurants" class="restaurant-cards">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-3">
-          <button mat-raised-button [routerLink]="[1]">
-            <img class="img-fluid" src="assets/dagrasso.jpg" alt="">
-            <h4>Da Grasso</h4>
-            <p>Wrocław</p>
-          </button>
-        </div>
-        <div class="col-md-3">
-          <button mat-raised-button [routerLink]="[2]">
-            <img class="img-fluid" src="assets/dagrasso.jpg" alt="">
-            <h4>Da Grasso</h4>
-            <p>Legnica</p>
+      <div class="row">
+        <div *ngFor="let restaurant of userRestaurants" class="col-md-6 offset-md-3">
+          <button mat-raised-button [routerLink]="[restaurant.id]">
+            <h4>{{ restaurant.name }}</h4>
+            <p>{{ restaurant.city }}</p>
           </button>
         </div>
       </div>
