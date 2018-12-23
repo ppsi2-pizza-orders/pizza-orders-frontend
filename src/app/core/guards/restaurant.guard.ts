@@ -8,7 +8,7 @@ export class RestaurantGuard implements CanActivate {
     constructor(private auth: AuthService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot) {
-        const restaurantID = route.params.id;
+        const restaurantID = parseInt(route.params.id, 10);
         if (this.auth.isRestaurantMember(restaurantID)) {
             return true;
         }

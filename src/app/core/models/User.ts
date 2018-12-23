@@ -10,7 +10,7 @@ export class User {
     email: string;
     password: string;
     admin: number;
-    restaurants?: Array<Object>;
+    restaurants?: Array<object>;
     firstName?: string;
     lastName?: string;
     name?: string;
@@ -26,9 +26,9 @@ export class User {
         return this.restaurants.length > 0;
     }
 
-    public getRestaurantRole(): RESTAURANT_ROLES {
-        if (this.isRestaurantMember()) {
-            return this.restaurants['role'];
+    public getRestaurantRole(restaurantID: number): RESTAURANT_ROLES {
+        if (this.isRestaurantMember(restaurantID)) {
+            return this.restaurants.find(r => r['id'] === restaurantID)['role'];
         }
     }
 }
