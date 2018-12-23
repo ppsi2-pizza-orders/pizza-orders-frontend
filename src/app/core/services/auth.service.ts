@@ -48,8 +48,8 @@ export class AuthService {
     return this.userFromToken().isRestaurantMember(id);
   }
 
-  public haveRestaurantRole(role: RESTAURANT_ROLES) {
-    return this.userFromToken().getRestaurantRole() === role;
+  public hasRestaurantRole(restaurantID: number, role: RESTAURANT_ROLES) {
+    return this.userFromToken().getRestaurantRole(restaurantID) === role;
   }
 
   public login(email: string, password: string) {

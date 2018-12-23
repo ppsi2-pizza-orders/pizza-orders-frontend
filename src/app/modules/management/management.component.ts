@@ -43,9 +43,8 @@ export class ManagementComponent implements OnDestroy, OnInit {
     this.subscription.add(this.authService.getCurrentUser().subscribe(user => this.user = user));
   }
 
-  public hasRestaurantRole(...roles: RESTAURANT_ROLES[]): boolean {
-    return true;
-    return roles.includes(this.user.getRestaurantRole());
+  public hasRestaurantRole(roles: RESTAURANT_ROLES[]): boolean {
+    return roles.includes(this.user.getRestaurantRole(this.restaurant.id));
   }
 
   public ngOnDestroy(): void {

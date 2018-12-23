@@ -25,14 +25,12 @@ export class ManagementGuard implements CanLoad, CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        const restaurantID = parseInt(route.parent.params.id, 10);
         const roles = route.data.expectedRole;
-        if (this.auth.isAuthenticated()) {
-            roles.forEach(role => {
-                if (this.auth.haveRestaurantRole(role)) {
-                    return true;
-                }
-            });
+        if (this.auth.isAuthenticated() || roles.some(role => this.auth.hasRestaurantRole(restaurantID, role))) {
+            return true;
         }
+
         this.router.navigateByUrl('*');
         return false;
     }
