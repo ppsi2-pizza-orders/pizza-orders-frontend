@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute } from '@angular/router';
-import { Restaurant, AuthService, RestaurantService, User, RESTAURANT_ROLES } from '../../core';
+import { Restaurant, AuthService, RestaurantService, User, RestaurantRoles } from '../../core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,9 +15,9 @@ export class ManagementComponent implements OnDestroy, OnInit {
   public loading = true;
   public mobileQuery: MediaQueryList;
   public role = {
-    owner: RESTAURANT_ROLES.OWNER,
-    manager: RESTAURANT_ROLES.MANAGER,
-    cook: RESTAURANT_ROLES.COOK
+    Owner: RestaurantRoles.Owner,
+    Manager: RestaurantRoles.Manager,
+    Cook: RestaurantRoles.Cook
   };
 
   private mobileQueryListener: () => void;
@@ -36,14 +36,16 @@ export class ManagementComponent implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     const restaurantId = +this.route.snapshot.paramMap.get('id');
-    this.subscription = this.restaurantService.getRestaurant(restaurantId).subscribe(restaurant => {
+    this.subscription = this.restaurantService.getRestaurant(restaurantId)
+    .subscribe(restaurant => {
       this.restaurant = restaurant['data'];
       this.loading = false;
     });
-    this.subscription.add(this.authService.getCurrentUser().subscribe(user => this.user = user));
+    this.subscription.add(this.authService.getObservableUser()
+    .subscribe(user => this.user = user));
   }
 
-  public hasRestaurantRole(roles: RESTAURANT_ROLES[]): boolean {
+  public hasRestaurantRole(roles: RestaurantRoles[]): boolean {
     return roles.includes(this.user.getRestaurantRole(this.restaurant.id));
   }
 

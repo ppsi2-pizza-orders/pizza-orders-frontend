@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { User } from '../models';
 import { SnackBarService } from './snack-bar.service';
 import { ApiService } from './api.service';
-import { API_URLS, RESTAURANT_ROLES } from '../const';
+import { API_URLS } from '../const';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +31,12 @@ export class AuthService {
     return this.isAuthenticated$.asObservable();
   }
 
-  public getCurrentUser(): Observable<User> {
+  public getObservableUser(): Observable<User> {
     return this.currentUser$.asObservable();
+  }
+
+  public getUser(): User {
+    return this.userFromToken();
   }
 
   public isAuthenticated(): boolean {
@@ -46,19 +50,7 @@ export class AuthService {
     return true;
   }
 
-  public isAdmin(): boolean {
-    return this.userFromToken().isAdmin();
-  }
-
-  public isRestaurantMember(id?: number): boolean {
-    return this.userFromToken().isRestaurantMember(id);
-  }
-
-  public hasRestaurantRole(restaurantID: number, role: RESTAURANT_ROLES) {
-    return this.userFromToken().getRestaurantRole(restaurantID) === role;
-  }
-
-  public login(email: string, password: string) {
+  public login(email: string, password: string): Observable<User> {
     return this.apiService.post(API_URLS.Login, {'email': email, 'password': password}).pipe(
       map(data => {
         if (data && data['data']['token']) {
@@ -68,7 +60,7 @@ export class AuthService {
     );
   }
 
-  public facebookLogin() {
+  public facebookLogin(): Observable<User> {
     let socialPlatformProvider;
     socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
 
@@ -81,14 +73,14 @@ export class AuthService {
     );
   }
 
-  public logout() {
+  public logout(): void {
     localStorage.removeItem('token');
     this.isAuthenticated$.next(false);
     this.router.navigate([ '/' ]);
     this.snackBar.show('Wylogowano!');
   }
 
-  public register(userData) {
+  public register(userData): Observable<User> {
     return this.apiService.post(API_URLS.RegisterUser, userData).pipe(
       map(data => {
         if (data && data['data']['token']) {
@@ -110,11 +102,12 @@ export class AuthService {
 
   private userFromToken(): User {
     if (localStorage.getItem('token')) {
-      return new User(this.jwtHelper.decodeToken(localStorage.getItem('token')).user);
+      const userData = this.jwtHelper.decodeToken(localStorage.getItem('token')).user;
+      return new User(userData);
     }
   }
 
-  private sendSocialToken(token: string) {
+  private sendSocialToken(token: string): Observable<User> {
     return this.apiService.post(API_URLS.SocialLogin, { 'access_token': token }).pipe(
       map(data => {
         if (data && data['data']['token']) {
@@ -124,7 +117,7 @@ export class AuthService {
     );
   }
 
-  private handleAuthData(data: any) {
+  private handleAuthData(data: any): User {
     localStorage.setItem('token', data['data']['token']);
     const user = this.userFromToken();
     this.currentUser$.next(user);

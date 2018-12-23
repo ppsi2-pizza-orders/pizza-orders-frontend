@@ -10,7 +10,13 @@ import {
   SnackBarService,
   ApiService
 } from './services';
-import { AdminGuard, AuthGuard, ManagementGuard, RestaurantGuard } from './guards';
+import {
+  AdminGuard,
+  AuthGuard,
+  ManagementGuard,
+  RestaurantMemberGuard,
+  RestaurantRoleGuard
+} from './guards';
 
 
 @NgModule({
@@ -28,7 +34,8 @@ import { AdminGuard, AuthGuard, ManagementGuard, RestaurantGuard } from './guard
     AuthGuard,
     AdminGuard,
     ManagementGuard,
-    RestaurantGuard,
+    RestaurantMemberGuard,
+    RestaurantRoleGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,

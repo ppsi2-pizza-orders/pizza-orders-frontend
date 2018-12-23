@@ -13,12 +13,12 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <div *ngIf="isLoggedIn" mat-menu-item disabled class="text-center"><mat-icon>person_pin</mat-icon>{{userName}}</div>
+            <div *ngIf="isLoggedIn" mat-menu-item disabled class="text-center"><mat-icon>person_pin</mat-icon>{{ user.name }}</div>
             <mat-divider *ngIf="isLoggedIn"></mat-divider>
             <button *ngIf="!isLoggedIn" (click)="openAuthDialog()" mat-menu-item>Logowanie</button>
             <ng-container *ngIf="isLoggedIn">
-                <button *ngIf="isAdmin" [routerLink]="['/', 'admin']"  mat-menu-item>Administracja</button>
-                <button *ngIf="isRestaurantMember" [routerLink]="['/','management']"  mat-menu-item>Moje restauracje</button>
+                <button *ngIf="user.isAdmin()" [routerLink]="['/', 'admin']"  mat-menu-item>Administracja</button>
+                <button *ngIf="user.isAnyRestaurantMember()" [routerLink]="['/','management']"  mat-menu-item>Moje restauracje</button>
                 <button [routerLink]="['/', 'user', 'orders']"  mat-menu-item>Moje zamówienia</button>
                 <button [routerLink]="['/', 'user', 'data']"  mat-menu-item>Moje dane</button>
                 <button (click)="openRegisterRestaurantDialog()" mat-menu-item>Zarejestruj pizzerie</button>

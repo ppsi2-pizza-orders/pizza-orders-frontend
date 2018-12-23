@@ -14,7 +14,7 @@ export class Restaurant {
     address: string;
     phone: string;
     photo?: string;
-    owner?: Object;
+    Owner?: Object;
     created_at?: string;
     description?: string;
     review?: number;

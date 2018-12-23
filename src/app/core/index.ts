@@ -1,4 +1,5 @@
 export * from './const';
+export * from './utils';
 export * from './core.module';
 export * from './guards/index';
 export * from './interceptors/api-interceptor';

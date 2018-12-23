@@ -1,9 +1,3 @@
-export enum RESTAURANT_ROLES {
-    OWNER = 1,
-    MANAGER = 2,
-    COOK = 3
-}
-
 export const ORDER_PICKUP_TYPES = {
     DELIVER: 'deliver',
     PICKUP: 'pickup',

@@ -9,7 +9,7 @@ export class AdminGuard implements CanLoad, CanActivate {
     constructor(private auth: AuthService, private router: Router, private dialogService: DialogService) { }
 
     canLoad() {
-        if (this.auth.isAuthenticated() && this.auth.isAdmin()) {
+        if (this.auth.isAuthenticated() && this.auth.getUser().isAdmin()) {
             return true;
         }
 
@@ -25,7 +25,7 @@ export class AdminGuard implements CanLoad, CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this.auth.isAuthenticated() && this.auth.isAdmin()) {
+        if (this.auth.isAuthenticated() && this.auth.getUser().isAdmin()) {
             return true;
         }
         this.router.navigate([ '*' ]);
