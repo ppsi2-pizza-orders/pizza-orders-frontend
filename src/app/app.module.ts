@@ -23,6 +23,10 @@ export function getAuthServiceConfigs() {
   );
 }
 
+export function jwtTokenGetter() {
+  return localStorage.getItem('token');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,9 +42,7 @@ export function getAuthServiceConfigs() {
     SocialLoginModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        },
+        tokenGetter: jwtTokenGetter,
         whitelistedDomains: environment.whitelist,
         blacklistedRoutes: environment.blacklist
       }
