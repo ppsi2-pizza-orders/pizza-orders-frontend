@@ -62,6 +62,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
       this.loadingSpinner = true;
       this.restaurantService.getRestaurants(cityValue, nameValue)
         .subscribe(restaurants => {
+          console.log(restaurants['data']);
           this.restaurants = restaurants['data'];
           this.loadingSpinner = false;
           if (this.restaurants.length === 0) {
