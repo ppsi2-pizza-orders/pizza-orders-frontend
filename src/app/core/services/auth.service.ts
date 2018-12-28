@@ -37,7 +37,13 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    return token && !this.jwtHelper.isTokenExpired(token);
+    if (!token) {
+      return false;
+    }
+    if (this.jwtHelper.isTokenExpired(token)) {
+      this.refreshToken();
+    }
+    return true;
   }
 
   public isAdmin(): boolean {
@@ -84,6 +90,16 @@ export class AuthService {
 
   public register(userData) {
     return this.apiService.post(API_URLS.RegisterUser, userData).pipe(
+      map(data => {
+        if (data && data['data']['token']) {
+          return this.handleAuthData(data);
+        }
+      })
+    );
+  }
+
+  private refreshToken() {
+    this.apiService.post(API_URLS.RefreshToken).pipe(
       map(data => {
         if (data && data['data']['token']) {
           return this.handleAuthData(data);

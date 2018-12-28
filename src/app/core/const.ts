@@ -25,6 +25,7 @@ export const PATH_PARAMS = {
 export const API_URLS = {
   Login: '/auth/login',
   SocialLogin: '/auth/facebook',
+  RefreshToken: '/auth/refresh',
   RegisterUser: '/auth/register',
   RegisterRestaurant: '/auth/restaurant',
   GetRestaurants: '/restaurants',
