@@ -15,14 +15,8 @@ export const routes: Routes = [
       { path: 'informations', component: InformationsComponent },
       { path: 'offers', component: OfferComponent },
       { path: 'reviews', component: ReviewsComponent },
-      { path: 'creator', component: PizzaCreatorComponent,
-        children: [
-          {
-            path: ':id',
-            component: PizzaCreatorComponent
-          }
-        ]
-      }
+      { path: 'creator', component: PizzaCreatorComponent },
+      { path: 'creator/:pizza', component: PizzaCreatorComponent }
     ]
   }
 ];

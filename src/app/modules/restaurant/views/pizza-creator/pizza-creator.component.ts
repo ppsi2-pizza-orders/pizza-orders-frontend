@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MockIngredients } from 'src/app/shared/mock/mock-ingredients';
-import { Ingredient } from 'src/app/shared/models/Ingredient';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { RestaurantService } from 'src/app/shared/services/restaurant.service';
-import { Restaurant } from 'src/app/shared/models/Restaurant';
+import { Ingredient } from 'src/app/core/models/Ingredient';
+import { Restaurant } from 'src/app/core/models/Restaurant';
+import { RestaurantService } from 'src/app/core/services/restaurant.service';
 
 @Component({
   selector: 'app-pizza-creator',
@@ -26,7 +26,7 @@ export class PizzaCreatorComponent implements OnInit {
   public ngOnInit() {
     Object.assign(this.avaiableIngredients, MockIngredients);
     this.displayIngredients = this.avaiableIngredients.slice(0, this.itemsPerPage);
-    this.currentRestaurant = this.restaurantService.currentRestaurant;
+    this.restaurantService.currentRestaurant.subscribe(restaurant => this.currentRestaurant = restaurant);
     const pizzaId = Number(this.route.snapshot.paramMap.get('pizza'));
     if (pizzaId) {
       this.initPizza(pizzaId);

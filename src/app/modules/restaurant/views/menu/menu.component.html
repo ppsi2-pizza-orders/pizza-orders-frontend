@@ -14,7 +14,7 @@
             </div>
             <div class="buttons col-md-3">
               <button [routerLink]="['../creator', pizza.id]" mat-mini-fab color="primary" matTooltip="Edytuj pizze"><mat-icon>local_pizza</mat-icon></button>
-              <button mat-mini-fab color="primary" matTooltip="Dodaj do zamówienia" (click)="addToBasket(pizza)"><mat-icon>add</mat-icon></button>
+              <button mat-mini-fab color="primary" matTooltip="Dodaj do zamówienia" (click)="addToOrder(pizza)"><mat-icon>add</mat-icon></button>
             </div>
         </div>
       </mat-card>

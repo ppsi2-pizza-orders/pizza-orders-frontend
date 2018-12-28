@@ -1,0 +1,94 @@
+@import 'styles.scss';
+.app-pizza-creator{
+    .dragdrop{
+        overflow: hidden;
+        .pizza-panel{
+            float: right;
+            background: url("src/assets/pizza.png") no-repeat 0px 0px;
+            background-size: contain;
+            width: 100%;
+            height: 400px;
+            z-index: -1;
+            .dropzone {
+                width: 70%;
+                height: 300px;
+                margin: auto;
+                margin-top: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-flow: wrap;
+            }
+        }
+        
+        .ingredients-panel{
+            width: 100%;
+            float: left;
+            position: absolute;
+            background-size: contain;
+            .ingredients{
+                width: 100%;
+            }
+        }
+
+        .ingredient{
+            cursor: move;
+            user-select: none;
+            width: 80px;
+            height: 80px;
+            transition: .05s ease-out;
+            float: left;
+            >div{
+                width: 80px;
+                height: 80px;
+                background-size: contain;
+                position: absolute;
+                z-index: 999;
+                transition-duration: .2s;
+            }
+        }
+        .col{
+            position: inherit;
+        }
+        .navigation-panel{
+            display: flex;
+            justify-content: center;
+            position: relative;
+            margin-top: 355px;
+        }
+    }
+    .summary-panel{
+        margin-top: 2em;
+        padding: 4px;
+        background-color: $secondary-color;
+        .pizza-name{
+            margin-left: 1em;
+            color:#fff;
+            ::ng-deep .mat-form-field-label{
+                color: #fff;
+            }
+            ::ng-deep .mat-form-field-underline{
+                background-color: #fff;
+            }
+        }
+        h5{
+            color: #fff;
+            margin-top: 1em;
+            text-align: center;
+        }
+        button{
+            color: $secondary-color;
+            margin-top: 1em;
+            margin-right: 1em;
+            float: right;
+        }
+    }
+}
+.dropzone-activated{
+    //background: url("src/assets/restaurant.jpg") no-repeat 0px 0px !important;
+}
+.dragging{
+    >div{
+        transform: scale(1.2);
+    }
+}
