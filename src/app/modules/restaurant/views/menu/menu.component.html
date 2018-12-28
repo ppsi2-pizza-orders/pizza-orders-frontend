@@ -5,7 +5,9 @@
         <div class="row content">
             <div class="title col-sm-7">
               <h2>{{ pizza.name }}</h2>
-              <span *ngFor="let ingredient of pizza.ingredients">{{ingredient.name}} </span>
+              <span *ngFor="let ingredient of pizza.ingredients; let last = last;">
+                {{ingredient.name}}<ng-container *ngIf="!last">,</ng-container>
+              </span>
             </div>
             <div class="cost col-sm-2">
               <h4>{{ pizza.price }}zł</h4>

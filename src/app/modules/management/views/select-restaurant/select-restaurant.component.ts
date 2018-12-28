@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestaurantService } from 'src/app/core';
+import { RestaurantService, AuthService, Restaurant } from 'src/app/core';
 
 @Component({
   selector: 'app-select-restaurant',
@@ -7,10 +7,12 @@ import { RestaurantService } from 'src/app/core';
   styleUrls: ['./select-restaurant.component.scss']
 })
 export class SelectRestaurantComponent implements OnInit {
+  public userRestaurants: object[];
 
-  constructor(private restaurantService: RestaurantService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.userRestaurants = this.authService.getUser().restaurants;
   }
 
 }

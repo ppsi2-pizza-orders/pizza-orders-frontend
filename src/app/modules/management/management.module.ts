@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { routes } from './management.routing';
 import { SelectRestaurantComponent } from './views/select-restaurant/select-restaurant.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { RestaurantGuard } from '../../core/guards/restaurant.guard';
 import { SharedModule } from 'src/app/shared';
 import { OrdersComponent } from './views/orders/orders.component';
 import { StoreComponent } from './views/store/store.component';
@@ -28,7 +27,6 @@ import { CustomizationsComponent } from './views/customizations/customizations.c
     CustomizationsComponent
   ],
   providers: [
-    RestaurantGuard
   ]
 })
 export class ManagementModule { }

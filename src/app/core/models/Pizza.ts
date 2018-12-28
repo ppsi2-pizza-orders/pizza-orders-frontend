@@ -9,6 +9,6 @@ export class Pizza implements Product {
 
     id: number;
     name: string;
-    price: number;
+    price: string;
     ingredients: Array<Ingredient>;
 }

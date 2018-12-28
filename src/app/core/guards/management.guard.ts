@@ -9,7 +9,7 @@ export class ManagementGuard implements CanLoad, CanActivate {
     constructor(private auth: AuthService, private router: Router, private dialogService: DialogService) { }
 
     canLoad() {
-        if (this.auth.isAuthenticated() && this.auth.isRestaurantMember()) {
+        if (this.auth.isAuthenticated() && this.auth.getUser().isAnyRestaurantMember()) {
             return true;
         }
 
@@ -25,9 +25,7 @@ export class ManagementGuard implements CanLoad, CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const restaurantID = parseInt(route.parent.params.id, 10);
-        const roles = route.data.expectedRole;
-        if (this.auth.isAuthenticated() || roles.some(role => this.auth.hasRestaurantRole(restaurantID, role))) {
+        if (this.auth.isAuthenticated() && this.auth.getUser().isAnyRestaurantMember()) {
             return true;
         }
 

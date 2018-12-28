@@ -14,12 +14,14 @@ export const routes: Routes = [
     {
         path: 'admin',
         loadChildren: './modules/admin/admin.module#AdminModule',
-        canLoad: [AdminGuard]
+        canLoad: [AdminGuard],
+        canActivate: [AdminGuard]
     },
     {
         path: 'management',
         loadChildren: './modules/management/management.module#ManagementModule',
-        // canLoad: [ManagementGuard]
+        canLoad: [ManagementGuard],
+        canActivate: [ManagementGuard]
     },
     { path: '**', redirectTo: '/' }
 ];

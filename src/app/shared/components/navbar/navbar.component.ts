@@ -11,11 +11,9 @@ import { User } from 'src/app/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  public user: User;
   public isLoggedIn: boolean;
-  public isAdmin: boolean;
-  public isRestaurantMember: boolean;
   public itemsInOrder: number;
-  public userName: string;
   private subscription: Subscription;
 
   constructor(
@@ -35,11 +33,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
       })
     );
     this.subscription.add(
-      this.authService.getCurrentUser().subscribe(user => {
+      this.authService.getObservableUser().subscribe(user => {
         if (user) {
-          this.userName = user.name;
-          this.isAdmin = user.isAdmin();
-          this.isRestaurantMember = user.isRestaurantMember();
+          this.user = user;
         }
       })
     );

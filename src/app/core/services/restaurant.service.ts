@@ -3,6 +3,9 @@ import { Restaurant } from '../models';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { ApiService } from './api.service';
 import { API_URLS} from '../const';
+import { switchMap } from 'rxjs/operators';
+import { AuthService } from './auth.service';
+import { RestaurantRoles } from '..';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +36,12 @@ export class RestaurantService {
 
   public setCurrentRestaurant(restaurant: Restaurant) {
     this.currentRestaurant$.next(restaurant);
+  }
+
+  public grantUserRole(email: string, role: number, restaurantID: number) {
+    const grantURL = `${API_URLS.AddRestaurant}/${restaurantID}/grant`;
+    const data = { 'email': email, 'role': role };
+
+    return this.apiService.post(grantURL, data);
   }
 }

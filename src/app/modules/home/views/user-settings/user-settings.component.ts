@@ -9,11 +9,11 @@ import { User } from 'src/app/core/models/User';
 })
 export class UserSettingsComponent implements OnInit {
   public user: User;
-  
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.getCurrentUser().subscribe(user => this.user = user);
+    this.authService.getObservableUser().subscribe(user => this.user = user);
   }
 
 }

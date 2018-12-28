@@ -29,6 +29,10 @@
   <form class="form" [formGroup]="registerForm" (ngSubmit)="onRegister()" *ngIf="!loadingSpinner">
     <div mat-dialog-content class="auth-content">
       <mat-form-field class="form-field">
+        <input type="text" matInput formControlName="name" placeholder="Imię">
+        <mat-error *ngIf="registerForm.get('name').invalid">{{ getValidateMessage("name") }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
         <input type="email" matInput formControlName="email" placeholder="Email">
         <mat-error *ngIf="registerForm.get('email').invalid">{{ getValidateMessage("email") }}</mat-error>
       </mat-form-field>

@@ -49,6 +49,7 @@ export class AuthDialogComponent implements OnInit {
     });
 
     this.registerForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       password_confirmation: ['', Validators.required]
@@ -98,7 +99,7 @@ export class AuthDialogComponent implements OnInit {
       (user) => {
         this.dialogData.isLoggedIn = true;
         this.dialogData.isAdmin = user.isAdmin();
-        this.dialogData.isRestaurantMember = user.isRestaurantMember();
+        this.dialogData.isRestaurantMember = user.isAnyRestaurantMember();
         this.confirmAndClose();
       },
       (err) => {
@@ -117,7 +118,7 @@ export class AuthDialogComponent implements OnInit {
       (user) => {
         this.dialogData.isLoggedIn = true;
         this.dialogData.isAdmin = user.isAdmin();
-        this.dialogData.isRestaurantMember = user.isRestaurantMember();
+        this.dialogData.isRestaurantMember = user.isAnyRestaurantMember();
         this.confirmAndClose();
       },
       (err) => {
@@ -133,7 +134,7 @@ export class AuthDialogComponent implements OnInit {
       (user) => {
           this.dialogData.isLoggedIn = true;
           this.dialogData.isAdmin = user.isAdmin();
-          this.dialogData.isRestaurantMember = user.isRestaurantMember();
+          this.dialogData.isRestaurantMember = user.isAnyRestaurantMember();
           this.confirmAndClose();
       },
       (err) => {

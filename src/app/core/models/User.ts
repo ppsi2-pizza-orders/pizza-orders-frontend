@@ -1,4 +1,5 @@
-import { RESTAURANT_ROLES } from '..';
+import { RestaurantRoles } from '..';
+
 
 export class User {
 
@@ -19,14 +20,15 @@ export class User {
         return this.admin === 1;
     }
 
-    public isRestaurantMember(restaurantID?: number): boolean {
-        if (restaurantID) {
-            return this.restaurants.find(r => r['id'] === restaurantID) ? true : false;
-        }
+    public isRestaurantMember(restaurantID: number): boolean {
+        return this.restaurants.find(r => r['id'] === restaurantID) ? true : false;
+    }
+
+    public isAnyRestaurantMember(): boolean {
         return this.restaurants.length > 0;
     }
 
-    public getRestaurantRole(restaurantID: number): RESTAURANT_ROLES {
+    public getRestaurantRole(restaurantID: number): RestaurantRoles {
         if (this.isRestaurantMember(restaurantID)) {
             return this.restaurants.find(r => r['id'] === restaurantID)['role'];
         }
