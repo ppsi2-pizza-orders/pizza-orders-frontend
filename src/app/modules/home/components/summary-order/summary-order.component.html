@@ -16,7 +16,9 @@
         <div class="col-8">
           <p class="product-name">{{ product.name }}</p>
           <p class="product-ingredients">
-            składnik1, składnik2, składnik3
+            <ng-container *ngFor="let ingredient of product.ingredients; let last = last;">
+              {{ingredient.name}}<ng-container *ngIf="!last">,</ng-container>
+            </ng-container>
           </p>
         </div>
         <div class="col-4 text-right align-self-center">
