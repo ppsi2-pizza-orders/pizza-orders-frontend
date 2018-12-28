@@ -2,13 +2,13 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <app-order-pickup class="order-section-box" [restaurant]="orderRestaurant" #orderpickup></app-order-pickup>
-        <app-user-data class="order-section-box" [user]="user"></app-user-data>
+        <app-order-pickup class="order-section-box" [restaurant]="orderRestaurant | async" #orderpickup></app-order-pickup>
+        <app-user-data class="order-section-box" [user]="user | async"></app-user-data>
         <app-order-comment class="order-section-box"></app-order-comment>
         <app-order-payments class="order-section-box" (submit)="onSubmit()"></app-order-payments>
       </div>
       <div class="col-md-4">
-        <app-summary-order class="order-section-box" [orderRestaurant]="orderRestaurant" [orderProducts]="orderProducts"></app-summary-order>
+        <app-summary-order class="order-section-box" [orderRestaurant]="orderRestaurant | async" [orderProducts]="orderProducts | async"></app-summary-order>
       </div>
     </div>
   </div>

@@ -14,6 +14,7 @@ import { OrderComponent } from './views/order/order.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { OrderCommentComponent } from './components/order-comment/order-comment.component';
 import { ProgressOrdersComponent } from './components/progress-orders/progress-orders.component';
+import { RestaurantResolverService } from './restaurant-resolver.service';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { ProgressOrdersComponent } from './components/progress-orders/progress-o
     OrderCommentComponent
   ],
   providers: [
+    RestaurantResolverService
   ]
 })
 export class HomeModule { }
