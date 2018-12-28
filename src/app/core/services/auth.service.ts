@@ -90,8 +90,8 @@ export class AuthService {
     );
   }
 
-  private refreshToken() {
-    this.apiService.post(API_URLS.RefreshToken).pipe(
+  public refreshToken(): Observable<User> {
+    return this.apiService.post(API_URLS.RefreshToken).pipe(
       map(data => {
         if (data && data['data']['token']) {
           return this.handleAuthData(data);

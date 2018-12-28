@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { RestaurantService } from '../../../core/services/restaurant.service';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
 import { Restaurant } from '../../../core/models/Restaurant';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { RestaurantRoles } from 'src/app/core/utils';
 
 @Component({
   selector: 'app-register-restaurant',
@@ -22,6 +24,7 @@ export class RegisterRestaurantComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private restaurantService: RestaurantService,
+    private authService: AuthService,
     private snackBarService: SnackBarService) { }
 
   public ngOnInit(): void {
@@ -48,11 +51,20 @@ export class RegisterRestaurantComponent implements OnInit {
     }
     this.loading = true;
     const restaurant = new Restaurant(this.registerForm.value);
+    const userEmail = this.authService.getUser().email;
     this.restaurantService.addRestaurant(restaurant).subscribe(data => {
         if (data) {
-          this.dialogRef.close();
-          this.snackBarService.show(data.messages[0]);
-          this.router.navigate([ '/managment' ]);
+          const restaurantID = data.data.id;
+          const message = data.messages[0];
+          this.restaurantService.grantUserRole(userEmail, RestaurantRoles.Owner, restaurantID)
+          .subscribe(() => {
+            this.authService.refreshToken()
+            .subscribe(() => {
+              this.dialogRef.close();
+              this.snackBarService.show(message);
+              this.router.navigate([ '/managment' ]);
+            });
+          });
         }
       }, error => {
         this.errorMeesage = error;

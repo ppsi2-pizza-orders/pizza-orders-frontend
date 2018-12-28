@@ -29,7 +29,7 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
     this.orderProducts = this.orderService.getOrderProducts();
 
-    this.user = this.authService.getCurrentUser();
+    this.user = this.authService.getObservableUser();
 
     this.orderRestaurant = this.route.data.pipe(map(data => data.restaurant['data']));
   }
