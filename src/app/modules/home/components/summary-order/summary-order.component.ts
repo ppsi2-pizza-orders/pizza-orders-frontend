@@ -17,7 +17,7 @@ export class SummaryOrderComponent implements OnInit {
   }
 
   public totalCost() {
-    return this.orderProducts.reduce((cost: number, product: Product) => cost + product.price, 0);
+    return this.orderProducts.reduce((cost: number, product: Product) => cost + parseFloat(product.price), 0);
   }
 
 }
