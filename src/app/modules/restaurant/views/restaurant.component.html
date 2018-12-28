@@ -1,11 +1,11 @@
 <div class="app-restaurant">
-  <div class="container">
+  <div class="container-fluid">
     <div *ngIf="loading" class="spinner">
         <mat-spinner></mat-spinner>
     </div>
     <div *ngIf="!loading" class="row">
         <div class="col-md-3">
-          <app-sidebar [restaurant]="restaurant"></app-sidebar>
+          <app-sidebar class="sidebar" [restaurant]="restaurant"></app-sidebar>
         </div>
         <div class="col-md-9">
           <router-outlet></router-outlet>
