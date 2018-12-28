@@ -11,6 +11,7 @@ import {CoreModule} from './core';
 import {SharedModule} from './shared';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 export function getAuthServiceConfigs() {
   return new AuthServiceConfig(
@@ -46,7 +47,8 @@ export function jwtTokenGetter() {
         whitelistedDomains: environment.whitelist,
         blacklistedRoutes: environment.blacklist
       }
-    })
+    }),
+    LeafletModule.forRoot()
   ],
   providers: [
     {

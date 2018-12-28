@@ -1,5 +1,8 @@
 @import 'styles';
 .app-sidebar{
+    @include md{
+        margin-bottom: 1em;
+    }
     .restaurant-info{
         img{
             width: 100%;

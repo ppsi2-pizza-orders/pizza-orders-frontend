@@ -9,6 +9,8 @@ import { OfferComponent } from './views/offer/offer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RestaurantComponent } from './views/restaurant.component';
 import { ReviewsComponent } from './views/reviews/reviews.component';
+import { InformationsComponent } from './views/informations/informations.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { ReviewsComponent } from './views/reviews/reviews.component';
     OfferComponent,
     SidebarComponent,
     RestaurantComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    InformationsComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    LeafletModule
   ]
 })
 export class RestaurantModule { }

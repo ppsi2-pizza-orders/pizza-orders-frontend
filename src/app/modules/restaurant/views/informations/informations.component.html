@@ -1,0 +1,26 @@
+<div class="app-informations">
+  <h4>Informacje</h4>
+  <hr>
+  <div class="information">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="description">
+          <p *ngIf="restaurant.description">{{ restaurant.description }}</p>
+          <p *ngIf="!restaurant.description">Ta restauracja nie posiada opisu.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="address">
+          <mat-icon>location_on</mat-icon>
+          <h5>{{ restaurant.address }}, {{ restaurant.city }}</h5>
+        </div>
+        <div class="phone">
+          <mat-icon>phone</mat-icon>
+          <h5>{{ restaurant.phone }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="map" *ngIf="mapReady" style="height: 300px;" leaflet [leafletOptions]="options" [leafletLayer]="layer">
+  </div>
+</div>

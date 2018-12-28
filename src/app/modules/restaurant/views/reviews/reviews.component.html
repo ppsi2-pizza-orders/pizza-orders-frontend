@@ -1,29 +1,27 @@
 <div class="app-reviews">
-  <div class="container">
-      <h4>Opinie użytkowników</h4>
-      <hr>
-      <div class="review" *ngFor="let review of restaurantReviews; last as lastIndex">
-        <div class="row">
-            <div class="col-3">
-                <p class="star-title">Ogólna ocena</p>
-                <app-rating [rating]="review.base_rating" [itemId]="1"></app-rating>
-            </div>
-            <div class="col-3">
-                <p class="star-title">Czas dostawy</p>
-                <app-rating [rating]="review.delivery_time_rating" [itemId]="2"></app-rating>                
-            </div>
-            <div class="col-3">
-                <p class="star-title">Składniki</p>
-                <app-rating [rating]="review.ingredients_rating" [itemId]="3"></app-rating>
-            </div>
-            <div class="col-3">
-                <p class="date">{{ review.created_at.date | date:'dd.MM.yyyy' }}</p>
-            </div>
-            <div class="col-12">
-                <p class="comment">{{ review.comment }}</p>
-            </div>
-        </div>
-        <hr *ngIf="!lastIndex">
+  <h4>Opinie użytkowników</h4>
+  <hr>
+  <div class="review" *ngFor="let review of restaurantReviews; last as lastIndex">
+    <div class="row">
+      <div class="col-3">
+        <p class="star-title">Ogólna ocena</p>
+        <app-rating [rating]="review.base_rating" [itemId]="1"></app-rating>
       </div>
+      <div class="col-3">
+        <p class="star-title">Czas dostawy</p>
+        <app-rating [rating]="review.delivery_time_rating" [itemId]="2"></app-rating>
+      </div>
+      <div class="col-3">
+        <p class="star-title">Składniki</p>
+        <app-rating [rating]="review.ingredients_rating" [itemId]="3"></app-rating>
+      </div>
+      <div class="col-3">
+        <p class="date">{{ review.created_at.date | date:'dd.MM.yyyy' }}</p>
+      </div>
+      <div class="col-12">
+        <p class="comment">{{ review.comment }}</p>
+      </div>
+    </div>
+    <hr *ngIf="!lastIndex">
   </div>
 </div>
