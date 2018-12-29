@@ -6,11 +6,12 @@
             float: right;
             background: url("src/assets/pizza.png") no-repeat 0px 0px;
             background-size: contain;
+            background-position: center;
             width: 100%;
             height: 400px;
             z-index: -1;
             .dropzone {
-                width: 70%;
+                width: 65%;
                 height: 300px;
                 margin: auto;
                 margin-top: 40px;
@@ -28,6 +29,9 @@
             background-size: contain;
             .ingredients{
                 width: 100%;
+                display: flex;
+                flex-flow: wrap;
+                justify-content: center;
             }
         }
 
@@ -36,6 +40,7 @@
             user-select: none;
             width: 80px;
             height: 80px;
+            margin: 4px;
             transition: .05s ease-out;
             float: left;
             >div{
@@ -58,28 +63,14 @@
         }
     }
     .summary-panel{
-        margin-top: 2em;
-        padding: 4px;
+        margin: 2em 0;
+        padding: 1em;
         background-color: $secondary-color;
-        .pizza-name{
-            margin-left: 1em;
-            color:#fff;
-            ::ng-deep .mat-form-field-label{
-                color: #fff;
-            }
-            ::ng-deep .mat-form-field-underline{
-                background-color: #fff;
-            }
-        }
-        h5{
+        h5, span{
             color: #fff;
-            margin-top: 1em;
-            text-align: center;
         }
         button{
             color: $secondary-color;
-            margin-top: 1em;
-            margin-right: 1em;
             float: right;
         }
     }

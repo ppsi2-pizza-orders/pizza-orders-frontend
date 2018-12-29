@@ -19,7 +19,7 @@ export class PizzaCreatorComponent implements OnInit {
   private pizzaPrice = 14;
   private ingredientsPrice = 3;
   private currentPage = 0;
-  private itemsPerPage = 20;
+  private itemsPerPage = 16;
 
   constructor(private route: ActivatedRoute, private restaurantService: RestaurantService) { }
 
