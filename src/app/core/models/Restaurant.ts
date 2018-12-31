@@ -17,7 +17,7 @@ export class Restaurant {
     owner?: Object;
     created_at?: string;
     description?: string;
-    review?: number;
+    review_stars?: number;
     reviews?: Array<Review>;
     pizzas?: Array<Pizza>;
     ingredients?: Array<Ingredient>;
