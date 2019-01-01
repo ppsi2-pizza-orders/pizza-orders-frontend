@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/services';
 import { ADMIN_API_URLS } from '../../core';
-import {HttpHeaders, HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +31,9 @@ export class AdminService {
 
   public getRestaurants(params?) {
     return this.apiService.get(ADMIN_API_URLS.GetRestaurants, params);
+  }
+
+  public deleteRestaurant(id: number) {
+    return this.apiService.delete(`${ADMIN_API_URLS.DeleteRestaurant}/${id}`);
   }
 }

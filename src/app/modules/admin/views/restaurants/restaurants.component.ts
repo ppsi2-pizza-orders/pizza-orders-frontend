@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { BaseTableViewComponent } from '../base-table-view/base-table-view.component';
 import {AdminService} from '../../admin.service';
+import { DialogService } from 'src/app/core';
 
 @Component({
   selector: 'app-restaurants',
@@ -23,7 +24,9 @@ export class RestaurantsComponent extends BaseTableViewComponent implements OnIn
   public dataSource: MatTableDataSource<Restaurant>;
   public expandedElement: any;
 
-  constructor(private adminService: AdminService) {
+  constructor(
+    private adminService: AdminService,
+    private dialogService: DialogService) {
     super();
   }
 
@@ -56,6 +59,18 @@ export class RestaurantsComponent extends BaseTableViewComponent implements OnIn
     .subscribe(restaurants => {
       this.restaurants = restaurants['data'];
       this.dataSource = new MatTableDataSource<Restaurant>(this.restaurants);
+    });
+  }
+
+  public deleteRestaurant(restaurant: Restaurant) {
+    this.dialogService.confirmDialog(`Czy na pewno chcesz usunąć restaurację "${restaurant.name}" ?`)
+    .subscribe(result => {
+      if (!!result) {
+        this.adminService.deleteRestaurant(restaurant.id)
+        .subscribe(() => {
+          this.performQuery({});
+        });
+      }
     });
   }
 

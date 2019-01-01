@@ -32,6 +32,7 @@ export const ADMIN_API_URLS = {
   GetIngredients: '/admin/ingredients',
   AddIngredient: '/ingredient',
   DeleteIngredient: '/ingredient',
+  DeleteRestaurant: '/restaurant',
   GetRestaurants: '/admin/restaurants',
   GetUsers: '/admin/users'
 };
