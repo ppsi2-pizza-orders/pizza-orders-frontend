@@ -58,12 +58,9 @@ export class RegisterRestaurantComponent implements OnInit {
           const message = data.messages[0];
           this.restaurantService.grantUserRole(userEmail, RestaurantRoles.Owner, restaurantID)
           .subscribe(() => {
-            this.authService.refreshToken()
-            .subscribe(() => {
-              this.dialogRef.close();
-              this.snackBarService.show(message);
-              this.router.navigate([ '/managment' ]);
-            });
+            this.dialogRef.close();
+            this.snackBarService.show(message);
+            this.router.navigate([ '/managment' ]);
           });
         }
       }, error => {

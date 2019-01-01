@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
         }
 
         this.dialogService.authDialog().subscribe(data => {
-            if (data && data.isLoggedIn === true) {
+            if (this.auth.isAuthenticated()) {
                 this.router.navigateByUrl(state.url);
                 return true;
             } else {
