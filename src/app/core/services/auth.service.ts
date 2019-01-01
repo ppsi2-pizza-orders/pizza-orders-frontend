@@ -17,7 +17,7 @@ import { API_URLS } from '../const';
 })
 export class AuthService {
 
-  private currentUser$ = new BehaviorSubject<User>(this.userFromToken());
+  private currentUser$ = new BehaviorSubject<User>(this.getUser());
   private isAuthenticated$ = new BehaviorSubject<boolean>(this.isAuthenticated());
 
   constructor(
@@ -36,31 +36,37 @@ export class AuthService {
   }
 
   public getUser(): User {
-    return this.userFromToken();
+    if (localStorage.getItem('token')) {
+      const userData = this.jwtHelper.decodeToken(localStorage.getItem('token')).user;
+      return new User(userData);
+    }
   }
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    if (!token) {
-      return false;
-    }
-    if (this.jwtHelper.isTokenExpired(token)) {
-      this.refreshToken();
-    }
-    return true;
+    return !!token && !this.jwtHelper.isTokenExpired(token);
   }
 
-  public login(email: string, password: string): Observable<User> {
+  public tokenExists(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  public isTokenExpired(): boolean {
+    const token = localStorage.getItem('token');
+    return this.jwtHelper.isTokenExpired(token);
+  }
+
+  public login(email: string, password: string): Observable<any> {
     return this.apiService.post(API_URLS.Login, {'email': email, 'password': password}).pipe(
       map(data => {
-        if (data && data['data']['token']) {
-          return this.handleAuthData(data);
+        if (data['data']['token']) {
+          this.handleAuthData(data);
         }
       })
     );
   }
 
-  public facebookLogin(): Observable<User> {
+  public facebookLogin(): Observable<any> {
     let socialPlatformProvider;
     socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
 
@@ -80,50 +86,40 @@ export class AuthService {
     this.snackBar.show('Wylogowano!');
   }
 
-  public register(userData): Observable<User> {
+  public register(userData): Observable<any> {
     return this.apiService.post(API_URLS.RegisterUser, userData).pipe(
       map(data => {
-        if (data && data['data']['token']) {
-          return this.handleAuthData(data);
+        if (data['data']['token']) {
+          this.handleAuthData(data);
         }
       })
     );
   }
 
-  public refreshToken(): Observable<User> {
+  public refreshToken(): Observable<any> {
     return this.apiService.post(API_URLS.RefreshToken).pipe(
       map(data => {
-        if (data && data['data']['token']) {
-          return this.handleAuthData(data);
+        if (data['data']['token']) {
+          this.handleAuthData(data);
         }
       })
     );
   }
 
-  private userFromToken(): User {
-    if (localStorage.getItem('token')) {
-      const userData = this.jwtHelper.decodeToken(localStorage.getItem('token')).user;
-      return new User(userData);
-    }
-  }
-
-  private sendSocialToken(token: string): Observable<User> {
+  private sendSocialToken(token: string): Observable<any> {
     return this.apiService.post(API_URLS.SocialLogin, { 'access_token': token }).pipe(
       map(data => {
-        if (data && data['data']['token']) {
-          return this.handleAuthData(data);
+        if (data['data']['token']) {
+          this.handleAuthData(data);
         }
       })
     );
   }
 
-  private handleAuthData(data: any): User {
+  private handleAuthData(data: any): void {
     localStorage.setItem('token', data['data']['token']);
-    const user = this.userFromToken();
-    this.currentUser$.next(user);
+    this.currentUser$.next(this.getUser());
     this.isAuthenticated$.next(true);
-
-    return user;
   }
 
 }

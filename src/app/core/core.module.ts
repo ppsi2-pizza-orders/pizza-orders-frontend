@@ -1,14 +1,14 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { ApiInterceptor } from './interceptors/api-interceptor';
 import {
   DialogService,
   DroppableService,
   IngredientService,
   RestaurantService,
   SnackBarService,
-  ApiService
+  ApiService,
+  ErrorHandlerService,
 } from './services';
 import {
   AdminGuard,
@@ -17,6 +17,8 @@ import {
   RestaurantMemberGuard,
   RestaurantRoleGuard
 } from './guards';
+import { RefreshTokenInterceptor } from './interceptors/refresh-token-interceptor';
+import { JwtInterceptor } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -36,9 +38,11 @@ import {
     ManagementGuard,
     RestaurantMemberGuard,
     RestaurantRoleGuard,
+    JwtInterceptor,
+    ErrorHandlerService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ApiInterceptor,
+      useClass: RefreshTokenInterceptor,
       multi: true
     },
   ]

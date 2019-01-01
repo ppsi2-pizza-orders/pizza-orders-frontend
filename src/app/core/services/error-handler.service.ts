@@ -4,7 +4,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DialogTypes } from '../../shared/components/info-dialog/info-dialog.component';
 import { Router } from '@angular/router';
 import { Logger } from './logger.service';
-import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,9 @@ import { throwError } from 'rxjs';
 export class ErrorHandlerService {
   private logger = new Logger('ErrorHandlerService');
 
-  constructor(private dialogService: DialogService, private router: Router) { }
+  constructor(
+    private dialogService: DialogService,
+    private router: Router) { }
 
   public handleError(error: HttpErrorResponse) {
     this.logger.error(error.message);
