@@ -8,8 +8,9 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { SharedModule } from 'src/app/shared';
 import { OrdersComponent } from './views/orders/orders.component';
 import { StoreComponent } from './views/store/store.component';
-import { SettingsComponent } from './views/settings/settings.component';
-import { CustomizationsComponent } from './views/customizations/customizations.component';
+import { EmployeesComponent } from './views/employees/employees.component';
+import { RestaurantDataComponent } from './views/restaurant-data/restaurant-data.component';
+import { RestaurantMenuComponent } from './views/restaurant-menu/restaurant-menu.component';
 
 @NgModule({
   imports: [
@@ -23,8 +24,9 @@ import { CustomizationsComponent } from './views/customizations/customizations.c
     DashboardComponent,
     OrdersComponent,
     StoreComponent,
-    SettingsComponent,
-    CustomizationsComponent
+    EmployeesComponent,
+    RestaurantDataComponent,
+    RestaurantMenuComponent
   ],
   providers: [
   ]

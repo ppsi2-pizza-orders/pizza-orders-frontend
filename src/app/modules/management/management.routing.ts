@@ -4,10 +4,11 @@ import { SelectRestaurantComponent } from './views/select-restaurant/select-rest
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { RestaurantRoles } from 'src/app/core';
 import { RestaurantMemberGuard, RestaurantRoleGuard } from 'src/app/core/guards';
-import { SettingsComponent } from './views/settings/settings.component';
-import { CustomizationsComponent } from './views/customizations/customizations.component';
 import { StoreComponent } from './views/store/store.component';
 import { OrdersComponent } from './views/orders/orders.component';
+import { EmployeesComponent } from './views/employees/employees.component';
+import { RestaurantDataComponent } from './views/restaurant-data/restaurant-data.component';
+import { RestaurantMenuComponent } from './views/restaurant-menu/restaurant-menu.component';
 
 export const routes: Routes = [
   { path: '', component: SelectRestaurantComponent },
@@ -38,16 +39,24 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'customizations',
-        component: CustomizationsComponent,
+        path: 'restaurant-menu',
+        component: RestaurantMenuComponent,
         canActivate: [RestaurantRoleGuard],
         data: {
           expectedRoles: [RestaurantRoles.Owner]
         }
       },
       {
-        path: 'settings',
-        component: SettingsComponent,
+        path: 'restaurant-data',
+        component: RestaurantDataComponent,
+        canActivate: [RestaurantRoleGuard],
+        data: {
+          expectedRoles: [RestaurantRoles.Owner]
+        }
+      },
+      {
+        path: 'employees',
+        component: EmployeesComponent,
         canActivate: [RestaurantRoleGuard],
         data: {
           expectedRoles: [RestaurantRoles.Owner]

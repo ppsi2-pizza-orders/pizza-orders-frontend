@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from '../environments/environment';
-import {Logger} from './core/services';
+import {Logger, AuthService} from './core/services/';
 import Echo from 'laravel-echo';
 
 @Component({
@@ -10,18 +10,24 @@ import Echo from 'laravel-echo';
 })
 
 export class AppComponent implements OnInit {
+
+  constructor(private authService: AuthService) { }
+
   ngOnInit() {
-      if (environment.production) {
-        Logger.enableProductionMode();
-      }
-      window.Echo = new Echo({
-        broadcaster: 'pusher',
-        key: environment.pusherKey,
-        wsHost: 'api.pizzaorders.pl',
-        authEndpoint: 'https://api.pizzaorders.pl/broadcasting/auth',
-        wsPort: 6001,
-        wssPort: 6001,
-        disableStats: false
-      });
+    if (environment.production) {
+      Logger.enableProductionMode();
+    }
+    if (!this.authService.isAuthenticated() && this.authService.tokenExists()) {
+      this.authService.refreshToken().subscribe();
+    }
+    window.Echo = new Echo({
+      broadcaster: 'pusher',
+      key: environment.pusherKey,
+      wsHost: 'api.pizzaorders.pl',
+      authEndpoint: 'https://api.pizzaorders.pl/broadcasting/auth',
+      wsPort: 6001,
+      wssPort: 6001,
+      disableStats: false
+    });
   }
 }

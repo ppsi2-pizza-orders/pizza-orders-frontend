@@ -1,0 +1,23 @@
+<div class="app-restaurant-data">
+  <div class="restaurant-data-header">
+    <h5>Dane restauracji</h5>
+    <button mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <hr>
+  </div>
+  <div class="restaurant-data" *ngIf="restaurant">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="restaurant.photo" alt="" class="img-fluid">
+      </div>
+      <div class="col-md-8">
+        <p><span>Nazwa:</span> {{ restaurant.name }}</p>
+        <p><span>Opis:</span> {{ restaurant.description }}</p>
+        <p><span>Telefon:</span> {{ restaurant.phone }}</p>
+        <p><span>Adres:</span> {{ restaurant.address }}</p>
+        <p><span>Miasto:</span> {{ restaurant.city }}</p>
+      </div>
+    </div>
+  </div>
+</div>
