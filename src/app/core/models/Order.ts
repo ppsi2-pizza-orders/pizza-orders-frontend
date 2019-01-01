@@ -8,6 +8,7 @@ export class Order {
     restaurant_id?: number;
     token: string;
     status: string;
+    price: string;
     delivery_address: string;
     phone_number: string;
     pizzas: Array<object>;

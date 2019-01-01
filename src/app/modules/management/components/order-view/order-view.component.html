@@ -1,0 +1,23 @@
+<div class="app-order-view">
+  <mat-card>
+    <mat-card-content>
+      <mat-card-title>
+        Zamówienie #{{ order.id }}
+        <div class="badge badge-pill badge-primary">{{ order.status }}</div>
+      </mat-card-title>
+      <mat-card-subtitle>Koszt: {{ order.price }}</mat-card-subtitle>
+      <mat-card-subtitle>Adres dostawy: {{ order.delivery_address }}</mat-card-subtitle>
+      <mat-card-subtitle>Telefon: {{ order.phone_number }}</mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-content>
+      <div class="product" *ngFor="let pizza of order.pizzas; let last = last;">
+        <p class="font-weight-bold">{{ pizza.description }}</p>
+        <p>Cena: {{ pizza.price }}</p>
+        <hr *ngIf="!last">
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button color="primary" class="status-button" (click)="onChangeStatus()">Zmień status</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

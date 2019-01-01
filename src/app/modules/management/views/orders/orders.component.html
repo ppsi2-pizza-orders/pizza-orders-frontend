@@ -1,3 +1,27 @@
-<p>
-  orders works!
-</p>
+<div class="app-restaurant-orders">
+  <div class="order-filter-buttons">
+    <div class="row">
+      <div class="col-3">
+        <button mat-flat-button color="accent" (click)="filterOrders(0)">Wszystkie</button>
+      </div>
+      <div class="col-3">
+        <button mat-flat-button color="accent" (click)="filterOrders(1)">Nowe</button>
+      </div>
+      <div class="col-3">
+        <button mat-flat-button color="accent" (click)="filterOrders(2)">W realizacji</button>
+      </div>
+      <div class="col-3">
+        <button mat-flat-button color="accent" (click)="filterOrders(3)">Gotowe</button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="restaurant-orders">
+    <div class="row">
+      <div class="col-md-4 restaurant-order" *ngFor="let order of fiteredOrders">
+        <app-order-view [order]="order" (status)="onChangeStatus($event)"></app-order-view>
+      </div>
+    </div>
+  </div>
+
+</div>

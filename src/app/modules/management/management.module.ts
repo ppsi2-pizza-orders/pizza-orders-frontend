@@ -11,6 +11,7 @@ import { StoreComponent } from './views/store/store.component';
 import { EmployeesComponent } from './views/employees/employees.component';
 import { RestaurantDataComponent } from './views/restaurant-data/restaurant-data.component';
 import { RestaurantMenuComponent } from './views/restaurant-menu/restaurant-menu.component';
+import { OrderViewComponent } from './components/order-view/order-view.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { RestaurantMenuComponent } from './views/restaurant-menu/restaurant-menu
     StoreComponent,
     EmployeesComponent,
     RestaurantDataComponent,
-    RestaurantMenuComponent
+    RestaurantMenuComponent,
+    OrderViewComponent
   ],
   providers: [
   ]

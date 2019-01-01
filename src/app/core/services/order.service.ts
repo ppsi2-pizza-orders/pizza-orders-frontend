@@ -25,8 +25,7 @@ export class OrderService {
       try {
         this.order = JSON.parse(storedProducts);
         this.orderProducts.next(this.order);
-        // tslint:disable-next-line:radix
-        this.restaurantID = parseInt(storedRestaurantID);
+        this.restaurantID = parseInt(storedRestaurantID, 10);
       } catch {
         this.order = [];
       }
