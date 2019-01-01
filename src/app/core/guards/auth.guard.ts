@@ -11,6 +11,12 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.auth.isAuthenticated()) {
             return true;
+        } else if (this.auth.tokenExists()) {
+            this.auth.refreshToken().subscribe(() => {
+                return true;
+            }, (err) => {
+                return false;
+            });
         }
 
         this.dialogService.authDialog().subscribe(data => {

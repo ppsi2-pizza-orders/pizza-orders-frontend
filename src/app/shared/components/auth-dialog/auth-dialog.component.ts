@@ -4,12 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { AuthService } from '../../../core/services/auth.service';
 
-export interface DialogData {
-  isLoggedIn: boolean;
-  isAdmin: boolean;
-  isRestaurantMember: boolean;
-}
-
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control): boolean {
     return (control && control.parent.get('password').value !== control.parent.get('password_confirmation').value && control.dirty);
@@ -23,11 +17,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class AuthDialogComponent implements OnInit {
 
-  public dialogData: DialogData = {
-    isLoggedIn: false,
-    isAdmin: false,
-    isRestaurantMember: false
-  };
   public loginForm: FormGroup;
   public registerForm: FormGroup;
   public currentForm = 'loginForm';
@@ -96,10 +85,7 @@ export class AuthDialogComponent implements OnInit {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
     this.auth.login(email, password).subscribe(
-      (user) => {
-        this.dialogData.isLoggedIn = true;
-        this.dialogData.isAdmin = user.isAdmin();
-        this.dialogData.isRestaurantMember = user.isAnyRestaurantMember();
+      () => {
         this.confirmAndClose();
       },
       (err) => {
@@ -115,10 +101,7 @@ export class AuthDialogComponent implements OnInit {
     }
     this.loadingSpinner = true;
     this.auth.register(this.registerForm.value).subscribe(
-      (user) => {
-        this.dialogData.isLoggedIn = true;
-        this.dialogData.isAdmin = user.isAdmin();
-        this.dialogData.isRestaurantMember = user.isAnyRestaurantMember();
+      () => {
         this.confirmAndClose();
       },
       (err) => {
@@ -131,10 +114,7 @@ export class AuthDialogComponent implements OnInit {
   onFacebookLogin() {
     this.loadingSpinner = true;
     this.auth.facebookLogin().subscribe(
-      (user) => {
-          this.dialogData.isLoggedIn = true;
-          this.dialogData.isAdmin = user.isAdmin();
-          this.dialogData.isRestaurantMember = user.isAnyRestaurantMember();
+      () => {
           this.confirmAndClose();
       },
       (err) => {
@@ -147,7 +127,7 @@ export class AuthDialogComponent implements OnInit {
 
   confirmAndClose() {
     this.loadingSpinner = false;
-    this.dialogRef.close(this.dialogData);
+    this.dialogRef.close();
     this.snackBar.show('Zalogowano!');
   }
 

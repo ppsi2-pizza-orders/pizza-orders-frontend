@@ -9,23 +9,15 @@ export class AdminGuard implements CanLoad, CanActivate {
     constructor(private auth: AuthService, private router: Router, private dialogService: DialogService) { }
 
     canLoad() {
-        if (this.auth.isAuthenticated() && this.auth.getUser().isAdmin()) {
+        if (!!this.auth.getUser() && this.auth.getUser().isAdmin()) {
             return true;
         }
-
-        this.dialogService.authDialog().subscribe(data => {
-            if (data && data.isLoggedIn && data.isAdmin ) {
-                this.router.navigate([ 'admin' ]);
-                return true;
-            } else {
-                this.router.navigate([ '*' ]);
-                return false;
-            }
-        });
+        this.router.navigate([ '*' ]);
+        return false;
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this.auth.isAuthenticated() && this.auth.getUser().isAdmin()) {
+        if (!!this.auth.getUser() && this.auth.getUser().isAdmin()) {
             return true;
         }
         this.router.navigate([ '*' ]);

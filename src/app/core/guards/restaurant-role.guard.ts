@@ -13,7 +13,7 @@ export class RestaurantRoleGuard implements CanActivate {
         const hasExpectedRole = expectedRoles
         .some(role => this.auth.getUser().getRestaurantRole(restaurantID) === role);
 
-        if (this.auth.isAuthenticated() && hasExpectedRole) {
+        if (!!this.auth.getUser() && hasExpectedRole) {
             return true;
         }
 
