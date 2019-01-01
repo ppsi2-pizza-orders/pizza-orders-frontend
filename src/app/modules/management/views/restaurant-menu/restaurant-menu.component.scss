@@ -1,0 +1,16 @@
+.app-restaurant-menu{
+    .restaurant-menu-header{
+        h5{
+            display: inline;
+        }
+        button{
+            float: right;
+            color: #fff;
+        }
+    }
+    .restaurant-menu{
+        .menu-item{
+            margin-bottom: 1em;
+        }
+    }
+}
