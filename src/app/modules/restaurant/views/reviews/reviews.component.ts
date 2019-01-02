@@ -13,7 +13,9 @@ export class ReviewsComponent implements OnInit {
 
   ngOnInit() {
     this.restaurantService.currentRestaurant.subscribe(restaurant => {
-      this.restaurantReviews = restaurant.reviews;
+      if (restaurant.reviews) {
+        this.restaurantReviews = restaurant.reviews;
+      }
     });
   }
 

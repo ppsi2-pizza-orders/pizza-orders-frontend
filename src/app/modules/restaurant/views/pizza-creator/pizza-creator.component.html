@@ -1,3 +1,63 @@
-<p>
-  pizza-creator works!
-</p>
+<div class="app-pizza-creator">
+  <div class="dragdrop">
+    <div class="row">
+      <div class="col-md-5">
+          <div class="ingredients-panel">
+            <div class="ingredients">
+              <div 
+              class="ingredient" 
+              *ngFor="let ingredient of displayIngredients" 
+              [appMovable]="true" 
+              [appMovableReset]="true" 
+              appDroppable 
+              [matTooltip]="ingredient.name"
+              (dragStart)="currentIngredient = ingredient">
+                <div [ngStyle]="{'background-image': 'url(' + ingredient.img + ')'}"></div>
+              </div>
+            </div>
+          </div>
+          <div class="navigation-panel">
+            <button mat-icon-button color="primary" (click)="prevPage()"><mat-icon>navigate_before</mat-icon></button>
+            <button mat-icon-button color="primary" (click)="nextPage()"><mat-icon>navigate_next</mat-icon></button>
+          </div>
+      </div>
+      <div class="col col-md-7">
+        <div class="pizza-panel">
+          <div 
+          class="dropzone" 
+          appDropzone 
+          (drop)="moveToDropzone(currentIngredient)" 
+          (remove)="moveToAvailable(currentIngredient)">
+            <div 
+            class="ingredient"
+            *ngFor="let ingredient of dropzoneIngredients" 
+            [appMovable]="true" 
+            [appMovableReset]="false"
+            appDroppable 
+            (dragStart)="currentIngredient = ingredient">
+              <div [ngStyle]="{'background-image': 'url(' + ingredient.img + ')'}"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="summary-panel mat-card">
+    <div class="row align-items-center">
+      <div class="col-md-5">
+        <h5>Dodane składniki:</h5>
+        <mat-chip-list>
+          <mat-chip *ngFor="let ingredient of dropzoneIngredients">
+            {{ ingredient.name }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <div class="col-md-3">
+        <h5 class="text-center">Cena: {{getPrice()}}zł</h5>
+      </div>
+      <div class="col-md-4">
+        <button mat-flat-button (click)="addToOrder()">Dodaj do zamówienia</button>
+      </div>
+    </div>
+  </div>
+</div>

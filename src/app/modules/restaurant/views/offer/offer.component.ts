@@ -6,15 +6,10 @@ import { Component, OnInit } from '@angular/core';
   <div class="app-offer">
   <h4>Oferty</h4>
   <hr>
-  <p>Brak dostępnych ofert.</p>
+  <p class="lead">Brak dostępnych ofert.</p>
   </div>
   `,
-  styles: [`
-    p{
-      font-size: 1.2em;
-      color: #5f5f5f;
-    }
-  `]
+  styles: []
 })
 export class OfferComponent implements OnInit {
 

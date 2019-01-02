@@ -13,7 +13,7 @@
             .cost{
                 text-align: right;
             }
-            @include sm{
+            @include md{
                 text-align: center;
                 .cost{
                     text-align: center;
@@ -21,12 +21,14 @@
             }
         }
         .buttons{
+            display: flex;
+            justify-content: flex-end;
+            @include md{
+                justify-content: center;
+            }
             button{
                 color: #fff;
                 margin: 0 4px;
-                @include xl{
-                    float: right;
-                }
             }
         }
     }

@@ -5,9 +5,6 @@ button:focus {outline:0;}
 .mat-raised-button{
     text-transform: uppercase;
 }
-.mat-flat-button{
-    color: #fff !important;
-}
 a{
     text-decoration: inherit;
     color: inherit;
@@ -22,4 +19,9 @@ a{
     span{
         width: 100% !important;
     }
+}
+p.lead{
+    font-size: 1.2em;
+    color: #5f5f5f;
+    font-weight: 400;
 }
