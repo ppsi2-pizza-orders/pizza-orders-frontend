@@ -59,7 +59,7 @@ export class InformationsComponent implements OnInit, OnDestroy {
       icon: icon({
          iconSize: [ 80, 80 ],
          iconAnchor: [ 0, 40 ],
-         iconUrl: 'assets/dagrasso.jpg'
+         iconUrl: this.restaurant.photo
       })
     });
   }

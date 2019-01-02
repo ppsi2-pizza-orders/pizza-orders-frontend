@@ -39,7 +39,7 @@
         <td mat-cel *matCellDef="let restaurant" [colSpan]="displayedColumns.length">
           <div class="row align-items-center expanded-detail" [ngClass]="{'expand-hidden': restaurant.id !== expandedElement}">
             <div class="col-md-3">
-              <img src="restaurant.photo" alt="" class="img-fluid">
+              <img [src]="restaurant.photo" alt="" class="img-fluid">
             </div>
             <div class="col-md-6">
               <p><span>Właściciel:</span> {{ restaurant.owner.name }}</p>

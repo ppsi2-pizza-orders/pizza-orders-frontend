@@ -1,7 +1,7 @@
 <mat-card class="restaurant-preview">
   <div class="row">
     <div class="col-4">
-      <img class="img-fluid" src="/assets/hanoi.png" alt="">
+      <img class="img-fluid" [src]="orderRestaurant.photo" alt="">
     </div>
     <div class="col-8 align-self-center">
       <h5 *ngIf="orderRestaurant">{{ orderRestaurant.name }}</h5>
