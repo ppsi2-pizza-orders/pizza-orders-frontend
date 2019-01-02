@@ -20,6 +20,7 @@ export class PizzaCreatorComponent implements OnInit {
   public currentIngredient: Ingredient;
   public currentRestaurant: Restaurant;
   private modifiedPizza = false;
+  private modifiedPizzaID: number;
   private modifiedPizzaName: string;
 
   private pizzaPrice = 14;
@@ -96,6 +97,7 @@ export class PizzaCreatorComponent implements OnInit {
       this.dialogService.infoDialog('Proszę dodać przynajmniej 1 składnik!', '', DialogTypes.WARNING);
     } else {
       const pizza = new Pizza({
+        id: this.modifiedPizzaID,
         name: this.modifiedPizza ? `Zmodyfikowana ${this.modifiedPizzaName}` : 'Pizza własna',
         type: this.modifiedPizza ? PIZZA_TYPES.MENU_CUSTOMIZED : PIZZA_TYPES.CUSTOM,
         ingredients: this.dropzoneIngredients,
@@ -124,5 +126,6 @@ export class PizzaCreatorComponent implements OnInit {
 
     this.modifiedPizza = true;
     this.modifiedPizzaName = pizza.name;
+    this.modifiedPizzaID = pizza.id;
   }
 }

@@ -5,6 +5,7 @@ export class Order {
     }
 
     id?: number;
+    restaurant_id?: number;
     token: string;
     status: string;
     delivery_address: string;

@@ -32,6 +32,7 @@ export const API_URLS = {
   GetRestaurant: '/restaurant',
   AddRestaurant: '/restaurant',
   GetAutocomplete: '/restaurants',
+  SendOrder: '/order'
 };
 
 export const ADMIN_API_URLS = {
