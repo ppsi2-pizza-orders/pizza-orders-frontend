@@ -39,7 +39,9 @@ export function jwtTokenGetter() {
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
     SocialLoginModule,
     JwtModule.forRoot({
       config: {
