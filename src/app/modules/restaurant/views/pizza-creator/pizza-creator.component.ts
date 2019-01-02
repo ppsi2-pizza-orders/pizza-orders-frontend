@@ -92,14 +92,18 @@ export class PizzaCreatorComponent implements OnInit {
   }
 
   public addToOrder() {
-    const pizza = new Pizza({
-      name: this.modifiedPizza ? `Zmodyfikowana ${this.modifiedPizzaName}` : 'Pizza własna',
-      type: this.modifiedPizza ? PIZZA_TYPES.MENU_CUSTOMIZED : PIZZA_TYPES.CUSTOM,
-      ingredients: this.dropzoneIngredients,
-      price: this.getPrice().toString()
-    });
+    if (this.dropzoneIngredients.length === 0) {
+      this.dialogService.infoDialog('Proszę dodać przynajmniej 1 składnik!', '', DialogTypes.WARNING);
+    } else {
+      const pizza = new Pizza({
+        name: this.modifiedPizza ? `Zmodyfikowana ${this.modifiedPizzaName}` : 'Pizza własna',
+        type: this.modifiedPizza ? PIZZA_TYPES.MENU_CUSTOMIZED : PIZZA_TYPES.CUSTOM,
+        ingredients: this.dropzoneIngredients,
+        price: this.getPrice().toString()
+      });
 
-    this.orderService.addToOrder(pizza, this.currentRestaurant.id);
+      this.orderService.addToOrder(pizza, this.currentRestaurant.id);
+    }
   }
 
   private refreshPage() {
