@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthService } from '../services';
 import { DialogService } from '../services';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -12,23 +13,22 @@ export class AuthGuard implements CanActivate {
         if (this.auth.isAuthenticated()) {
             return true;
         } else if (this.auth.tokenExists()) {
-            this.auth.refreshToken().subscribe(() => {
+            return this.auth.refreshToken().pipe(map(() => {
                 return true;
-            }, (err) => {
-                return false;
+            }));
+        } else {
+            this.dialogService.authDialog().subscribe(data => {
+                if (this.auth.isAuthenticated()) {
+                    this.router.navigateByUrl(state.url);
+                    return true;
+                } else {
+                  if (!this.router.url.includes('restaurant')) {
+                    this.router.navigate([ '*' ]);
+                  }
+                  return false;
+                }
             });
         }
 
-        this.dialogService.authDialog().subscribe(data => {
-            if (this.auth.isAuthenticated()) {
-                this.router.navigateByUrl(state.url);
-                return true;
-            } else {
-              if (!this.router.url.includes('restaurant')) {
-                this.router.navigate([ '*' ]);
-              }
-              return false;
-            }
-        });
     }
 }
