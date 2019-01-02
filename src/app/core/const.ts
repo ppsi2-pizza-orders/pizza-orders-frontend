@@ -3,6 +3,12 @@ export const ORDER_PICKUP_TYPES = {
     PICKUP: 'pickup',
 };
 
+export const PIZZA_TYPES = {
+    CUSTOM: 'custom',
+    MENU: 'menu',
+    MENU_CUSTOMIZED: 'menu_customized'
+};
+
 export const PAYMENTS = [
     { name: 'blik', img: 'assets/blik.png' },
     { name: 'card', img: 'assets/visa-mastercard.png' },

@@ -11,4 +11,5 @@ export class Pizza implements Product {
     name: string;
     price: string;
     ingredients: Array<Ingredient>;
+    type?: string;
 }

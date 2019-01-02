@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MockIngredients } from 'src/app/shared/mock/mock-ingredients';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Ingredient } from 'src/app/core/models/Ingredient';
 import { Restaurant } from 'src/app/core/models/Restaurant';
 import { RestaurantService } from 'src/app/core/services/restaurant.service';
+import { OrderService, Pizza, DialogService } from 'src/app/core';
+import { PIZZA_TYPES } from 'src/app/core/const';
+import { DialogTypes } from 'src/app/shared/components/info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-pizza-creator',
@@ -16,12 +19,20 @@ export class PizzaCreatorComponent implements OnInit {
   public dropzoneIngredients: Array<Ingredient> = [];
   public currentIngredient: Ingredient;
   public currentRestaurant: Restaurant;
+  private modifiedPizza = false;
+  private modifiedPizzaName: string;
+
   private pizzaPrice = 14;
-  private ingredientsPrice = 3;
+  private ingredientsPrice = 5;
   private currentPage = 0;
   private itemsPerPage = 16;
+  private maxDropzoneIngredients = 9;
 
-  constructor(private route: ActivatedRoute, private restaurantService: RestaurantService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private restaurantService: RestaurantService,
+    private orderService: OrderService,
+    private dialogService: DialogService) { }
 
   public ngOnInit() {
     Object.assign(this.avaiableIngredients, MockIngredients);
@@ -33,12 +44,25 @@ export class PizzaCreatorComponent implements OnInit {
     }
   }
 
-  public move(item: Ingredient, list: Array<Ingredient>): void {
+  public moveToDropzone(item: Ingredient): void {
+    if (this.dropzoneIngredients.length === this.maxDropzoneIngredients) {
+      this.dialogService.infoDialog('Osiągnięto maksymalną ilość składników w pizzy!', '', DialogTypes.WARNING);
+    } else {
+      this.remove(item, this.avaiableIngredients);
+      this.remove(item, this.displayIngredients);
+      this.remove(item, this.dropzoneIngredients);
+
+      this.dropzoneIngredients.push(item);
+      this.refreshPage();
+    }
+  }
+
+  public moveToAvailable(item: Ingredient): void {
     this.remove(item, this.avaiableIngredients);
     this.remove(item, this.displayIngredients);
     this.remove(item, this.dropzoneIngredients);
 
-    list.push(item);
+    this.avaiableIngredients.push(item);
     this.refreshPage();
   }
 
@@ -48,7 +72,7 @@ export class PizzaCreatorComponent implements OnInit {
     }
   }
 
-  public getPrice() {
+  public getPrice(): number {
     return this.pizzaPrice + (this.dropzoneIngredients.length * this.ingredientsPrice);
   }
 
@@ -67,6 +91,17 @@ export class PizzaCreatorComponent implements OnInit {
     }
   }
 
+  public addToOrder() {
+    const pizza = new Pizza({
+      name: this.modifiedPizza ? `Zmodyfikowana ${this.modifiedPizzaName}` : 'Pizza własna',
+      type: this.modifiedPizza ? PIZZA_TYPES.MENU_CUSTOMIZED : PIZZA_TYPES.CUSTOM,
+      ingredients: this.dropzoneIngredients,
+      price: this.getPrice().toString()
+    });
+
+    this.orderService.addToOrder(pizza, this.currentRestaurant.id);
+  }
+
   private refreshPage() {
     const begin = this.currentPage * this.itemsPerPage;
     const end = begin + this.itemsPerPage;
@@ -76,10 +111,14 @@ export class PizzaCreatorComponent implements OnInit {
   private initPizza(id: number) {
     const pizza = this.currentRestaurant.pizzas.filter(p => p.id === id)[0];
     const ingredients = pizza.ingredients.map(i => i.id);
+
     this.avaiableIngredients.forEach(ingredient => {
       if (ingredients.includes(ingredient.id)) {
-        this.move(ingredient, this.dropzoneIngredients);
+        this.moveToDropzone(ingredient);
       }
     });
+
+    this.modifiedPizza = true;
+    this.modifiedPizzaName = pizza.name;
   }
 }

@@ -26,8 +26,8 @@
           <div 
           class="dropzone" 
           appDropzone 
-          (drop)="move(currentIngredient, dropzoneIngredients)" 
-          (remove)="move(currentIngredient, avaiableIngredients)">
+          (drop)="moveToDropzone(currentIngredient)" 
+          (remove)="moveToAvailable(currentIngredient)">
             <div 
             class="ingredient"
             *ngFor="let ingredient of dropzoneIngredients" 
@@ -56,7 +56,7 @@
         <h5 class="text-center">Cena: {{getPrice()}}zł</h5>
       </div>
       <div class="col-md-4">
-        <button mat-flat-button>Dodaj do zamówienia</button>
+        <button mat-flat-button (click)="addToOrder()">Dodaj do zamówienia</button>
       </div>
     </div>
   </div>
