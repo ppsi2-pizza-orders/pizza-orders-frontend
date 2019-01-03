@@ -13,6 +13,15 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
+declare var require: any;
+declare global {
+  interface Window { Echo: any; }
+  interface Window { Pusher: any; }
+}
+
+window.Echo = window.Echo || {};
+window.Pusher = window.Pusher || require('pusher-js');
+
 export function getAuthServiceConfigs() {
   return new AuthServiceConfig(
     [
@@ -39,7 +48,9 @@ export function jwtTokenGetter() {
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
     SocialLoginModule,
     JwtModule.forRoot({
       config: {
@@ -58,4 +69,4 @@ export function jwtTokenGetter() {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

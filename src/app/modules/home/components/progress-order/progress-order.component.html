@@ -1,0 +1,21 @@
+<div class="orders-panel">
+  <mat-card>
+    <div class="row align-items-center">
+      <div class="col-md-12 order-header">
+          <p class="text-left">Zamówienie #{{ order.id }}</p>
+          <p class="text-right">Adres dostawy: {{ order.delivery_address }}</p>
+      </div>
+      <div class="col-lg-8 col-md-12 col-sm-12 order-details">
+        <div *ngFor="let pizza of order.pizzas">
+          <p>{{ pizza.description }} <span class="font-weight-bold">{{ pizza.price }}zł</span></p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 order-status">
+        <h5>Status:
+          <span class="badge badge-pill text-uppercase" [ngClass]="statusClass(order.status)">{{ orderStatusName(order.status) }}</span>
+        </h5>
+        <h5>Łączny koszt: {{ order.price }}zł</h5>
+      </div>
+    </div>
+  </mat-card>
+</div>

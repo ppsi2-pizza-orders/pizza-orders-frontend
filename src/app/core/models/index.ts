@@ -4,3 +4,4 @@ export * from './Pizza';
 export * from './Restaurant';
 export * from './Review';
 export * from './User';
+export * from './Order';

@@ -10,10 +10,12 @@ import { ORDER_PICKUP_TYPES } from 'src/app/core';
 })
 export class OrderPickupComponent implements OnInit {
   public orderPickupForm: FormGroup;
+  public phoneForm: FormGroup;
   public orderPickupTypes = ORDER_PICKUP_TYPES;
   public orderPickupType = ORDER_PICKUP_TYPES.DELIVER;
   @Input() public restaurant: Restaurant;
-  @ViewChild('submit') submit: ElementRef;
+  @ViewChild('submitOrderPickupForm') submitOrderPickupForm: ElementRef;
+  @ViewChild('submitPhoneForm') submitPhoneForm: ElementRef;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -24,17 +26,55 @@ export class OrderPickupComponent implements OnInit {
       house_number: ['', Validators.required],
       flat_number: ['']
     });
+    this.phoneForm = this.formBuilder.group({
+      phone: ['', Validators.required]
+    });
+    console.log(this.restaurant.id);
   }
 
   public isFormValid(): boolean {
+
+    this.submitForms();
+
     if (this.orderPickupType === ORDER_PICKUP_TYPES.DELIVER) {
-      this.submit.nativeElement.click();
       if (!this.orderPickupForm.valid) {
         window.scrollTo(0, 0);
         return false;
       }
     }
+
+    if (!this.phoneForm.valid) {
+      window.scrollTo(0, 0);
+      return false;
+    }
+
     return true;
+  }
+
+  public getPhone(): string {
+    return this.phoneForm.value.phone;
+  }
+
+  public getDeliveryAddress(): string {
+    if (this.orderPickupType === ORDER_PICKUP_TYPES.DELIVER) {
+      const adressData = this.orderPickupForm.value;
+      return `${adressData.street} ${adressData.house_number}/${adressData.flat_number} ${adressData.city}`;
+    } else {
+      return `${this.restaurant.address} ${this.restaurant.city}`;
+    }
+  }
+
+  public getRestaurantID(): number {
+    return this.restaurant.id;
+  }
+
+  private submitForms() {
+    if (!!this.submitOrderPickupForm) {
+      this.submitOrderPickupForm.nativeElement.click();
+    }
+    if (!!this.submitPhoneForm) {
+    this.submitPhoneForm.nativeElement.click();
+    }
   }
 
 }

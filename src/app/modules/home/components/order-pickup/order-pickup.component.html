@@ -32,7 +32,7 @@
               <input matInput formControlName="flat_number" placeholder="Numer mieszkania">
             </mat-form-field>
 
-            <input #submit style="display: none;" type="submit">
+            <input #submitOrderPickupForm style="display: none;" type="submit">
 
           </form>
         </div>
@@ -41,6 +41,17 @@
           <p>{{ restaurant.name }}</p>
           <p>{{ restaurant.address }}</p>
           <p>{{ restaurant.city }}</p>
+        </div>
+        <div class="col-6">
+          <h6>Numer kontaktowy</h6>
+          <form [formGroup]="phoneForm">
+            <mat-form-field>
+              <span matPrefix>+48 &nbsp;</span>
+              <input type="tel" matInput formControlName="phone"> 
+              <mat-error *ngIf="phoneForm.get('phone').invalid">Proszę wypełnić to pole</mat-error>
+            </mat-form-field>
+            <input #submitPhoneForm style="display: none;" type="submit">
+          </form>
         </div>
       </div>
     </mat-card-content>
