@@ -1,0 +1,27 @@
+<div class="app-restaurant-menu">
+  <div class="restaurant-menu-header">
+    <h5>Menu restauracji</h5>
+    <button mat-flat-button color="primary" (click)="add()">Dodaj produkt</button>
+    <hr>
+  </div>
+  <div class="restaurant-menu" *ngIf="restaurant">
+    <div *ngFor="let pizza of restaurant.pizzas">
+      <div class="menu-item">
+        <div class="row content">
+          <div class="title col-sm-7">
+            <h5>{{ pizza.name }}</h5>
+            <span *ngFor="let ingredient of pizza.ingredients; let last = last;">
+              {{ingredient.name}}<ng-container *ngIf="!last">,</ng-container>
+            </span>
+          </div>
+          <div class="cost col-sm-2">
+            <h5>{{ pizza.price }}zł</h5>
+          </div>
+          <div class="buttons col-sm-3">
+            <button mat-flat-button color="primary" matTooltip="Edytuj pizze" (click)="edit(pizza)">Edytuj</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

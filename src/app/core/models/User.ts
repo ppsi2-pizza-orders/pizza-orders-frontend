@@ -33,4 +33,10 @@ export class User {
             return this.restaurants.find(r => r['id'] === restaurantID)['role'];
         }
     }
+
+    public getRestaurantToken(restaurantID: number): string {
+        if (this.isRestaurantMember(restaurantID)) {
+            return this.restaurants.find(r => r['id'] === restaurantID)['token'];
+        }
+    }
 }

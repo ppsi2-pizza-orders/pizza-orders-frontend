@@ -39,6 +39,7 @@ export class ManagementComponent implements OnDestroy, OnInit {
     this.subscription = this.restaurantService.getRestaurant(restaurantId)
     .subscribe(restaurant => {
       this.restaurant = restaurant['data'];
+      this.restaurantService.setCurrentRestaurant(this.restaurant);
       this.loading = false;
     });
     this.subscription.add(this.authService.getObservableUser()
