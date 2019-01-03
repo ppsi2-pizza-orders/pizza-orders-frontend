@@ -1,5 +1,4 @@
 .orders-panel{
-    margin-top: 40px;
     .section-title{
         margin-bottom: 1em;
         color: #9b9b9b;
@@ -16,13 +15,12 @@
     .order-details{
         margin-top: 1em;
         p{
-            text-align: center;
             color: rgba(0, 0, 0, 0.54);
         }
     }
     .order-status{
         margin-top: 1em;
-        text-align: right;
+        text-align: center;
         span{
             padding: 8px;
         }

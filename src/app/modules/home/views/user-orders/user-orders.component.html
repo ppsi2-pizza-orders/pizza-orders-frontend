@@ -2,8 +2,16 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-md-10">
-        <app-progress-orders></app-progress-orders>
-        <app-history-orders></app-history-orders>
+        <ng-container *ngIf="currentOrder">
+          <p class="section-title">Zamówienia w toku</p>          
+          <app-progress-order [order]="currentOrder"></app-progress-order>
+        </ng-container>
+        <ng-container *ngIf="!currentOrder" >
+          <div class="not-found">
+              <mat-icon>error_outline</mat-icon>
+              <h4>Aktualnie brak zamówień.</h4>
+          </div>
+        </ng-container>
       </div>
     </div>
   </div>

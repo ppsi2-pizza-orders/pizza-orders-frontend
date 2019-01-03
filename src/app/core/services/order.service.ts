@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../models';
 import { DialogService } from './dialog.service';
 import { Order } from '../models/Order';
@@ -77,12 +77,44 @@ export class OrderService {
     return this.restaurantID;
   }
 
-  public sendNewOrder(order: Order) {
+  public userOrderTokenExist(): boolean {
+    return !!localStorage.getItem('order_token');
+  }
+
+  public sendNewOrder(order: Order): Observable<Order> {
     return this.apiService.post(API_URLS.SendOrder, order).pipe(map(data => {
-      if (data.token) {
-        localStorage.setItem('order_token', data.token);
+      if (data.data.token) {
+        localStorage.setItem('order_token', data.data.token);
+        return new Order(data.data);
       }
     }));
+  }
+
+  public getOrder(): Observable<Order> {
+    const token = localStorage.getItem('order_token');
+    return this.apiService.get(`${API_URLS.GetOrder}/${token}`).pipe(
+      map(data => {
+        return new Order(data.data);
+      })
+    );
+  }
+
+  public getOrders(restaurantID: number): Observable<Order[]> {
+    const url = `${API_URLS.GetRestaurant}/${restaurantID}/orders`;
+    return this.apiService.get(url).pipe(
+      map(data => {
+        return data.data;
+      })
+    );
+  }
+
+  public nextStatusOrder(token: string): Observable<Order> {
+    const url = `${API_URLS.SendOrder}/${token}/status/next`;
+    return this.apiService.post(url).pipe(
+      map(data => {
+        return new Order(data.data);
+      })
+    );
   }
 
   private storeOrder() {

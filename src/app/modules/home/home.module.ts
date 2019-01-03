@@ -13,7 +13,7 @@ import { OrderPickupComponent } from './components/order-pickup/order-pickup.com
 import { OrderComponent } from './views/order/order.component';
 import { UserDataComponent } from './components/user-data/user-data.component';
 import { OrderCommentComponent } from './components/order-comment/order-comment.component';
-import { ProgressOrdersComponent } from './components/progress-orders/progress-orders.component';
+import { ProgressOrderComponent } from './components/progress-order/progress-order.component';
 import { RestaurantResolverService } from './restaurant-resolver.service';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { RestaurantResolverService } from './restaurant-resolver.service';
     OrderComponent,
     UserOrdersComponent,
     UserSettingsComponent,
-    ProgressOrdersComponent,
+    ProgressOrderComponent,
     HistoryOrdersComponent,
     UserDataComponent,
     SummaryOrderComponent,

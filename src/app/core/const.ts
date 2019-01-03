@@ -1,3 +1,9 @@
+export const STATUS_NEW = 'new';
+export const STATUS_ACCEPTED = 'accepted';
+export const STATUS_REALIZATION = 'realization';
+export const STATUS_DELIVERY = 'delivery';
+export const STATUS_FINISHED = 'finished';
+
 export const ORDER_PICKUP_TYPES = {
     DELIVER: 'deliver',
     PICKUP: 'pickup',
@@ -32,7 +38,8 @@ export const API_URLS = {
   GetRestaurant: '/restaurant',
   AddRestaurant: '/restaurant',
   GetAutocomplete: '/restaurants',
-  SendOrder: '/order'
+  SendOrder: '/order',
+  GetOrder: '/order'
 };
 
 export const ADMIN_API_URLS = {
