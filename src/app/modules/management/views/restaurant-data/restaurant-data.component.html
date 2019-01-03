@@ -8,7 +8,7 @@
   <div class="restaurant-data" *ngIf="restaurant">
     <div class="row">
       <div class="col-md-4">
-        <img src="restaurant.photo" alt="" class="img-fluid">
+        <img [src]="restaurant.photo" alt="" class="img-fluid">
       </div>
       <div class="col-md-8">
         <p><span>Nazwa:</span> {{ restaurant.name }}</p>
