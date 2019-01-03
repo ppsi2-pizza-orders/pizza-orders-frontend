@@ -12,7 +12,7 @@
       </div>
       <div class="col-lg-4 col-md-12 col-sm-12 order-status">
         <h5>Status:
-          <span class="badge badge-pill text-uppercase" [ngClass]="statusClass(order.status)">{{ orderStatusName(order.status) }}</span>
+          <span class="badge badge-pill text-capitalize" [ngClass]="statusClass(order.status)">{{ orderStatusName(order.status) }}</span>
         </h5>
         <h5>Łączny koszt: {{ order.price }}zł</h5>
       </div>

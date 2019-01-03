@@ -29,5 +29,8 @@ export class AppComponent implements OnInit {
       wssPort: 6001,
       disableStats: false
     });
+    window.Echo.connector.pusher.config.auth.headers = {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    };
   }
 }

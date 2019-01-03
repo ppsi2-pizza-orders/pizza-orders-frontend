@@ -118,6 +118,9 @@ export class AuthService {
 
   private handleAuthData(data: any): void {
     localStorage.setItem('token', data['data']['token']);
+    window.Echo.connector.pusher.config.auth.headers = {
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    };
     this.currentUser$.next(this.getUser());
     this.isAuthenticated$.next(true);
   }

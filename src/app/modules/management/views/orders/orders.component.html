@@ -1,27 +1,33 @@
 <div class="app-restaurant-orders">
   <div class="order-filter-buttons">
-    <div class="row">
-      <div class="col-3">
-        <button mat-flat-button color="accent" (click)="filterOrders(0)">Wszystkie</button>
-      </div>
-      <div class="col-3">
-        <button mat-flat-button color="accent" (click)="filterOrders(1)">Nowe</button>
-      </div>
-      <div class="col-3">
-        <button mat-flat-button color="accent" (click)="filterOrders(2)">W realizacji</button>
-      </div>
-      <div class="col-3">
-        <button mat-flat-button color="accent" (click)="filterOrders(3)">Gotowe</button>
+    <mat-tab-group dynamicHeight mat-stretch-tabs (selectedIndexChange)="filterOrders($event)">
+      <mat-tab label="Wszystkie">
+        <ng-container *ngTemplateOutlet="restaurantOrders"></ng-container>
+      </mat-tab>
+      <mat-tab label="Oczekujące">
+        <ng-container *ngTemplateOutlet="restaurantOrders"></ng-container>
+      </mat-tab>
+      <mat-tab label="Przyjęte">
+        <ng-container *ngTemplateOutlet="restaurantOrders"></ng-container>
+      </mat-tab>
+      <mat-tab label="W realizacji">
+        <ng-container *ngTemplateOutlet="restaurantOrders"></ng-container>
+      </mat-tab>
+      <mat-tab label="Dostarczane">
+        <ng-container *ngTemplateOutlet="restaurantOrders"></ng-container>
+      </mat-tab>
+      <mat-tab label="Gotowe">
+        <ng-container *ngTemplateOutlet="restaurantOrders"></ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <ng-template #restaurantOrders>
+    <div class="restaurant-orders">
+      <div class="row">
+        <div class="col-md-4 restaurant-order" *ngFor="let order of fiteredOrders">
+          <app-order-view [order]="order" (status)="onChangeStatus($event)"></app-order-view>
+        </div>
       </div>
     </div>
-  </div>
-  <hr>
-  <div class="restaurant-orders">
-    <div class="row">
-      <div class="col-md-4 restaurant-order" *ngFor="let order of fiteredOrders">
-        <app-order-view [order]="order" (status)="onChangeStatus($event)"></app-order-view>
-      </div>
-    </div>
-  </div>
-
+  </ng-template>
 </div>

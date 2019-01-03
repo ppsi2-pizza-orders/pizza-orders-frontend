@@ -1,183 +1,87 @@
-import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Order } from 'src/app/core/models/Order';
+import {
+  OrderService,
+  RestaurantService,
+  Restaurant,
+  STATUS_NEW,
+  STATUS_ACCEPTED,
+  STATUS_REALIZATION,
+  STATUS_DELIVERY,
+  STATUS_FINISHED,
+  AuthService
+} from 'src/app/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit, OnDestroy {
 
   public orders: Array<Order>;
   public fiteredOrders: Array<Order>;
+  public restaurant: Restaurant;
+  public restaurantToken: string;
+  private currentFilteredStatus = 0;
+  private subscribtion: Subscription;
 
-  constructor() { }
+  constructor(
+    private orderService: OrderService,
+    private restaurantService: RestaurantService,
+    private authService: AuthService) { }
 
   ngOnInit() {
-    this.orders = this.fiteredOrders = [
-      {
-        'id': 2,
-        'token': 'AnUD8OUFXapccnrC',
-        'status': 'new',
-        'price': '29,00',
-        'delivery_address': 'Piastowska 1 Legnica',
-        'phone_number': '123456789',
-        'pizzas': [
-          {
-            'price': '15,00',
-            'description': 'Custom Pizza: sos pomidorowy, ser, szynka',
-            'type': 'custom'
-          },
-          {
-            'price': '14,00',
-            'description': 'Pizza \'Margherita\': sos pomidorowy, ser',
-            'type': 'menu'
-          }
-        ]
-      },
-      {
-        'id': 3,
-        'token': 'GlwXpX54kaQr0mrl',
-        'status': 'new',
-        'price': '58,00',
-        'delivery_address': 'Piastowska 1 Legnica',
-        'phone_number': '123456789',
-        'pizzas': [
-          {
-            'price': '15,00',
-            'description': 'Custom Pizza: sos pomidorowy, ser, szynka',
-            'type': 'custom'
-          },
-          {
-            'price': '14,00',
-            'description': 'Pizza \'Margherita\': sos pomidorowy, ser',
-            'type': 'menu'
-          },
-          {
-            'price': '29,00',
-            'description': 'Zmodyfikowana \'Margherita\': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )',
-            'type': 'menu_customized'
-          }
-        ]
-      },
-      {
-        'id': 4,
-        'token': 'JAJy13AJ9NCNXNcb',
-        'status': 'new',
-        'price': '58,00',
-        'delivery_address': 'Piastowska 1 Legnica',
-        'phone_number': '123456789',
-        'pizzas': [
-          {
-            'price': '15,00',
-            'description': 'Własna Pizza: sos pomidorowy, ser, szynka',
-            'type': 'custom'
-          },
-          {
-            'price': '14,00',
-            'description': 'Pizza \'Margherita\': sos pomidorowy, ser',
-            'type': 'menu'
-          },
-          {
-            'price': '29,00',
-            'description': 'Zmodyfikowana \'Margherita\': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )',
-            'type': 'menu_customized'
-          }
-        ]
-      },
-      {
-        'id': 5,
-        'token': '0By8uAXQJ0tjvoAV',
-        'status': 'realization',
-        'price': '58,00',
-        'delivery_address': 'Piastowska 1 Legnica',
-        'phone_number': '123456789',
-        'pizzas': [
-          {
-            'price': '15,00',
-            'description': 'Własna Pizza: sos pomidorowy, ser, szynka',
-            'type': 'custom'
-          },
-          {
-            'price': '14,00',
-            'description': 'Pizza \'Margherita\': sos pomidorowy, ser',
-            'type': 'menu'
-          },
-          {
-            'price': '29,00',
-            'description': 'Zmodyfikowana \'Margherita\': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )',
-            'type': 'menu_customized'
-          }
-        ]
-      },
-      {
-        'id': 6,
-        'token': 'Yi6e11jaQA0W5L4X',
-        'status': 'new',
-        'price': '58,00',
-        'delivery_address': 'Długa 12 Legnica',
-        'phone_number': '123341111',
-        'pizzas': [
-          {
-            'price': '15,00',
-            'description': 'Własna Pizza: sos pomidorowy, ser, szynka',
-            'type': 'custom'
-          },
-          {
-            'price': '14,00',
-            'description': 'Pizza \'Margherita\': sos pomidorowy, ser',
-            'type': 'menu'
-          },
-          {
-            'price': '29,00',
-            'description': 'Zmodyfikowana \'Margherita\': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )',
-            'type': 'menu_customized'
-          }
-        ]
-      },
-      {
-        'id': 7,
-        'token': 'pb7K1nVx7lRISeYy',
-        'status': 'new',
-        'price': '58,00',
-        'delivery_address': 'Długa 12 Legnica',
-        'phone_number': '123341111',
-        'pizzas': [
-          {
-            'price': '15,00',
-            'description': 'Własna Pizza: sos pomidorowy, ser, szynka',
-            'type': 'custom'
-          },
-          {
-            'price': '14,00',
-            'description': 'Pizza \'Margherita\': sos pomidorowy, ser',
-            'type': 'menu'
-          },
-          {
-            'price': '29,00',
-            'description': 'Zmodyfikowana \'Margherita\': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )',
-            'type': 'menu_customized'
-          }
-        ]
-      }
-    ];
+    this.subscribtion = this.restaurantService.currentRestaurant
+    .subscribe(restaurant => {
+      this.restaurant = restaurant;
+      this.restaurantToken = this.authService.getUser().getRestaurantToken(restaurant.id);
+      this.orderService.getOrders(restaurant.id)
+      .subscribe(orders => {
+        this.orders = orders;
+        this.fiteredOrders = orders;
+        this.initEchoConnector();
+      });
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscribtion.unsubscribe();
+    window.Echo.leave(`restaurant.${this.restaurantToken}`);
+  }
+
+  initEchoConnector() {
+    window.Echo.private(`restaurant.${this.restaurantToken}`).listen('OrderPlaced', (event) => {
+      this.orders.push(event.order);
+      this.filterOrders(this.currentFilteredStatus);
+    });
   }
 
   filterOrders(status: number) {
+    this.currentFilteredStatus = status;
     this.fiteredOrders = this.orders.filter(x => {
       if (status === 1) {
-        return x.status === 'new';
+        return x.status === STATUS_NEW;
       } else if (status === 2) {
-        return x.status === 'realization';
+        return x.status === STATUS_ACCEPTED;
       } else if (status === 3) {
-        return x.status === 'ready';
+        return x.status === STATUS_REALIZATION;
+      } else if (status === 4) {
+        return x.status === STATUS_DELIVERY;
+      } else if (status === 5) {
+        return x.status === STATUS_FINISHED;
       }
       return true;
     });
   }
 
   onChangeStatus(orderToken: string) {
-
+    this.orderService.nextStatusOrder(orderToken).subscribe((order) => {
+      const index = this.orders.findIndex(o => o.token === order.token);
+      this.orders[index].status = order.status;
+      this.filterOrders(this.currentFilteredStatus);
+    });
   }
 
 }

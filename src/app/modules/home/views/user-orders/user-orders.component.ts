@@ -22,9 +22,6 @@ export class UserOrdersComponent implements OnInit, OnDestroy {
   }
 
   initEchoConnector() {
-    window.Echo.connector.pusher.config.auth.headers = {
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
-    };
     window.Echo.private(`order.${this.currentOrder.token}`).listen('OrderStatusChanged', (event) => {
       this.currentOrder.status = event.status;
     });

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Order } from 'src/app/core/models/Order';
+import { orderStatusName, statusClass } from 'src/app/core/utils';
 
 @Component({
   selector: 'app-order-view',
@@ -8,6 +9,8 @@ import { Order } from 'src/app/core/models/Order';
 })
 export class OrderViewComponent implements OnInit {
 
+  public statusName = orderStatusName;
+  public statusClass = statusClass;
   @Input() public order: Order;
   @Output() public status: EventEmitter<string> = new EventEmitter();
 
