@@ -36,7 +36,9 @@
             "stylePreprocessorOptions": {
               "includePaths": ["src"]
             },
-            "scripts": []
+            "scripts": [
+              "node_modules/laravel-echo/dist/echo.js"
+            ]
           },
           "configurations": {
             "production": {
