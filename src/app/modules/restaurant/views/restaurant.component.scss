@@ -1,15 +1,6 @@
 @import 'styles';
 .app-restaurant{
     padding-top: 120px;
-    .sidebar{
-        position: fixed;
-        width: 23%;
-        @include md{
-            position: relative;
-            width: 100%;
-            margin-bottom: 1em;
-        }
-    }
     .spinner{
         display: flex;
         align-items: center;

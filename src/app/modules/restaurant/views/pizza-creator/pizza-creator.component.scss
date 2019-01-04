@@ -2,6 +2,28 @@
 .app-pizza-creator{
     .dragdrop{
         overflow: hidden;
+        .ingredient{
+            cursor: move;
+            user-select: none;
+            width: 80px;
+            height: 80px;
+            margin: 4px;
+            transition: .05s ease-out;
+            float: left;
+            >div{
+                width: 80px;
+                height: 80px;
+                background-size: contain;
+                position: absolute;
+                z-index: 999;
+                transition-duration: .2s;
+            }
+            &.dragging{
+                >div{
+                    transform: scale(1.2);
+                }
+            }
+        }
         .pizza-panel{
             float: right;
             background: url("src/assets/pizza.png") no-repeat 0px 0px;
@@ -19,14 +41,27 @@
                 align-items: center;
                 justify-content: center;
                 flex-flow: wrap;
+                .ingredient{
+                    position: absolute;
+                    width: 400px;
+                    height: 400px;
+                    >div{
+                        width: 400px;
+                        height: 400px;
+                    }
+                    &.dragging{
+                        >div{
+                            transform: scale(.4);
+                        }
+                    }
+                }
             }
         }
         
         .ingredients-panel{
-            width: 100%;
-            float: left;
-            position: absolute;
-            background-size: contain;
+            max-width: 420px;
+            height: 360px;
+            margin: auto;
             .ingredients{
                 width: 100%;
                 display: flex;
@@ -34,52 +69,36 @@
                 justify-content: center;
             }
         }
-
-        .ingredient{
-            cursor: move;
-            user-select: none;
-            width: 80px;
-            height: 80px;
-            margin: 4px;
-            transition: .05s ease-out;
-            float: left;
-            >div{
-                width: 80px;
-                height: 80px;
-                background-size: contain;
-                position: absolute;
-                z-index: 999;
-                transition-duration: .2s;
-            }
-        }
         .col{
             position: inherit;
+        }
+        .row{
+            min-height: 70vh;
+            align-items: center;
+            justify-content: center;
         }
         .navigation-panel{
             display: flex;
             justify-content: center;
             position: relative;
-            margin-top: 355px;
         }
     }
     .summary-panel{
-        margin: 2em 0;
         padding: 1em;
-        background-color: $secondary-color;
-        h5, span{
-            color: #fff;
-        }
+        position: fixed;
+        bottom: 0;
+        width: 72%;
+        background-color: #fff;
         button{
-            color: $secondary-color !important;
             float: right;
+            width: 100%;
+        }
+        @include lg{
+            position: relative;
+            width: auto;
         }
     }
 }
 .dropzone-activated{
     //background: url("src/assets/restaurant.jpg") no-repeat 0px 0px !important;
-}
-.dragging{
-    >div{
-        transform: scale(1.2);
-    }
 }
