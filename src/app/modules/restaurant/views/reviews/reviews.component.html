@@ -1,5 +1,7 @@
 <div class="app-reviews">
   <h4>Opinie użytkowników</h4>
+  <button mat-flat-button color="primary" (click)="rateRestaurant()">Wystaw opinie</button>
+
   <hr>
   <p class="lead" *ngIf="restaurantReviews.length === 0">Ta restauracja nie posiada jeszcze opinii.</p>
   <div class="review" *ngFor="let review of restaurantReviews; last as lastIndex">
@@ -17,7 +19,7 @@
         <app-rating [rating]="review.ingredients_rating" [itemId]="3"></app-rating>
       </div>
       <div class="col-3">
-        <p class="date">{{ review.created_at.date | date:'dd.MM.yyyy' }}</p>
+        <p class="date">{{ review.created_at | date:'dd.MM.yyyy' }}</p>
       </div>
       <div class="col-12">
         <p class="comment">{{ review.comment }}</p>

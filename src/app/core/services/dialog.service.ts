@@ -7,6 +7,7 @@ import {ConfirmDialogComponent} from '../../shared/components/confirm-dialog/con
 import {DialogTypes, InfoDialogComponent} from '../../shared/components/info-dialog/info-dialog.component';
 import {RegisterRestaurantComponent} from '../../shared/components/register-restaurant/register-restaurant.component';
 import { RestaurantEditComponent } from 'src/app/shared/components/restaurant-edit/restaurant-edit.component';
+import { RateDialogComponent } from 'src/app/shared/components/rate-dialog/rate-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,13 @@ export class DialogService {
     let dialogRef: MatDialogRef<RestaurantEditComponent>;
     dialogRef = this.dialog.open(RestaurantEditComponent);
     dialogRef.componentInstance.restaurant = restaurant;
+
+    return dialogRef.beforeClose();
+  }
+
+  public rateDialog() {
+    let dialogRef: MatDialogRef<RateDialogComponent>;
+    dialogRef = this.dialog.open(RateDialogComponent);
 
     return dialogRef.beforeClose();
   }
