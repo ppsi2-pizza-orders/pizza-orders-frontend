@@ -45,7 +45,7 @@ import { JwtInterceptor } from '@auth0/angular-jwt';
       useClass: RefreshTokenInterceptor,
       multi: true
     },
-  ]
+  ],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

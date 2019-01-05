@@ -1,0 +1,46 @@
+<div class="restaurant-edit-dialog">
+  <form class="form" [formGroup]="restaurantForm" (ngSubmit)="onConfirm()">
+    <div mat-dialog-content>
+
+      <mat-form-field class="form-field">
+        <input matInput type="text" formControlName="name" placeholder="Nazwa restauracji">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <input matInput type="text" formControlName="address" placeholder="Adres">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <input matInput type="text" formControlName="city" placeholder="Miasto">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <input matInput type="tel" formControlName="phone" placeholder="Telefon">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <textarea matInput type="text" formControlName="description" placeholder="Opis"></textarea>
+      </mat-form-field>
+
+      <table class="form-field">
+        <tr>
+          <td>
+            <button mat-flat-button class="select-file-button" color="warn" (click)="inputFile.click()" type="button">Wybierz plik</button>
+          </td>
+          <td>
+            <mat-form-field class="form-field input-file">
+              <input matInput type="text" formControlName="filename" readonly>
+            </mat-form-field>
+            <input #inputFile type="file" (change)="selectedImage($event)" style="display:none;" required>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+    <div mat-dialog-actions class="action-button">
+      <button mat-flat-button class="on-confirm" color="primary" type="submit">Zapisz</button>
+    </div>
+
+  </form>
+</div>

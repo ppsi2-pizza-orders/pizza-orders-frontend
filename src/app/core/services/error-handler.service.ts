@@ -16,7 +16,7 @@ export class ErrorHandlerService {
     private router: Router) { }
 
   public handleError(error: HttpErrorResponse) {
-    this.logger.error(error.message);
+    this.logger.error(error);
 
     switch (error.status) {
       case 0:
