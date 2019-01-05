@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { ApiService } from './api.service';
 import { API_URLS} from '../const';
 import { map } from 'rxjs/operators';
+import { ReviewData } from 'src/app/shared/components/rate-dialog/rate-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +50,10 @@ export class RestaurantService {
     const data = { 'email': email, 'role': role };
 
     return this.apiService.post(grantURL, data);
+  }
+
+  public addReview(restaurantID: number, data: ReviewData): Observable<any> {
+    const url = `${API_URLS.AddRestaurant}/${restaurantID}/review`;
+    return this.apiService.post(url, data);
   }
 }

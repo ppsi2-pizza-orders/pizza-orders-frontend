@@ -1,5 +1,11 @@
 .app-reviews{
     margin-bottom: 40px;
+    h4{
+        display: inline;
+    }
+    button{
+        float: right;
+    }
     .review{
         .star-title{
             margin: 0;

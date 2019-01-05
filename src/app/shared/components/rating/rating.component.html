@@ -1,4 +1,4 @@
-<form [class]="clickable ? 'rating' : 'rating nonclick'">
+<form [class]="clickable ? 'rating' : 'rating nonclick'" [style.font-size.px]="size">
   <input type="radio" [name]="inputName" value="5" [checked]="rating===5" />
   <label (click)='onClick(5)'>5 stars</label>
 

@@ -1,0 +1,25 @@
+<div class="app-rate-dialog">
+  <form (ngSubmit)="onConfirm()">
+    <div mat-dialog-content>
+      <div class="review-row">
+        <p class="lead">Składniki pizzy</p>
+        <app-rating class="stars" [size]="24" [clickable]="true" [itemId]="1" (ratingClick)="setRate($event)"></app-rating>
+      </div>
+      <div class="review-row">
+        <p class="lead">Czas dostawy</p>
+        <app-rating class="stars" [size]="24" [clickable]="true" [itemId]="2" (ratingClick)="setRate($event)"></app-rating>
+      </div>
+      <div class="review-row">
+        <p class="lead">Ogólna ocena</p>
+        <app-rating class="stars" [size]="24" [clickable]="true" [itemId]="3" (ratingClick)="setRate($event)"></app-rating>
+      </div>
+      <mat-error *ngIf="formError">Proszę uzupelnić oceny</mat-error>
+      <mat-form-field class="form-field">
+          <textarea matInput type="text" placeholder="Komentarz" name="comment" [(ngModel)]="reviewData.comment" #comment="ngModel"></textarea>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="action-button">
+      <button mat-flat-button class="on-confirm" color="primary" type="submit">Zapisz</button>
+    </div>
+  </form>
+</div>

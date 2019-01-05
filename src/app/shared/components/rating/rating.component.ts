@@ -9,6 +9,7 @@ export class RatingComponent implements OnInit {
   @Input() rating: number;
   @Input() itemId: number;
   @Input() clickable = false;
+  @Input() size = 16;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
 
   inputName: string;
