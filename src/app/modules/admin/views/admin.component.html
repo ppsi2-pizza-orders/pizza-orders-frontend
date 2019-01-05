@@ -20,7 +20,8 @@
         <a [routerLink]="['users']" [routerLinkActive]="['active']" mat-list-item><mat-icon>people</mat-icon>Użytkownicy</a>
         <a [routerLink]="['ingredients']" [routerLinkActive]="['active']" mat-list-item><mat-icon>group_work</mat-icon>Składniki</a>
         <a [routerLink]="['logs']" [routerLinkActive]="['active']" mat-list-item><mat-icon>info</mat-icon>Zdarzenia</a>
-        <a (click)="logout()" mat-list-item><mat-icon>input</mat-icon>Wyloguj</a>
+        <a [routerLink]="['*']" mat-list-item><mat-icon>reply</mat-icon>Wyjście</a>
+        <a (click)="logout()" mat-list-item><mat-icon>exit_to_app</mat-icon>Wyloguj</a>
       </mat-nav-list>
     </mat-sidenav>
 

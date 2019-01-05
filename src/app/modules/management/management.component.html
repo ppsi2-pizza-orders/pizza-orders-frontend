@@ -21,7 +21,8 @@
           <a *ngIf="hasRestaurantRole([role.Owner])" [routerLink]="['restaurant-menu']" [routerLinkActive]="['active']" mat-list-item><mat-icon>scatter_plot</mat-icon>Menu</a>
           <a *ngIf="hasRestaurantRole([role.Owner])" [routerLink]="['employees']" [routerLinkActive]="['active']" mat-list-item><mat-icon>people</mat-icon>Pracownicy</a>
           <a *ngIf="hasRestaurantRole([role.Owner])" [routerLink]="['restaurant-data']" [routerLinkActive]="['active']" mat-list-item><mat-icon>settings</mat-icon>Dane restauracji</a>
-          <a (click)="logout()" mat-list-item><mat-icon>input</mat-icon>Wyloguj</a>
+          <a [routerLink]="['*']" mat-list-item><mat-icon>reply</mat-icon>Wyjście</a>
+          <a (click)="logout()" mat-list-item><mat-icon>exit_to_app</mat-icon>Wyloguj</a>
         </mat-nav-list>
       </mat-sidenav>
   
