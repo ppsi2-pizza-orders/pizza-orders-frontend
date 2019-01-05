@@ -138,8 +138,7 @@ export class AuthDialogComponent implements OnInit {
     const user = this.auth.getUser();
     if (user.isAdmin()) {
       this.router.navigate(['/', 'admin']);
-    }
-    if (user.isAnyRestaurantMember()) {
+    } else if (user.isAnyRestaurantMember()) {
       this.router.navigate(['/', 'management']);
     }
   }

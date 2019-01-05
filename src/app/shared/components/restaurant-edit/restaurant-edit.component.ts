@@ -23,8 +23,8 @@ export class RestaurantEditComponent implements OnInit {
       phone: [this.restaurant.phone, Validators.required],
       address: [this.restaurant.address, Validators.required],
       description: [this.restaurant.description],
-      photo: [''],
-      filename: ['']
+      photo: [],
+      filename: []
     });
   }
 
@@ -35,7 +35,9 @@ export class RestaurantEditComponent implements OnInit {
     uploadData.append('phone', this.restaurantForm.get('phone').value);
     uploadData.append('address', this.restaurantForm.get('address').value);
     uploadData.append('description', this.restaurantForm.get('description').value);
-    uploadData.append('photo', this.restaurantForm.get('photo').value);
+    if (this.restaurantForm.get('photo').value) {
+      uploadData.append('photo', this.restaurantForm.get('photo').value);
+    }
 
     this.dialogRef.close(uploadData);
   }

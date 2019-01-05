@@ -20,7 +20,7 @@ export class RestaurantService {
     return this.apiService.post(API_URLS.GetRestaurants, query);
   }
 
-  public getRestaurant(id: number): Observable<Restaurant> {
+  public getRestaurant(id: number): Observable<any> {
     return this.apiService.get(`${API_URLS.GetRestaurant}/${id}`);
   }
 
@@ -28,7 +28,7 @@ export class RestaurantService {
     return this.apiService.get(API_URLS.GetAutocomplete);
   }
 
-  public addRestaurant(restaurant: Restaurant): Observable<Restaurant> {
+  public addRestaurant(restaurant: Restaurant): Observable<any> {
     return this.apiService.post(API_URLS.AddRestaurant, restaurant);
   }
 

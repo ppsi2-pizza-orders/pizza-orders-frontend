@@ -40,11 +40,11 @@
             <div class="restaurant-box">
               <a [routerLink]="['restaurant', restaurant.id, 'menu']">
                 <mat-card>
-                  <div class="row">
-                    <div class="col-4">
+                  <div class="row align-items-center">
+                    <div class="col-3">
                       <img class="img-fluid" [src]="restaurant.photo" alt="">
                     </div>
-                    <div class="col-8">
+                    <div class="col-9">
                       <div class="title">
                         <h2>{{ restaurant.name }}</h2>
                       </div>
