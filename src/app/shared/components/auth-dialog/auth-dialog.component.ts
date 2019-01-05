@@ -3,6 +3,7 @@ import { MatDialogRef, ErrorStateMatcher } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control): boolean {
@@ -29,7 +30,8 @@ export class AuthDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<AuthDialogComponent>,
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private snackBar: SnackBarService) { }
+    private snackBar: SnackBarService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -126,9 +128,20 @@ export class AuthDialogComponent implements OnInit {
   }
 
   confirmAndClose() {
+    this.checkRoleAndRedirect();
     this.loadingSpinner = false;
     this.dialogRef.close();
     this.snackBar.show('Zalogowano!');
+  }
+
+  checkRoleAndRedirect() {
+    const user = this.auth.getUser();
+    if (user.isAdmin()) {
+      this.router.navigate(['/', 'admin']);
+    }
+    if (user.isAnyRestaurantMember()) {
+      this.router.navigate(['/', 'management']);
+    }
   }
 
 }
