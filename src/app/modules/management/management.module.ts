@@ -28,7 +28,7 @@ import { OrderViewComponent } from './components/order-view/order-view.component
     EmployeesComponent,
     RestaurantDataComponent,
     RestaurantMenuComponent,
-    OrderViewComponent
+    OrderViewComponent,
   ],
   providers: [
   ]

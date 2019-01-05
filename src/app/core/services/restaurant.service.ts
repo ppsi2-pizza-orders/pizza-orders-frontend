@@ -3,9 +3,7 @@ import { Restaurant } from '../models';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { ApiService } from './api.service';
 import { API_URLS} from '../const';
-import { switchMap } from 'rxjs/operators';
-import { AuthService } from './auth.service';
-import { RestaurantRoles } from '..';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +28,16 @@ export class RestaurantService {
     return this.apiService.get(API_URLS.GetAutocomplete);
   }
 
-  public addRestaurant(restaurant: Restaurant) {
+  public addRestaurant(restaurant: Restaurant): Observable<Restaurant> {
     return this.apiService.post(API_URLS.AddRestaurant, restaurant);
+  }
+
+  public uploadRestaurant(restaurantID: number, uploadData: FormData): Observable<Restaurant> {
+    return this.apiService.path(`${API_URLS.AddRestaurant}/${restaurantID}`, uploadData).pipe(
+      map(data => {
+        return new Restaurant(data.data);
+      })
+    );
   }
 
   public setCurrentRestaurant(restaurant: Restaurant) {
