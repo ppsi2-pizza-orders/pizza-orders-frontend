@@ -25,3 +25,10 @@ export const fadeAnimation = trigger('fadeAnimation', [
         )
     ])
 ]);
+
+export const fadeRoute = trigger('fadeRoute', [
+    transition('* <=> *', [
+        style({opacity: '0'}),
+        animate('.2s ease-in-out', style({opacity: '1'}))
+    ])
+]);
