@@ -27,13 +27,11 @@ export class OrderPickupComponent implements OnInit {
       flat_number: ['']
     });
     this.phoneForm = this.formBuilder.group({
-      phone: ['', Validators.required]
+      phone: ['', [Validators.required, Validators.minLength(9)]]
     });
-    console.log(this.restaurant.id);
   }
 
   public isFormValid(): boolean {
-
     this.submitForms();
 
     if (this.orderPickupType === ORDER_PICKUP_TYPES.DELIVER) {

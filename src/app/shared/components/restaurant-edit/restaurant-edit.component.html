@@ -29,7 +29,7 @@
           </td>
           <td>
             <mat-form-field class="form-field input-file">
-              <input matInput type="text" formControlName="filename" readonly>
+              <input matInput type="text" formControlName="filename" placeholder="Zdjęcie" readonly>
             </mat-form-field>
             <input #inputFile type="file" (change)="selectedImage($event)" style="display:none;" required>
           </td>

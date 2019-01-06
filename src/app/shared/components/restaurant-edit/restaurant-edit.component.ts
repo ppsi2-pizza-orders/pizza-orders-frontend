@@ -24,7 +24,7 @@ export class RestaurantEditComponent implements OnInit {
       address: [this.restaurant.address, Validators.required],
       description: [this.restaurant.description],
       photo: [],
-      filename: []
+      filename: [this.restaurant.photo]
     });
   }
 

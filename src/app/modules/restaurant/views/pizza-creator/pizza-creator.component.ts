@@ -62,10 +62,11 @@ export class PizzaCreatorComponent implements OnInit {
     this.displayIngredients = this.avaiableIngredients.slice(0, this.itemsPerPage);
     this.restaurantService.currentRestaurant.subscribe(restaurant => this.currentRestaurant = restaurant);
     const pizzaId = Number(this.route.snapshot.paramMap.get('pizza'));
+    this.totalPrice = this.pizzaPrice;
+
     if (pizzaId) {
       this.initPizza(pizzaId);
     }
-    this.totalPrice = this.pizzaPrice;
   }
 
   public moveToDropzone(item: Ingredient): void {
@@ -118,19 +119,15 @@ export class PizzaCreatorComponent implements OnInit {
   }
 
   public addToOrder() {
-    if (this.dropzoneIngredients.length === 0) {
-      this.dialogService.infoDialog('Proszę dodać przynajmniej 1 składnik!', '', DialogTypes.WARNING);
-    } else {
-      const pizza = new Pizza({
-        id: this.modifiedPizzaID,
-        name: this.modifiedPizza ? `Zmodyfikowana ${this.modifiedPizzaName}` : 'Pizza własna',
-        type: this.modifiedPizza ? PIZZA_TYPES.MENU_CUSTOMIZED : PIZZA_TYPES.CUSTOM,
-        ingredients: this.dropzoneIngredients,
-        price: this.totalPrice.toString()
-      });
+    const pizza = new Pizza({
+      id: this.modifiedPizzaID,
+      name: this.modifiedPizza ? `Zmodyfikowana ${this.modifiedPizzaName}` : 'Pizza własna',
+      type: this.modifiedPizza ? PIZZA_TYPES.MENU_CUSTOMIZED : PIZZA_TYPES.CUSTOM,
+      ingredients: this.dropzoneIngredients,
+      price: this.totalPrice.toString()
+    });
 
-      this.orderService.addToOrder(pizza, this.currentRestaurant.id);
-    }
+    this.orderService.addToOrder(pizza, this.currentRestaurant.id);
   }
 
   private refreshPage() {
@@ -149,6 +146,7 @@ export class PizzaCreatorComponent implements OnInit {
       }
     });
 
+    this.totalPrice = parseFloat(pizza.price);
     this.modifiedPizza = true;
     this.modifiedPizzaName = pizza.name;
     this.modifiedPizzaID = pizza.id;
