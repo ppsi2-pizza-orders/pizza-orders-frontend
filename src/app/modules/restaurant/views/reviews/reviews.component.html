@@ -6,19 +6,19 @@
   <p class="lead" *ngIf="restaurantReviews.length === 0">Ta restauracja nie posiada jeszcze opinii.</p>
   <div class="review" *ngFor="let review of restaurantReviews; last as lastIndex">
     <div class="row">
-      <div class="col-3">
+      <div class="col-sm-3">
         <p class="star-title">Ogólna ocena</p>
         <app-rating [rating]="review.base_rating" [itemId]="1"></app-rating>
       </div>
-      <div class="col-3">
+      <div class="col-sm-3">
         <p class="star-title">Czas dostawy</p>
         <app-rating [rating]="review.delivery_time_rating" [itemId]="2"></app-rating>
       </div>
-      <div class="col-3">
+      <div class="col-sm-3">
         <p class="star-title">Składniki</p>
         <app-rating [rating]="review.ingredients_rating" [itemId]="3"></app-rating>
       </div>
-      <div class="col-3">
+      <div class="col-sm-3">
         <p class="date">{{ review.created_at | date:'dd.MM.yyyy' }}</p>
       </div>
       <div class="col-12">

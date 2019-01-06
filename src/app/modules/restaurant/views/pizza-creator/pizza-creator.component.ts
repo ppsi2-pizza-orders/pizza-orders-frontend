@@ -7,11 +7,32 @@ import { RestaurantService } from 'src/app/core/services/restaurant.service';
 import { OrderService, Pizza, DialogService } from 'src/app/core';
 import { PIZZA_TYPES } from 'src/app/core/const';
 import { DialogTypes } from 'src/app/shared/components/info-dialog/info-dialog.component';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-pizza-creator',
   templateUrl: './pizza-creator.component.html',
-  styleUrls: ['./pizza-creator.component.scss']
+  styleUrls: ['./pizza-creator.component.scss'],
+  animations: [
+  trigger('insertRemoveTrigger', [
+    transition(':enter', [
+      style({ opacity: 0 }),
+      animate('.8s', style({ opacity: 1 }))
+    ]),
+    transition(':leave', [
+      animate('.4s', style({ opacity: 0 }))
+    ])
+  ]),
+  trigger('changePageTrigger', [
+    transition(':enter', [
+      style({ opacity: 0 }),
+      animate('.4s', style({ opacity: 1 }))
+    ]),
+    transition(':leave', [
+      style({ opacity: 0 })
+    ])
+  ]),
+]
 })
 export class PizzaCreatorComponent implements OnInit {
   public avaiableIngredients: Array<Ingredient> = [];
@@ -19,6 +40,7 @@ export class PizzaCreatorComponent implements OnInit {
   public dropzoneIngredients: Array<Ingredient> = [];
   public currentIngredient: Ingredient;
   public currentRestaurant: Restaurant;
+  public totalPrice: number;
   private modifiedPizza = false;
   private modifiedPizzaID: number;
   private modifiedPizzaName: string;
@@ -43,6 +65,7 @@ export class PizzaCreatorComponent implements OnInit {
     if (pizzaId) {
       this.initPizza(pizzaId);
     }
+    this.totalPrice = this.pizzaPrice;
   }
 
   public moveToDropzone(item: Ingredient): void {
@@ -55,6 +78,7 @@ export class PizzaCreatorComponent implements OnInit {
 
       this.dropzoneIngredients.push(item);
       this.refreshPage();
+      this.setPrice();
     }
   }
 
@@ -65,6 +89,7 @@ export class PizzaCreatorComponent implements OnInit {
 
     this.avaiableIngredients.push(item);
     this.refreshPage();
+    this.setPrice();
   }
 
   public remove(item: Ingredient, list: Array<Ingredient>) {
@@ -73,8 +98,8 @@ export class PizzaCreatorComponent implements OnInit {
     }
   }
 
-  public getPrice(): number {
-    return this.pizzaPrice + (this.dropzoneIngredients.length * this.ingredientsPrice);
+  public setPrice(): void {
+    this.totalPrice = this.pizzaPrice + (this.dropzoneIngredients.length * this.ingredientsPrice);
   }
 
   public nextPage() {
@@ -101,7 +126,7 @@ export class PizzaCreatorComponent implements OnInit {
         name: this.modifiedPizza ? `Zmodyfikowana ${this.modifiedPizzaName}` : 'Pizza własna',
         type: this.modifiedPizza ? PIZZA_TYPES.MENU_CUSTOMIZED : PIZZA_TYPES.CUSTOM,
         ingredients: this.dropzoneIngredients,
-        price: this.getPrice().toString()
+        price: this.totalPrice.toString()
       });
 
       this.orderService.addToOrder(pizza, this.currentRestaurant.id);

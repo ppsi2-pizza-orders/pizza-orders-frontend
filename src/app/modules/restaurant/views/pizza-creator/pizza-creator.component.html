@@ -4,7 +4,9 @@
       <div class="col-lg-6">
           <div class="ingredients-panel">
             <div class="ingredients">
-              <div 
+              <div class="ingredients-container">
+                <div 
+                @changePageTrigger
               class="ingredient" 
               *ngFor="let ingredient of displayIngredients" 
               [appMovable]="true" 
@@ -13,6 +15,7 @@
               [matTooltip]="ingredient.name"
               (dragStart)="currentIngredient = ingredient">
                 <div [ngStyle]="{'background-image': 'url(' + ingredient.img + ')'}"></div>
+              </div>
               </div>
             </div>
           </div>
@@ -46,13 +49,13 @@
     <div class="row align-items-center">
       <div class="col-md-6">
         <span class="font-weight-bold">Dodane składniki:</span>
-        <span *ngFor="let ingredient of dropzoneIngredients; let last=last;">
+        <span *ngFor="let ingredient of dropzoneIngredients; let last=last;" @insertRemoveTrigger>
           {{ ingredient.name }}<ng-container *ngIf="!last">,</ng-container>
         </span>
       </div>
       <div class="col-md-3 text-center">
         <span class="font-weight-bold">Cena: </span>
-        <span>{{getPrice()}}zł</span>
+        <span>{{ totalPrice }}zł</span>
       </div>
       <div class="col-md-3">
         <button mat-flat-button color="primary" (click)="addToOrder()">Dodaj do zamówienia</button>

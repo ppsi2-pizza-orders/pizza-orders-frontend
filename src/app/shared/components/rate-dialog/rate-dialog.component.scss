@@ -1,11 +1,16 @@
+@import 'styles';
 .app-rate-dialog{
     .review-row{
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         justify-content: space-between;
         .stars{
             margin-bottom: 5px;
             margin-left: 50px;
+            @include sm{
+                margin-left: 0; 
+            }
         }
     }
     .form-field{
