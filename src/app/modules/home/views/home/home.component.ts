@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit, AfterContentInit {
         });
 
       setTimeout(() => {
-        this.listRestaurant.nativeElement.scrollIntoView({ behavior: 'smooth' });
+        window.scrollTo({ top: (window.innerHeight - 80), behavior: 'smooth' });
       }, 100);
     }
   }
