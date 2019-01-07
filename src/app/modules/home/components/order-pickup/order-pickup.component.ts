@@ -27,7 +27,7 @@ export class OrderPickupComponent implements OnInit {
       flat_number: ['']
     });
     this.phoneForm = this.formBuilder.group({
-      phone: ['', [Validators.required, Validators.minLength(9)]]
+      phone: ['', [Validators.required, Validators.minLength(9), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
     });
   }
 
