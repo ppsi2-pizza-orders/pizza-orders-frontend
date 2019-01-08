@@ -35,9 +35,10 @@ export class DialogService {
     return dialogRef.beforeClose();
   }
 
-  public authDialog() {
+  public authDialog(canRedirect = true) {
     let dialogRef: MatDialogRef<AuthDialogComponent>;
     dialogRef = this.dialog.open(AuthDialogComponent);
+    dialogRef.componentInstance.canRedirect = canRedirect;
 
     return dialogRef.beforeClose();
   }

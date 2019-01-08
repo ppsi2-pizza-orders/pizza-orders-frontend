@@ -3,7 +3,7 @@ import { MatDialogRef, ErrorStateMatcher } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterStateSnapshot } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control): boolean {
@@ -24,6 +24,7 @@ export class AuthDialogComponent implements OnInit {
   public loginError = '';
   public registerError = '';
   public loadingSpinner = false;
+  public canRedirect;
   public matcher = new MyErrorStateMatcher();
 
   constructor(
@@ -135,11 +136,13 @@ export class AuthDialogComponent implements OnInit {
   }
 
   checkRoleAndRedirect() {
-    const user = this.auth.getUser();
-    if (user.isAdmin()) {
-      this.router.navigate(['/', 'admin']);
-    } else if (user.isAnyRestaurantMember()) {
-      this.router.navigate(['/', 'management']);
+    if (this.router.url === '/' && this.canRedirect) {
+      const user = this.auth.getUser();
+      if (user.isAdmin()) {
+        this.router.navigate(['/', 'admin']);
+      } else if (user.isAnyRestaurantMember()) {
+        this.router.navigate(['/', 'management']);
+      }
     }
   }
 
