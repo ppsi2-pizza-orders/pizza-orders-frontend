@@ -1,7 +1,7 @@
 <div class="app-pizza-creator">
   <div class="dragdrop">
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-md-6">
           <div class="ingredients-panel">
             <div class="ingredients">
               <div class="ingredients-container">
@@ -19,12 +19,12 @@
               </div>
             </div>
           </div>
-          <div class="navigation-panel">
+          <div class="navigation-panel" *ngIf="displayIngredients.length > itemsPerPage">
             <button mat-icon-button color="primary" (click)="prevPage()"><mat-icon>navigate_before</mat-icon></button>
             <button mat-icon-button color="primary" (click)="nextPage()"><mat-icon>navigate_next</mat-icon></button>
           </div>
       </div>
-      <div class="col col-lg-6">
+      <div class="col col-md-6">
         <div class="pizza-panel">
           <div 
           class="dropzone" 
