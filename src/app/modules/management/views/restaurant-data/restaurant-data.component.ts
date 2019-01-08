@@ -8,10 +8,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './restaurant-data.component.html',
   styleUrls: ['./restaurant-data.component.scss']
 })
-export class RestaurantDataComponent implements OnInit, OnDestroy {
+export class RestaurantDataComponent implements OnInit {
 
   public restaurant: Restaurant;
-  private subscription: Subscription;
 
   constructor(
     private restaurantService: RestaurantService,
@@ -20,12 +19,8 @@ export class RestaurantDataComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const restaurantID = this.route.parent.snapshot.params['id'];
-    this.subscription = this.restaurantService.getRestaurant(restaurantID)
+    this.restaurantService.getRestaurant(restaurantID)
     .subscribe(restaurant => this.restaurant = restaurant.data);
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   edit() {

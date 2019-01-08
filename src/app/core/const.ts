@@ -39,7 +39,9 @@ export const API_URLS = {
   AddRestaurant: '/restaurant',
   GetAutocomplete: '/restaurants',
   SendOrder: '/order',
-  GetOrder: '/order'
+  GetOrder: '/order',
+  AddPizza: '/restaurant',
+  EditPizza: '/pizza'
 };
 
 export const ADMIN_API_URLS = {

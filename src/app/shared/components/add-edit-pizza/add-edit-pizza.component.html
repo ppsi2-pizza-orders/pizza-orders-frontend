@@ -1,0 +1,20 @@
+<div class="pizza-add-edit-dialog">
+  <form class="form" [formGroup]="pizzaForm" (ngSubmit)="onConfirm()">
+    <div mat-dialog-content>
+
+      <mat-form-field class="form-field">
+        <input matInput type="text" formControlName="name" placeholder="Nazwa pizzy">
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <input matInput type="text" formControlName="price" placeholder="Cena">
+      </mat-form-field>
+
+    </div>
+
+    <div mat-dialog-actions class="action-button">
+      <button mat-flat-button class="on-confirm" color="primary" type="submit">Zapisz</button>
+    </div>
+
+  </form>
+</div>

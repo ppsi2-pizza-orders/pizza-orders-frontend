@@ -18,6 +18,7 @@ import {NavbarComponent} from './components/navbar/navbar.component';
 import {RatingComponent} from './components/rating/rating.component';
 import { RestaurantEditComponent } from './components/restaurant-edit/restaurant-edit.component';
 import { RateDialogComponent } from './components/rate-dialog/rate-dialog.component';
+import { AddEditPizzaComponent } from './components/add-edit-pizza/add-edit-pizza.component';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { RateDialogComponent } from './components/rate-dialog/rate-dialog.compon
     NavbarComponent,
     RatingComponent,
     RestaurantEditComponent,
-    RateDialogComponent
+    RateDialogComponent,
+    AddEditPizzaComponent
   ],
   entryComponents: [
     AuthDialogComponent,
@@ -61,7 +63,8 @@ import { RateDialogComponent } from './components/rate-dialog/rate-dialog.compon
     InfoDialogComponent,
     OrderPreviewComponent,
     RestaurantEditComponent,
-    RateDialogComponent
+    RateDialogComponent,
+    AddEditPizzaComponent
   ],
 })
 export class SharedModule { }

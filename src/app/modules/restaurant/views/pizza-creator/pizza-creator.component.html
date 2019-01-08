@@ -50,7 +50,7 @@
       <div class="col-md-6">
         <span class="font-weight-bold">Dodane składniki:</span>
         <span *ngFor="let ingredient of dropzoneIngredients; let last=last;" @insertRemoveTrigger>
-          {{ ingredient.name }}<ng-container *ngIf="!last">,</ng-container>
+          {{ ingredient.name }}<ng-container *ngIf="!last" >,</ng-container>
         </span>
       </div>
       <div class="col-md-3 text-center">

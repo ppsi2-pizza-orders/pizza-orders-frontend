@@ -65,7 +65,7 @@ export class RestaurantsComponent extends BaseTableViewComponent implements OnIn
   public deleteRestaurant(restaurant: Restaurant) {
     this.dialogService.confirmDialog(`Czy na pewno chcesz usunąć restaurację "${restaurant.name}" ?`)
     .subscribe(result => {
-      if (!!result) {
+      if (result) {
         this.adminService.deleteRestaurant(restaurant.id)
         .subscribe(() => {
           this.performQuery({});

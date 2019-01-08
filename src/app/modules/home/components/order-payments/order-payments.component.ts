@@ -15,7 +15,7 @@ export class OrderPaymentsComponent implements OnInit {
   ngOnInit() {
   }
 
-  public onSubmit(event){
+  public onSubmit(event) {
     this.submit.emit(event);
   }
 

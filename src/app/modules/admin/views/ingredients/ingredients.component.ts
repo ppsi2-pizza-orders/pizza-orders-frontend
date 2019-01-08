@@ -39,7 +39,7 @@ export class IngredientsComponent extends BaseTableViewComponent implements OnIn
   public deleteIngredient(ingredient: Ingredient) {
     this.dialogService.confirmDialog(`Czy na pewno chcesz usunąć składnik "${ingredient.name}" ?`)
     .subscribe(result => {
-      if (!!result) {
+      if (result) {
         this.adminService.deleteIngredients(ingredient.id)
         .subscribe(() => {
           this.performQuery({});

@@ -18,6 +18,7 @@
             <h5>{{ pizza.price }}zł</h5>
           </div>
           <div class="buttons col-sm-3">
+            <button mat-flat-button color="warn" matTooltip="Usuń pizze" (click)="remove(pizza)">Usuń</button>
             <button mat-flat-button color="primary" matTooltip="Edytuj pizze" (click)="edit(pizza)">Edytuj</button>
           </div>
         </div>
