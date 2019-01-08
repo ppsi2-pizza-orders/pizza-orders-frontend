@@ -4,10 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Ingredient } from 'src/app/core/models/Ingredient';
 import { Restaurant } from 'src/app/core/models/Restaurant';
 import { RestaurantService } from 'src/app/core/services/restaurant.service';
-import { OrderService, Pizza, DialogService } from 'src/app/core';
-import { PIZZA_TYPES } from 'src/app/core/const';
+import { OrderService, Pizza, DialogService, ApiService } from 'src/app/core';
+import { PIZZA_TYPES, ADMIN_API_URLS } from 'src/app/core/const';
 import { DialogTypes } from 'src/app/shared/components/info-dialog/info-dialog.component';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pizza-creator',
@@ -55,11 +56,16 @@ export class PizzaCreatorComponent implements OnInit {
     private route: ActivatedRoute,
     private restaurantService: RestaurantService,
     private orderService: OrderService,
-    private dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private apiService: ApiService) { }
 
   public ngOnInit() {
-    Object.assign(this.avaiableIngredients, MockIngredients);
-    this.displayIngredients = this.avaiableIngredients.slice(0, this.itemsPerPage);
+    this.getIngredients().subscribe(data => {
+      console.log(data);
+      Object.assign(this.avaiableIngredients, data.data);
+      this.displayIngredients = this.avaiableIngredients.slice(0, this.itemsPerPage);
+
+    });
     this.restaurantService.currentRestaurant.subscribe(restaurant => this.currentRestaurant = restaurant);
     const pizzaId = Number(this.route.snapshot.paramMap.get('pizza'));
     this.totalPrice = this.pizzaPrice;
@@ -150,5 +156,10 @@ export class PizzaCreatorComponent implements OnInit {
     this.modifiedPizza = true;
     this.modifiedPizzaName = pizza.name;
     this.modifiedPizzaID = pizza.id;
+  }
+
+  // temporary method
+  private getIngredients(): Observable<any> {
+    return this.apiService.get(ADMIN_API_URLS.GetIngredients);
   }
 }
