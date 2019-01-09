@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MockIngredients } from 'src/app/shared/mock/mock-ingredients';
 import { ActivatedRoute } from '@angular/router';
 import { Ingredient } from 'src/app/core/models/Ingredient';
 import { Restaurant } from 'src/app/core/models/Restaurant';
@@ -60,19 +59,19 @@ export class PizzaCreatorComponent implements OnInit {
     private apiService: ApiService) { }
 
   public ngOnInit() {
+    const pizzaId = Number(this.route.snapshot.paramMap.get('pizza'));
+    this.restaurantService.currentRestaurant.subscribe(restaurant => this.currentRestaurant = restaurant);
+    this.totalPrice = this.pizzaPrice;
+
     this.getIngredients().subscribe(data => {
-      console.log(data);
       Object.assign(this.avaiableIngredients, data.data);
       this.displayIngredients = this.avaiableIngredients.slice(0, this.itemsPerPage);
 
-    });
-    this.restaurantService.currentRestaurant.subscribe(restaurant => this.currentRestaurant = restaurant);
-    const pizzaId = Number(this.route.snapshot.paramMap.get('pizza'));
-    this.totalPrice = this.pizzaPrice;
+      if (pizzaId) {
+        this.initPizza(pizzaId);
+      }
 
-    if (pizzaId) {
-      this.initPizza(pizzaId);
-    }
+    });
   }
 
   public moveToDropzone(item: Ingredient): void {
