@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {environment} from '../environments/environment';
 import {Logger, AuthService} from './core/services/';
 import Echo from 'laravel-echo';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,14 @@ import Echo from 'laravel-echo';
 
 export class AppComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) {
+    this.router.events.subscribe(event => {
+     if (event instanceof NavigationEnd) {
+       (<any>window).ga('set', 'page', event.urlAfterRedirects);
+       (<any>window).ga('send', 'pageview');
+     }
+   });
+ }
 
   ngOnInit() {
     if (environment.production) {
