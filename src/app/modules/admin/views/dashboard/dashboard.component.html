@@ -1,3 +1,66 @@
-<p>
-  dashboard works!
-</p>
+<div class="admin-dashboard">
+  <div id="embed-api-auth-container"></div>
+  <h4>Dane witryny z ostatniego miesiąca</h4>
+  <div class="charts" *ngIf="!loadingPage">
+    <div class="row">
+
+      <div class="col-md-12 chart-box">
+        <mat-card>
+          <mat-card-subtitle>Sesje</mat-card-subtitle>
+          <mat-card-content>
+            <div id="sessions-chart"></div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-md-6 chart-box">
+        <mat-card>
+          <mat-card-subtitle>Przeglądarki</mat-card-subtitle>
+          <mat-card-content>
+            <div id="browsers-chart"></div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-md-6 chart-box">
+        <mat-card>
+          <mat-card-subtitle>Urządzenia</mat-card-subtitle>
+          <mat-card-content>
+            <div id="devices-chart"></div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-md-6 chart-box">
+        <mat-card>
+          <mat-card-subtitle>Województwa</mat-card-subtitle>
+          <mat-card-content>
+            <div id="regions-chart"></div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-md-6 chart-box">
+        <mat-card>
+          <mat-card-subtitle>Miasta</mat-card-subtitle>
+          <mat-card-content>
+            <div id="cities-chart"></div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-md-12 chart-box">
+        <mat-card>
+          <mat-card-subtitle>Linki</mat-card-subtitle>
+          <mat-card-content>
+            <div id="routes-chart"></div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+  <div class="loading" [hidden]="!loadingPage">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

@@ -7,5 +7,6 @@ export const environment = {
   blacklist: [
     'api.pizzaorders.pl/auth/*',
   ],
-  pusherKey: 'cPLbjveoWXRthHNQ'
+  pusherKey: 'cPLbjveoWXRthHNQ',
+  clientID: '402418022309-titnjbmrij34qnktjamvb23vip44lhkc.apps.googleusercontent.com'
 };
