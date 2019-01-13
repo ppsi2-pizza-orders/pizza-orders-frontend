@@ -3,24 +3,43 @@
   <form class="form" (ngSubmit)="onConfirm()" *ngIf="!loading">
     <div mat-dialog-content class="ingredient-content">
 
-      <mat-form-field class="form-field">
+      <mat-form-field class="form-field name-field">
         <input matInput id="name" type="text" name="name" [(ngModel)]="ingredientName" #name="ngModel" placeholder="Nazwa składnika" required>
       </mat-form-field>
+
+      <mat-form-field class="form-field">
+          <input matInput id="index" type="number" name="index" [(ngModel)]="ingredientIndex" #index="ngModel" placeholder="Index warstwy">
+        </mat-form-field>
 
       <table class="form-field">
         <tr>
           <td>
-            <button mat-flat-button color="warn" (click)="inputFile.click()" type="button">Wybierz plik</button>
+            <button mat-flat-button color="warn" (click)="imageInputFile.click()" type="button">Wybierz obrazek</button>
           </td>
           <td>
             <mat-form-field class="form-field input-file">
-              <input matInput id="file" type="text" name="file" [(ngModel)]="fileName" #file="ngModel" required readonly>
-              <mat-error *ngIf="file.errors && file.errors.required">Zdjęcie składnika jest wymagane</mat-error>
+              <input matInput id="imageFile" type="text" name="imageFile" [(ngModel)]="imageFileName" #imageFile="ngModel" required readonly>
+              <mat-error *ngIf="imageFile.errors && imageFile.errors.required">Obrazek składnika jest wymagany</mat-error>
             </mat-form-field>
-            <input #inputFile type="file" (change)="selectedImage($event)" style="display:none;" required>
+            <input #imageInputFile type="file" (change)="selectedImage($event)" style="display:none;" required>
           </td>
         </tr>
       </table>
+
+      <table class="form-field">
+          <tr>
+            <td>
+              <button mat-flat-button color="warn" (click)="thumbnailInputFile.click()" type="button">Wybierz miniaturkę</button>
+            </td>
+            <td>
+              <mat-form-field class="form-field input-file">
+                <input matInput id="thumbnailFile" type="text" name="thumbnailFile" [(ngModel)]="thumbnailFileName" #thumbnailFile="ngModel" required readonly>
+                <mat-error *ngIf="thumbnailFile.errors && thumbnailFile.errors.required">Miniaturka składnika jest wymagana</mat-error>
+              </mat-form-field>
+              <input #thumbnailInputFile type="file" (change)="selectedThumbnail($event)" style="display:none;" required>
+            </td>
+          </tr>
+        </table>
 
 
     </div>

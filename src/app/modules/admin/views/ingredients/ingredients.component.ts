@@ -13,7 +13,7 @@ import { AdminService } from '../../admin.service';
 })
 export class IngredientsComponent extends BaseTableViewComponent implements OnInit {
   public ingredients: Ingredient[];
-  public displayedColumns: string[] = ['id', 'image', 'name', 'action'];
+  public displayedColumns: string[] = ['id', 'image', 'thumbnail', 'name', 'action'];
   public dataSource: MatTableDataSource<Ingredient>;
 
   constructor(

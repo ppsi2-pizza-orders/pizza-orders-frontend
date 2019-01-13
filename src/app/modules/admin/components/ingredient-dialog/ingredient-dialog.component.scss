@@ -1,8 +1,11 @@
 @import 'styles';
 .ingredient-dialog{
     min-width: 350px;
-    height: 250px;
+    height: 380px;
     .form{
+        .name-field{
+            width: 100%;
+        }
         .form-field{
             &.input-file{
                 margin-left: 10px;

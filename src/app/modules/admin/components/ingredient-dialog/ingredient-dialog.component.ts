@@ -11,9 +11,12 @@ import { AdminService } from '../../admin.service';
 export class IngredientDialogComponent implements OnInit {
 
   public error = '';
-  public file;
+  public imageFile;
+  public thumbnailFile;
   public ingredientName = '';
-  public fileName = '';
+  public thumbnailFileName = '';
+  public imageFileName = '';
+  public ingredientIndex = 0;
   public loading = false;
   public ingredient: Ingredient;
 
@@ -24,13 +27,15 @@ export class IngredientDialogComponent implements OnInit {
 
   public ngOnInit() {
     if (this.ingredient) {
-      this.fileName = this.ingredient.image;
+      this.imageFileName = this.ingredient.image;
+      this.thumbnailFileName = this.ingredient.thumbnail;
       this.ingredientName = this.ingredient.name;
+      this.ingredientIndex = this.ingredient.index;
     }
   }
 
   public onConfirm() {
-    if (this.fileName === '' || this.ingredientName === '') {
+    if (this.ingredientName === '' || this.imageFileName === '' || this.thumbnailFileName === '') {
       return;
     }
 
@@ -38,17 +43,26 @@ export class IngredientDialogComponent implements OnInit {
     this.loading = true;
 
     if (this.ingredient) {
-      if (this.file) {
-        formData.append('image', this.file);
+
+      if (this.imageFile) {
+        formData.append('image', this.imageFile);
       }
+
+      if (this.thumbnailFile) {
+        formData.append('thumbnail', this.thumbnailFile);
+      }
+
       formData.append('name', this.ingredientName);
+      formData.append('index', this.ingredientIndex.toString());
       this.adminService.updateIngredients(this.ingredient.id, formData)
       .subscribe(() => {
         this.dialogRef.close();
       });
     } else {
       formData.append('name', this.ingredientName);
-      formData.append('image', this.file);
+      formData.append('image', this.imageFile);
+      formData.append('thumbnail', this.thumbnailFile);
+      formData.append('index', this.ingredientIndex.toString());
       this.adminService.addIngredients(formData).subscribe(() => {
         this.dialogRef.close();
       });
@@ -56,7 +70,12 @@ export class IngredientDialogComponent implements OnInit {
   }
 
   public selectedImage(event) {
-    this.file = event.target.files[0];
-    this.fileName = event.target.files[0].name;
+    this.imageFile = event.target.files[0];
+    this.imageFileName = event.target.files[0].name;
+  }
+
+  public selectedThumbnail(event) {
+    this.thumbnailFile = event.target.files[0];
+    this.thumbnailFileName = event.target.files[0].name;
   }
 }

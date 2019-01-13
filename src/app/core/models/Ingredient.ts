@@ -8,5 +8,6 @@ export class Ingredient {
     name: string;
     cost?: number;
     image: string;
-    // available: boolean;
+    thumbnail: string;
+    index: number;
 }
