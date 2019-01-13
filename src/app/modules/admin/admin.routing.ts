@@ -3,7 +3,6 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { Routes } from '@angular/router';
 import { AdminComponent } from './views/admin.component';
 import { RestaurantsComponent } from './views/restaurants/restaurants.component';
-import { LogsComponent } from './views/logs/logs.component';
 import { UsersComponent } from './views/users/users.component';
 import { AdminGuard } from 'src/app/core/guards';
 
@@ -15,7 +14,6 @@ export const routes: Routes = [
       { path: 'restaurants', component: RestaurantsComponent, canActivate: [AdminGuard] },
       { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
       { path: 'ingredients', component: IngredientsComponent, canActivate: [AdminGuard] },
-      { path: 'logs', component: LogsComponent, canActivate: [AdminGuard] },
       { path: '**', redirectTo: '/' }
     ] }
 ];

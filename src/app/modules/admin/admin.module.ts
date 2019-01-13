@@ -8,7 +8,6 @@ import { SharedModule } from '../../shared';
 import { AdminDialogService } from './admin-dialog.service';
 import { IngredientDialogComponent } from './components/ingredient-dialog/ingredient-dialog.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { LogsComponent } from './views/logs/logs.component';
 import { BaseTableViewComponent } from './views/base-table-view/base-table-view.component';
 import { IngredientsComponent } from './views/ingredients/ingredients.component';
 import { UsersComponent } from './views/users/users.component';
@@ -28,7 +27,6 @@ import { AdminService } from './admin.service';
     RestaurantsComponent,
     UsersComponent,
     IngredientsComponent,
-    LogsComponent,
     IngredientDialogComponent,
     BaseTableViewComponent
   ],

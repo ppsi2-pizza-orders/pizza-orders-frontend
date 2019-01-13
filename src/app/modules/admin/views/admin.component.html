@@ -19,7 +19,7 @@
         <a [routerLink]="['restaurants']" [routerLinkActive]="['active']" mat-list-item><mat-icon>store_mall_directory</mat-icon>Restauracje</a>
         <a [routerLink]="['users']" [routerLinkActive]="['active']" mat-list-item><mat-icon>people</mat-icon>Użytkownicy</a>
         <a [routerLink]="['ingredients']" [routerLinkActive]="['active']" mat-list-item><mat-icon>group_work</mat-icon>Składniki</a>
-        <a [routerLink]="['logs']" [routerLinkActive]="['active']" mat-list-item><mat-icon>info</mat-icon>Zdarzenia</a>
+        <a href="https://api.pizzaorders.pl/logs" target="blank" mat-list-item><mat-icon>info</mat-icon>Logi</a>
         <a [routerLink]="['*']" mat-list-item><mat-icon>reply</mat-icon>Wyjście</a>
         <a (click)="logout()" mat-list-item><mat-icon>exit_to_app</mat-icon>Wyloguj</a>
       </mat-nav-list>
