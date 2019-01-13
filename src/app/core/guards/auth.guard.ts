@@ -25,6 +25,7 @@ export class AuthGuard implements CanActivate {
                   if (!this.router.url.includes('restaurant')) {
                     this.router.navigate([ '*' ]);
                   }
+                  this.auth.logout();
                   return false;
                 }
             });

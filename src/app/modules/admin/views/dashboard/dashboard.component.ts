@@ -69,7 +69,8 @@ export class DashboardComponent implements OnInit {
         'metrics': 'ga:pageviews',
         'dimensions': 'ga:pagePath',
         'start-date': '30daysAgo',
-        'end-date': 'today'
+        'end-date': 'today',
+        'max-results': 30
       },
       chart: {
         'container': 'routes-chart',
