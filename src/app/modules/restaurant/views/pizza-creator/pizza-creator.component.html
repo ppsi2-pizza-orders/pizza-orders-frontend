@@ -14,7 +14,7 @@
               appDroppable 
               [matTooltip]="ingredient.name"
               (dragStart)="currentIngredient = ingredient">
-                <div [ngStyle]="{'background-image': 'url(' + ingredient.image + ')'}"></div>
+                <div [ngStyle]="{'background-image': 'url(' + ingredient.thumbnail + ')'}"></div>
               </div>
               </div>
             </div>
@@ -37,8 +37,9 @@
             [appMovable]="true" 
             [appMovableReset]="true"
             appDroppable 
-            (dragStart)="currentIngredient = ingredient">
-              <div [ngStyle]="{'background-image': 'url(' + ingredient.image + ')'}"></div>
+            (dragStart)="currentIngredient = ingredient"
+            [style.z-index]="ingredient.index">
+              <div [style.background-image]="'url(' + ingredient.image + ')'"></div>
             </div>
           </div>
         </div>
