@@ -41,6 +41,7 @@ export class PizzaCreatorComponent implements OnInit {
   public currentIngredient: Ingredient;
   public currentRestaurant: Restaurant;
   public totalPrice: number;
+  public itemsPerPage = 16;
   private modifiedPizza = false;
   private modifiedPizzaID: number;
   private modifiedPizzaName: string;
@@ -48,7 +49,6 @@ export class PizzaCreatorComponent implements OnInit {
   private pizzaPrice = 14;
   private ingredientsPrice = 5;
   private currentPage = 0;
-  private itemsPerPage = 16;
   private maxDropzoneIngredients = 9;
 
   constructor(
