@@ -9,8 +9,11 @@ button:focus {outline:0;}
     color: #fff !important;
 }
 a{
-    text-decoration: inherit;
+    text-decoration: none;
     color: inherit;
+    &:hover{
+        text-decoration: none;
+    }
 }
 .nopadding {
     padding: 0 !important;

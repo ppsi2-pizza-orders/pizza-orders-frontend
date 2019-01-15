@@ -1,6 +1,12 @@
 <div class="admin-dashboard">
   <div id="embed-api-auth-container"></div>
-  <h4>Dane Google Analytics z ostatniego miesiąca</h4>
+  <h4>Dane Google Analytics z ostatniego miesiąca
+    <a mat-flat-button color="primary" class="float-right" target="blank" 
+    href="https://analytics.google.com/analytics/web/?authuser=0#/report/visitors-overview/a121630178w192071752p187903917/_.advseg=&_.useg=&_.sectionId=/">
+      Wszystkie dane
+    </a>
+  </h4>
+  
   <div class="charts" *ngIf="!loadingPage">
     <div class="row">
 
