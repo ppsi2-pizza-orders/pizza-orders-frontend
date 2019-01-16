@@ -1,3 +1,38 @@
-<p>
-  employees works!
-</p>
+<div class="app-restaurant-employees">
+  <div class="restaurant-employees-header">
+    <h5>Dodaj pracownika</h5>
+    <hr>
+  </div>
+  <div class="restaurant-employees">
+
+    <form (ngSubmit)="onAddEmployee()">
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Email" id="email" required [(ngModel)]="grant.email" name="email" #email="ngModel">
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-select placeholder="Rola" [(ngModel)]="grant.role" name="role" #role="ngModel">
+              <mat-option *ngFor="let role of roles" id="role" required [value]="role.index">
+                {{role.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <button mat-flat-button type="submit" color="primary">Dodaj pracownika</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br>
+  <div class="restaurant-employees-header">
+    <h5>Pracownicy restauracji</h5>
+    <hr>
+  </div>
+  <div class="restaurant-employees">
+
+  </div>
+</div>

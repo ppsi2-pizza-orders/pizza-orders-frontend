@@ -1,0 +1,19 @@
+.app-restaurant-employees{
+    .restaurant-employees-header{
+        h5{
+            display: inline;
+        }
+        button{
+            float: right;
+            color: #fff;
+        }
+    }
+    .restaurant-employees{
+        .employee-item{
+            margin-bottom: 1em;
+        }
+        button{
+            margin-left: 10px;
+        }
+    }
+}
