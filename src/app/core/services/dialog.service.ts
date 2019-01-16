@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { AuthDialogComponent } from 'src/app/shared/components/auth-dialog/auth-dialog.component';
-import { Product, Restaurant, Pizza } from '../models';
+import { Product, Restaurant, Pizza, Ingredient } from '../models';
 import {OrderPreviewComponent} from '../../shared/components/order-preview/order-preview.dialog';
 import {ConfirmDialogComponent} from '../../shared/components/confirm-dialog/confirm-dialog.component';
 import {DialogTypes, InfoDialogComponent} from '../../shared/components/info-dialog/info-dialog.component';
@@ -71,17 +71,19 @@ export class DialogService {
     return dialogRef.beforeClose();
   }
 
-  addPizza() {
+  addPizza(ingredients: Ingredient[]) {
     let dialogRef: MatDialogRef<AddEditPizzaComponent>;
     dialogRef = this.dialog.open(AddEditPizzaComponent);
+    dialogRef.componentInstance.ingredients = ingredients;
 
     return dialogRef.beforeClose();
   }
 
-  editPizza(pizza: Pizza) {
+  editPizza(ingredients: Ingredient[], pizza: Pizza) {
     let dialogRef: MatDialogRef<AddEditPizzaComponent>;
     dialogRef = this.dialog.open(AddEditPizzaComponent);
     dialogRef.componentInstance.pizza = pizza;
+    dialogRef.componentInstance.ingredients = ingredients;
 
     return dialogRef.beforeClose();
   }

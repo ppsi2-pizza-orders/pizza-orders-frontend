@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Restaurant, RestaurantService, Pizza, DialogService } from 'src/app/core';
-import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -24,7 +23,7 @@ export class RestaurantMenuComponent implements OnInit {
   }
 
   add() {
-    this.dialogService.addPizza().subscribe(data => {
+    this.dialogService.addPizza(this.restaurant.ingredients).subscribe(data => {
       if (data) {
         this.restaurantService.addPizzaToMenu(this.restaurant.id, new Pizza(data))
           .subscribe(() => {
@@ -35,7 +34,7 @@ export class RestaurantMenuComponent implements OnInit {
   }
 
   edit(pizza: Pizza) {
-    this.dialogService.editPizza(pizza).subscribe(data => {
+    this.dialogService.editPizza(this.restaurant.ingredients, pizza).subscribe(data => {
       if (data) {
         this.restaurantService.editMenuPizza(pizza.id, new Pizza(data))
           .subscribe(() => {
