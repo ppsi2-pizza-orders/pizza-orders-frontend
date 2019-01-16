@@ -41,7 +41,7 @@ export const API_URLS = {
   SendOrder: '/order',
   GetOrder: '/order',
   AddPizza: '/restaurant',
-  EditPizza: '/pizza'
+  EditPizza: '/restaurant'
 };
 
 export const ADMIN_API_URLS = {

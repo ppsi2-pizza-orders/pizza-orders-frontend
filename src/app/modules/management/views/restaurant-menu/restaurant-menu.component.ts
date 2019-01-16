@@ -36,7 +36,7 @@ export class RestaurantMenuComponent implements OnInit {
   edit(pizza: Pizza) {
     this.dialogService.editPizza(this.restaurant.ingredients, pizza).subscribe(data => {
       if (data) {
-        this.restaurantService.editMenuPizza(pizza.id, new Pizza(data))
+        this.restaurantService.editMenuPizza(this.restaurant.id, pizza.id, new Pizza(data))
         .subscribe(() => {
           this.ngOnInit();
         });
@@ -48,7 +48,7 @@ export class RestaurantMenuComponent implements OnInit {
     this.dialogService.confirmDialog(`Czy na pewno chcesz usunąć pizze ${pizza.name}?`)
     .subscribe(result => {
       if (result) {
-        this.restaurantService.removeMenuPizza(pizza.id)
+        this.restaurantService.removeMenuPizza(this.restaurant.id, pizza.id)
         .subscribe(() => {
           this.ngOnInit();
         });

@@ -62,13 +62,13 @@ export class RestaurantService {
     return this.apiService.post(url, pizza);
   }
 
-  public editMenuPizza(pizzaID: number, pizza: Pizza) {
-    const url = `${API_URLS.EditPizza}/${pizzaID}`;
+  public editMenuPizza(restaurantID: number, pizzaID: number, pizza: Pizza) {
+    const url = `${API_URLS.EditPizza}/${restaurantID}/pizza/${pizzaID}`;
     return this.apiService.path(url, pizza);
   }
 
-  public removeMenuPizza(pizzaID: number) {
-    const url = `${API_URLS.EditPizza}/${pizzaID}`;
+  public removeMenuPizza(restaurantID: number, pizzaID: number) {
+    const url = `${API_URLS.EditPizza}/${restaurantID}/pizza/${pizzaID}`;
     return this.apiService.delete(url);
   }
 
