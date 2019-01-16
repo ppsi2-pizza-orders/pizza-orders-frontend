@@ -50,5 +50,6 @@ export const ADMIN_API_URLS = {
   DeleteIngredient: '/ingredient',
   DeleteRestaurant: '/restaurant',
   GetRestaurants: '/admin/restaurants',
+  StatusRestaurant: '/admin/restaurant',
   GetUsers: '/admin/users'
 };

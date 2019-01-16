@@ -25,6 +25,11 @@
         <td mat-cell *matCellDef="let restaurant"> {{restaurant.created_at}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="confirmed">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Aktywna </th>
+          <td mat-cell *matCellDef="let restaurant"> {{restaurant.confirmed ? 'TAK' : 'NIE'}} </td>
+        </ng-container>
+
       <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
           <td mat-cell *matCellDef="let restaurant">
@@ -48,8 +53,8 @@
               <p><span>Adres:</span> {{ restaurant.address }}</p>
             </div>
             <div class="col-md-3">
-              <button mat-flat-button color="primary">Aktywuj</button>
-              <button mat-flat-button color="warn" (click)="deleteRestaurant(restaurant)">Usuń</button>
+              <button mat-flat-button color="primary"(click)="activateRestaurant(restaurant)" [disabled]="!restaurant.visible || restaurant.confirmed">Aktywuj</button>
+              <button mat-flat-button color="warn" (click)="blockRestaurant(restaurant)" [disabled]="!restaurant.visible || !restaurant.confirmed">Zablokuj</button>
             </div>
           </div>
         </td>

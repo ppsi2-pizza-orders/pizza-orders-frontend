@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { BaseTableViewComponent } from '../base-table-view/base-table-view.component';
 import {AdminService} from '../../admin.service';
-import { DialogService } from 'src/app/core';
+import { DialogService, SnackBarService } from 'src/app/core';
 
 @Component({
   selector: 'app-restaurants',
@@ -20,13 +20,14 @@ import { DialogService } from 'src/app/core';
 })
 export class RestaurantsComponent extends BaseTableViewComponent implements OnInit {
   public restaurants: Restaurant[];
-  public displayedColumns: string[] = ['id', 'name', 'city', 'created_at', 'action'];
+  public displayedColumns: string[] = ['id', 'name', 'city', 'created_at', 'confirmed', 'action'];
   public dataSource: MatTableDataSource<Restaurant>;
   public expandedElement: any;
 
   constructor(
     private adminService: AdminService,
-    private dialogService: DialogService) {
+    private dialogService: DialogService,
+    private snackBarService: SnackBarService) {
     super();
   }
 
@@ -71,6 +72,22 @@ export class RestaurantsComponent extends BaseTableViewComponent implements OnIn
           this.performQuery({});
         });
       }
+    });
+  }
+
+  public activateRestaurant(restaurant: Restaurant) {
+    this.adminService.publishRestaurant(restaurant.id)
+    .subscribe(() => {
+      this.snackBarService.show('Restauracja aktywna!');
+      this.performQuery({});
+    });
+  }
+
+  public blockRestaurant(restaurant: Restaurant) {
+    this.adminService.hideRestaurant(restaurant.id)
+    .subscribe(() => {
+      this.snackBarService.show('Restauracja zablokowana!');
+      this.performQuery({});
     });
   }
 

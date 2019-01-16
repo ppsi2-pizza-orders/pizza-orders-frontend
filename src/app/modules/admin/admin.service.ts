@@ -36,4 +36,12 @@ export class AdminService {
   public deleteRestaurant(id: number) {
     return this.apiService.delete(`${ADMIN_API_URLS.DeleteRestaurant}/${id}`);
   }
+
+  public publishRestaurant(id: number) {
+    return this.apiService.post(`${ADMIN_API_URLS.StatusRestaurant}/${id}/publish`, {});
+  }
+
+  public hideRestaurant(id: number) {
+    return this.apiService.post(`${ADMIN_API_URLS.StatusRestaurant}/${id}/hide`, {});
+  }
 }
