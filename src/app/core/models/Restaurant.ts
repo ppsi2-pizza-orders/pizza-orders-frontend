@@ -21,4 +21,6 @@ export class Restaurant {
     reviews?: Array<Review>;
     pizzas?: Array<Pizza>;
     ingredients?: Array<Ingredient>;
+    visible: boolean;
+    confirmed: boolean;
 }
