@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Restaurant, Pizza } from '../models';
+import { Restaurant, Pizza, Ingredient } from '../models';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import { ApiService } from './api.service';
 import { API_URLS} from '../const';
@@ -70,5 +70,10 @@ export class RestaurantService {
   public removeMenuPizza(pizzaID: number) {
     const url = `${API_URLS.EditPizza}/${pizzaID}`;
     return this.apiService.delete(url);
+  }
+
+  public addIngredient(restaurantID: number, ingredient: Ingredient) {
+    const url = `${API_URLS.AddPizza}/${restaurantID}/manage`;
+    return this.apiService.post(url, ingredient);
   }
 }

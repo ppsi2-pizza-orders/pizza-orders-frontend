@@ -54,7 +54,7 @@ import { AddEditPizzaComponent } from './components/add-edit-pizza/add-edit-pizz
     RatingComponent,
     RestaurantEditComponent,
     RateDialogComponent,
-    AddEditPizzaComponent
+    AddEditPizzaComponent,
   ],
   entryComponents: [
     AuthDialogComponent,

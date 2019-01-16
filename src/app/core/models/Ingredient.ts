@@ -10,4 +10,6 @@ export class Ingredient {
     image: string;
     thumbnail: string;
     index: number;
+    price: number;
+    available: any;
 }

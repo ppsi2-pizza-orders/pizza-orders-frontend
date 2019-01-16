@@ -1,3 +1,56 @@
-<p>
-  store works!
-</p>
+<div class="app-restaurant-store">
+  <div class="restaurant-store-header">
+    <div class="row align-items-center">
+      <div class="col-sm-6">
+        <h5>Dostępne składniki</h5>
+      </div>
+      <div class="col-sm-6">
+          <div class="add-ingredient">
+              <mat-form-field>
+                  <mat-select placeholder="Składniki" [(ngModel)]="selectedIngredient">
+                    <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient.id">
+                      {{ingredient.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              <button mat-flat-button color="primary" (click)="add()">Dodaj składnik</button>
+          </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="restaurant-store" *ngIf="restaurant">
+    <div *ngFor="let ingredient of restaurant.ingredients">
+      <form (ngSubmit)="onSubmit(ingredient)" #ingredientForm="ngForm">
+
+        <div class="store-item">
+          <div class="row content align-items-center">
+            <div class="image col-sm-1">
+                <img [src]="ingredient.thumbnail" class="img-fluid">
+              </div>
+            <div class="title col-sm-4">
+              <h5>{{ ingredient.name }}</h5>
+            </div>
+            <div class="cost col-sm-2">
+                <mat-slide-toggle
+                [id]="ingredient.name" [(ngModel)]="ingredient.available" [name]="ingredient.name"
+                color="primary"
+                [checked]="ingredient.available">
+                <span>{{ ingredient.available ? 'Dostępny': 'Niedostępny' }}</span>
+                </mat-slide-toggle>
+            </div>
+            <div class="cost col-sm-2">
+              <mat-form-field class="">
+                <input matInput type="number" id="price" [(ngModel)]="ingredient.price" name="price"
+                  placeholder="Cena (zł)">
+              </mat-form-field>
+            </div>
+            <div class="buttons col-sm-3">
+              <button mat-flat-button color="primary" type="submit" matTooltip="Usuń cenę">Zapisz</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
