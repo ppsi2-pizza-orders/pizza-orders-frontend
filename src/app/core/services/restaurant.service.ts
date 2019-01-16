@@ -80,4 +80,12 @@ export class RestaurantService {
     const url = `${API_URLS.AddPizza}/${restaurantID}/manage`;
     return this.apiService.post(url, ingredient);
   }
+
+  public publishRestaurant(id: number) {
+    return this.apiService.post(`${API_URLS.AddRestaurant}/${id}/publish/request`);
+  }
+
+  public hideRestaurant(id: number) {
+    return this.apiService.post(`${API_URLS.AddRestaurant}/${id}/publish/cancel`);
+  }
 }
