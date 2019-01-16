@@ -37,9 +37,9 @@ export class RestaurantMenuComponent implements OnInit {
     this.dialogService.editPizza(this.restaurant.ingredients, pizza).subscribe(data => {
       if (data) {
         this.restaurantService.editMenuPizza(pizza.id, new Pizza(data))
-          .subscribe(() => {
-            this.ngOnInit();
-          });
+        .subscribe(() => {
+          this.ngOnInit();
+        });
       }
     });
   }

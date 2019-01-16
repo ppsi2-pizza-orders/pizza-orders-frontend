@@ -39,14 +39,14 @@ export class AddEditPizzaComponent implements OnInit {
     if (this.pizza) {
       this.pizzaForm = this.formBuilder.group({
         name: [this.pizza.name, [Validators.required]],
-        price: [this.pizza.price, Validators.required],
+        price: [parseFloat(this.pizza.price), Validators.required],
         ingredients: []
       });
       this.pizza.ingredients.forEach(ingredient => this.addedIngredients.push(ingredient));
     } else {
       this.pizzaForm = this.formBuilder.group({
         name: ['', [Validators.required]],
-        price: ['', Validators.required],
+        price: [0, Validators.required],
         ingredients: []
       });
     }
