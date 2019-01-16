@@ -55,22 +55,21 @@ export class PizzaCreatorComponent implements OnInit {
     private route: ActivatedRoute,
     private restaurantService: RestaurantService,
     private orderService: OrderService,
-    private dialogService: DialogService,
-    private apiService: ApiService) { }
+    private dialogService: DialogService) { }
 
   public ngOnInit() {
     const pizzaId = Number(this.route.snapshot.paramMap.get('pizza'));
     this.restaurantService.currentRestaurant.subscribe(restaurant => this.currentRestaurant = restaurant);
     this.totalPrice = this.pizzaPrice;
 
-    this.getIngredients().subscribe(data => {
+    this.restaurantService.getRestaurantIngredients(this.currentRestaurant.id)
+    .subscribe(data => {
       Object.assign(this.avaiableIngredients, data.data);
+      this.filterUnavailableIngredients();
       this.displayIngredients = this.avaiableIngredients.slice(0, this.itemsPerPage);
-
       if (pizzaId) {
         this.initPizza(pizzaId);
       }
-
     });
   }
 
@@ -105,7 +104,10 @@ export class PizzaCreatorComponent implements OnInit {
   }
 
   public setPrice(): void {
-    this.totalPrice = this.pizzaPrice + (this.dropzoneIngredients.length * this.ingredientsPrice);
+    const ingredientPrice = this.dropzoneIngredients.reduce((value, ingredient) => {
+      return value + ingredient.price;
+    }, 0);
+    this.totalPrice = this.pizzaPrice + ingredientPrice;
   }
 
   public nextPage() {
@@ -157,8 +159,7 @@ export class PizzaCreatorComponent implements OnInit {
     this.modifiedPizzaID = pizza.id;
   }
 
-  // temporary method
-  private getIngredients(): Observable<any> {
-    return this.apiService.get(ADMIN_API_URLS.GetIngredients);
+  filterUnavailableIngredients() {
+    this.avaiableIngredients = this.avaiableIngredients.filter(ingredient => ingredient.available === true);
   }
 }

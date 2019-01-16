@@ -72,6 +72,10 @@ export class RestaurantService {
     return this.apiService.delete(url);
   }
 
+  public getRestaurantIngredients(restaurantID: number) {
+    return this.apiService.get(`${API_URLS.AddRestaurant}/${restaurantID}/ingredients`);
+  }
+
   public addIngredient(restaurantID: number, ingredient: Ingredient) {
     const url = `${API_URLS.AddPizza}/${restaurantID}/manage`;
     return this.apiService.post(url, ingredient);
