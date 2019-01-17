@@ -33,6 +33,14 @@
     <hr>
   </div>
   <div class="restaurant-employees">
-
+    <div class="row">
+      <div class="col-md-12" *ngFor="let user of restaurant.users">
+        <div class="emplyee-row">
+          <p>{{ user.name }}</p>
+          <p><span>rola:</span> {{ getRoleName(user.role) }}</p>
+          <button mat-flat-button color="warn" (click)="onRemoveEmployee(user.id)">Usuń</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

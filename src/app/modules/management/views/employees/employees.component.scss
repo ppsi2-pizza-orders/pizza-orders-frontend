@@ -9,8 +9,17 @@
         }
     }
     .restaurant-employees{
-        .employee-item{
-            margin-bottom: 1em;
+        .emplyee-row{
+            display: flex;
+            align-items: center;
+            padding: 1em 0;
+            p{
+                margin: 0;
+                width: 200px;
+                span{
+                    font-weight: bold;
+                }
+            }
         }
         button{
             margin-left: 10px;

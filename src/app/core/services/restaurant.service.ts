@@ -52,6 +52,12 @@ export class RestaurantService {
     return this.apiService.post(grantURL, data);
   }
 
+  public removeUser(userID: number, restaurantID: number) {
+    const url = `${API_URLS.AddRestaurant}/${restaurantID}/revoke/${userID}`;
+
+    return this.apiService.delete(url);
+  }
+
   public addReview(restaurantID: number, data: ReviewData): Observable<any> {
     const url = `${API_URLS.AddRestaurant}/${restaurantID}/review`;
     return this.apiService.post(url, data);

@@ -23,4 +23,5 @@ export class Restaurant {
     ingredients?: Array<Ingredient>;
     visible: boolean;
     confirmed: boolean;
+    users: Array<any>;
 }
