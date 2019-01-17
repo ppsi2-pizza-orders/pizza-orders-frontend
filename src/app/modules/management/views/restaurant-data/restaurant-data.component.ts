@@ -40,7 +40,7 @@ export class RestaurantDataComponent implements OnInit {
       this.ngOnInit();
     },
     (err) => {
-      this.snackBarService.show('Nie można aktywować restauracji!');
+      this.snackBarService.show(err);
     });
   }
 
@@ -51,7 +51,7 @@ export class RestaurantDataComponent implements OnInit {
       this.ngOnInit();
     },
     (err) => {
-      this.snackBarService.show('Wystąpił błąd!');
+      this.snackBarService.show(err);
     });
   }
 

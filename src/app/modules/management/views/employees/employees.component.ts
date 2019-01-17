@@ -41,7 +41,7 @@ export class EmployeesComponent implements OnInit {
       this.ngOnInit();
     },
     (err) => {
-      this.snackBarService.show('Nie mona dodać tego użytkownika!');
+      this.snackBarService.show(err);
     });
   }
 
@@ -52,7 +52,7 @@ export class EmployeesComponent implements OnInit {
       this.ngOnInit();
     },
     (err) => {
-      this.snackBarService.show('Nie można usunąć tego użytkownika!');
+      this.snackBarService.show(err);
     });
   }
 

@@ -152,8 +152,8 @@ export class PizzaCreatorComponent implements OnInit {
       if (ingredients.includes(ingredient.id)) {
         dropzone.push(ingredient);
       }
-    });
-
+    })
+;
     dropzone.forEach(ingredient => this.moveToDropzone(ingredient));
 
     this.totalPrice = parseFloat(pizza.price);
