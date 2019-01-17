@@ -29,6 +29,8 @@ export class StoreComponent implements OnInit {
 
   onSubmit(ingredient: Ingredient) {
     ingredient['ingredient_id'] = ingredient.id;
+    delete ingredient['id'];
+    console.log(ingredient);
     this.restaurantService.addIngredient(this.restaurant.id, ingredient)
     .subscribe(() => {
       this.snackBarService.show('Zapisano!');
