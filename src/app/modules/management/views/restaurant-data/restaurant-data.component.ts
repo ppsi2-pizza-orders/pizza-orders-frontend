@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Restaurant, RestaurantService, DialogService, SnackBarService } from 'src/app/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Restaurant, RestaurantService, DialogService, SnackBarService, AuthService } from 'src/app/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -16,7 +15,8 @@ export class RestaurantDataComponent implements OnInit {
     private restaurantService: RestaurantService,
     private dialogService: DialogService,
     private route: ActivatedRoute,
-    private snackBarService: SnackBarService) { }
+    private snackBarService: SnackBarService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     const restaurantID = this.route.parent.snapshot.params['id'];
@@ -52,6 +52,21 @@ export class RestaurantDataComponent implements OnInit {
     },
     (err) => {
       this.snackBarService.show(err);
+    });
+  }
+
+  remove() {
+    this.dialogService.confirmDialog('Czy napewno chcesz usunąć restaurację?')
+    .subscribe(data => {
+      if (data) {
+        this.restaurantService.removeRestaurant(this.restaurant.id)
+        .subscribe(resp => {
+          this.snackBarService.show(resp.messages[0]);
+          setTimeout(() => {
+            this.authService.logout();
+          }, 1500);
+        });
+      }
     });
   }
 

@@ -6,6 +6,7 @@
     matTooltip="Restauracja będzie widoczna w wynikach wyszukiwania po zatwierdzeniu przez administratora.">Aktywuj restaurację</button>
     <button *ngIf="restaurant && restaurant.visible" mat-flat-button color="warn" (click)="hide()" 
     matTooltip="Restauracja zostanie ukryta w wynikach wyszukiwania.">Ukryj restaurację</button>
+    <button mat-flat-button color="warn" (click)="remove()">Usuń restaurację</button>
     <hr>
   </div>
   <div class="restaurant-data" *ngIf="restaurant">

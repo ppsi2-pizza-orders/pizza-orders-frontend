@@ -94,4 +94,8 @@ export class RestaurantService {
   public hideRestaurant(id: number) {
     return this.apiService.post(`${API_URLS.AddRestaurant}/${id}/publish/cancel`);
   }
+
+  public removeRestaurant(id: number) {
+    return this.apiService.delete(`${API_URLS.AddRestaurant}/${id}`);
+  }
 }

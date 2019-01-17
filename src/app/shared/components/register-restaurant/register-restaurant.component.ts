@@ -57,7 +57,7 @@ export class RegisterRestaurantComponent implements OnInit {
           this.snackBarService.show(data.messages[0]);
           setTimeout(() => {
             this.authService.logout();
-          }, 2000);
+          }, 1500);
         }
       }, error => {
         this.errorMeesage = error;
