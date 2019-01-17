@@ -107,8 +107,8 @@ export class OrderService {
     );
   }
 
-  public nextStatusOrder(token: string): Observable<Order> {
-    const url = `${API_URLS.SendOrder}/${token}/status/next`;
+  public nextStatusOrder(restaurantID: number, token: string): Observable<Order> {
+    const url = `restaurant/${restaurantID}/${API_URLS.SendOrder}/${token}/status/next`;
     return this.apiService.post(url).pipe(
       map(data => {
         return new Order(data.data);

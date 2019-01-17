@@ -77,7 +77,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   onChangeStatus(orderToken: string) {
-    this.orderService.nextStatusOrder(orderToken).subscribe((order) => {
+    this.orderService.nextStatusOrder(this.restaurant.id, orderToken).subscribe((order) => {
       const index = this.orders.findIndex(o => o.token === order.token);
       this.orders[index].status = order.status;
       this.filterOrders(this.currentFilteredStatus);
