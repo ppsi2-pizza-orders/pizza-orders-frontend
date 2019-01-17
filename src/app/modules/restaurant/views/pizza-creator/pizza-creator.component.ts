@@ -146,12 +146,15 @@ export class PizzaCreatorComponent implements OnInit {
   private initPizza(id: number) {
     const pizza = this.currentRestaurant.pizzas.filter(p => p.id === id)[0];
     const ingredients = pizza.ingredients.map(i => i.id);
+    const dropzone = [];
 
     this.avaiableIngredients.forEach(ingredient => {
       if (ingredients.includes(ingredient.id)) {
-        this.moveToDropzone(ingredient);
+        dropzone.push(ingredient);
       }
     });
+
+    dropzone.forEach(ingredient => this.moveToDropzone(ingredient));
 
     this.totalPrice = parseFloat(pizza.price);
     this.modifiedPizza = true;
