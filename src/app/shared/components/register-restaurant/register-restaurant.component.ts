@@ -51,17 +51,13 @@ export class RegisterRestaurantComponent implements OnInit {
     }
     this.loading = true;
     const restaurant = new Restaurant(this.registerForm.value);
-    const userEmail = this.authService.getUser().email;
     this.restaurantService.addRestaurant(restaurant).subscribe(data => {
         if (data) {
-          const restaurantID = data.data.id;
-          const message = data.messages[0];
-          this.restaurantService.grantUserRole(userEmail, RestaurantRoles.Owner, restaurantID)
-          .subscribe(() => {
-            this.dialogRef.close();
-            this.snackBarService.show(message);
-            this.router.navigate([ '/managment' ]);
-          });
+          this.dialogRef.close();
+          this.snackBarService.show(data.messages[0]);
+          setTimeout(() => {
+            this.authService.logout();
+          }, 2000);
         }
       }, error => {
         this.errorMeesage = error;
