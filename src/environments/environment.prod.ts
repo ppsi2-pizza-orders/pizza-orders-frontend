@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://api.pizzaorders.pl',
+  apiBaseUrl: 'https://pizza-orders-api.herokuapp.com/api',
   whitelist: [
-    'api.pizzaorders.pl',
+    'https://pizza-orders-api.herokuapp.com',
   ],
   blacklist: [
-    'api.pizzaorders.pl/auth/*',
+    'https://pizza-orders-api.herokuapp.com/auth/*',
   ],
   pusherKey: 'cPLbjveoWXRthHNQ',
   clientID: '402418022309-titnjbmrij34qnktjamvb23vip44lhkc.apps.googleusercontent.com'
